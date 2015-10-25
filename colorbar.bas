@@ -31,7 +31,8 @@ Sub Macro2()
     Set aSel = ActiveSelectionRange
     For Each g1 In aSel
         If fillCmyk(g1) Then
-            g1.PositionY = g1.PositionY + 5
+            g1.PositionY = g1.PositionY + g1.SizeHeight
+            Exit For
         End If
     Next g1
 End Sub
@@ -51,7 +52,9 @@ Sub Macro3()
     Set aSel = ActiveSelectionRange
     For i = 1 To aSel.Count
         If nextItem(aSel, i) Then
-            aSel.Item(i).PositionY = aSel.Item(i).PositionY + 5
+            Exit For
+        Else
+            aSel.Item(i).Delete
         End If
     Next i
 End Sub
