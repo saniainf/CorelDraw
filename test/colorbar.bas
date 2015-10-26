@@ -1,4 +1,4 @@
-Attribute VB_Name = "RecordedMacros"
+Attribute VB_Name = "colorbar"
 Sub Macro1()
     Dim aSel As ShapeRange
     Dim g1 As Shape
