@@ -1,4 +1,18 @@
-Attribute VB_Name = "colorbar"
+Attribute VB_Name = "RecordedMacros"
+Sub Macro5()
+    Dim aSel As ShapeRange
+    Dim s1 As Shape
+    Dim cyanColor As New Color
+    cyanColor.CMYKAssign 100, 0, 0, 0
+    Set aSel = ActiveSelectionRange
+    
+    For Each s1 In aSel
+        If (s1.Fill.UniformColor.IsSame(cyanColor)) Then
+            s1.PositionY = s1.PositionY + 5
+        End If
+    Next s1
+End Sub
+
 Sub Macro1()
     Dim aSel As ShapeRange
     Dim g1 As Shape
@@ -38,11 +52,21 @@ Sub Macro2()
 End Sub
 
 Public Function fillCmyk(s1 As Shape) As Boolean
+    Dim cyanColor As New Color
+    Dim magentaColor As New Color
+    Dim yellowColor As New Color
+    Dim blackColor As New Color
+    
+    cyanColor.CMYKAssign 100, 0, 0, 0
+    magentaColor.CMYKAssign 0, 100, 0, 0
+    yellowColor.CMYKAssign 0, 0, 100, 0
+    blackColor.CMYKAssign 0, 0, 0, 100
+
     fillCmyk = False
-    If s1.Fill.UniformColor.HexValue = "#00A0E3" Then fillCmyk = True
-    If s1.Fill.UniformColor.HexValue = "#E5097F" Then fillCmyk = True
-    If s1.Fill.UniformColor.HexValue = "#FFED00" Then fillCmyk = True
-    If s1.Fill.UniformColor.HexValue = "#2B2A29" Then fillCmyk = True
+    If (s1.Fill.UniformColor.IsSame(cyanColor)) Then fillCmyk = True
+    If s1.Fill.UniformColor.IsSame(magentaColor) Then fillCmyk = True
+    If s1.Fill.UniformColor.IsSame(yellowColor) Then fillCmyk = True
+    If s1.Fill.UniformColor.IsSame(blackColor) Then fillCmyk = True
 End Function
 
 Sub Macro3()
@@ -54,7 +78,7 @@ Sub Macro3()
         If nextItem(aSel, i) Then
             Exit For
         Else
-            aSel.Item(i).Delete
+            aSel.Item(i).PositionY = aSel.Item(i).PositionY + 5
         End If
     Next i
 End Sub
@@ -63,7 +87,7 @@ Public Function nextItem(aSel As ShapeRange, i As Integer) As Boolean
     nextItem = False
     If i + 2 > aSel.Count Then
         nextItem = False
-    ElseIf ((fillCmyk(aSel.Item(i))) And (fillCmyk(aSel.Item(i + 1))) And (fillCmyk(aSel.Item(i + 2)))) Then
+    ElseIf ((fillCmyk(aSel.Item(i))) And (fillCmyk(aSel.Item(i + 1)))) Then
         nextItem = True
     End If
 End Function

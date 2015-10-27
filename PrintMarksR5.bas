@@ -5,7 +5,7 @@ If (Documents.Count > 0) Then
     Application.Optimization = True
     
     Dim itemColorBar As Shape
-    Dim colorBar As ShapeRange
+    Dim colorBar As ShapeRange, finalColorBar As ShapeRange
     Dim leftOffsetMark As ShapeRange
     Dim rightOffsetMark As ShapeRange
     Dim leftTargetMark As ShapeRange
@@ -33,6 +33,7 @@ If (Documents.Count > 0) Then
     Set leftMark = ActiveSelectionRange
     ActiveLayer.Import (printMarksPath & "signCmyk.cdr")
     Set signCmyk = ActiveSelectionRange
+    Set finalColorBar = New ShapeRange
     
     colorBar.CenterX = ActivePage.BoundingBox.CenterX
     colorBar.PositionY = ActivePage.BoundingBox.Bottom + colorBar.BoundingBox.Height
@@ -51,14 +52,15 @@ If (Documents.Count > 0) Then
     
     colorBar.Ungroup
     For Each itemColorBar In colorBar
-        If itemColorBar.BoundingBox.Left < ActivePage.BoundingBox.Left Then
-            itemColorBar.Delete
-        ElseIf itemColorBar.BoundingBox.Right > ActivePage.BoundingBox.Right Then
-            itemColorBar.Delete
+        If (itemColorBar.BoundingBox.Left > ActivePage.BoundingBox.Left) And (itemColorBar.BoundingBox.Right < ActivePage.BoundingBox.Right) Then
+            finalColorBar.Add itemColorBar
         End If
     Next itemColorBar
+    Set finalColorBar = finalColorBar.Duplicate
+    colorBar.Delete
     
-    colorBar.AddToSelection
+    Set itemColorBar = finalColorBar.Group
+    itemColorBar.AddToSelection
     leftOffsetMark.AddToSelection
     rightOffsetMark.AddToSelection
     leftMark.AddToSelection
