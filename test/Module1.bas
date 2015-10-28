@@ -15,7 +15,7 @@ If (Documents.Count = 0) Then Exit Sub
     Dim leftMark As ShapeRange
     Dim signCmyk As ShapeRange
     Dim printMarksPath As String
-    Dim offsetLeftMark As Integer, offsetTargetMark As Integer, offsetColorBar As Integer
+    Dim offsetLeftMark As Integer, offsetTargetMark As Integer, offsetColorBar As Integer, offsetBothSide
     Dim allMarks As ShapeRange
     Dim i As Integer, a As Integer
     
@@ -23,6 +23,7 @@ If (Documents.Count = 0) Then Exit Sub
     offsetLeftMark = 55
     offsetTargetMark = 15
     offsetColorBar = 2
+    offsetBothSide = 5
     
     ActiveLayer.Import (printMarksPath & "colorBarR7BodyPart.cdr")
     Set colorBar = ActiveSelectionRange
@@ -41,7 +42,7 @@ If (Documents.Count = 0) Then Exit Sub
     ActiveDocument.ClearSelection
     '\
     For Each iCB In cbLeftPart
-        If iCB.BoundingBox.Left > ActivePage.BoundingBox.Left Then cbCrop.Add iCB
+        If iCB.BoundingBox.Left > ActivePage.BoundingBox.Left + offsetBothSide Then cbCrop.Add iCB
     Next iCB
     Set cbCrop = cbCrop.Duplicate
     cbLeftPart.Delete
@@ -49,7 +50,7 @@ If (Documents.Count = 0) Then Exit Sub
     Set cbCrop = New ShapeRange
     
     For Each iCB In cbRightPart
-        If iCB.BoundingBox.Right < ActivePage.BoundingBox.Right Then cbCrop.Add iCB
+        If iCB.BoundingBox.Right < ActivePage.BoundingBox.Right - offsetBothSide Then cbCrop.Add iCB
     Next iCB
     Set cbCrop = cbCrop.Duplicate
     cbRightPart.Delete

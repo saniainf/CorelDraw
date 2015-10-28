@@ -68,6 +68,7 @@ If (Documents.Count > 0) Then
     rightTargetMark.AddToSelection
     signCmyk.AddToSelection
     ActiveSelectionRange.Group
+    ActiveDocument.ClearSelection
     
     Application.Optimization = False
     ActiveWindow.Refresh
