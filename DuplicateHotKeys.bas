@@ -1,6 +1,7 @@
 Attribute VB_Name = "DuplicateHotKeys"
 Sub DuplicateTop()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+If (ActiveSelectionRange.Count < 1) Then Exit Sub
 Application.ActiveDocument.Unit = cdrMillimeter
     Dim activeSelection As ShapeRange
     Dim dShape As ShapeRange
@@ -18,11 +19,11 @@ Application.ActiveDocument.Unit = cdrMillimeter
         dShape.Move 0#, sH
         dShape.CreateSelection
     End If
-End If
 End Sub
 
 Sub DuplicateBottom()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+If (ActiveSelectionRange.Count < 1) Then Exit Sub
 Application.ActiveDocument.Unit = cdrMillimeter
     Dim activeSelection As ShapeRange
     Dim dShape As ShapeRange
@@ -40,11 +41,11 @@ Application.ActiveDocument.Unit = cdrMillimeter
         dShape.Move 0#, -sH
         dShape.CreateSelection
     End If
-End If
 End Sub
 
 Sub DuplicateLeft()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+If (ActiveSelectionRange.Count < 1) Then Exit Sub
 Application.ActiveDocument.Unit = cdrMillimeter
     Dim activeSelection As ShapeRange
     Dim dShape As ShapeRange
@@ -62,11 +63,11 @@ Application.ActiveDocument.Unit = cdrMillimeter
         dShape.Move -sW, 0#
         dShape.CreateSelection
     End If
-End If
 End Sub
 
 Sub DuplicateRight()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+If (ActiveSelectionRange.Count < 1) Then Exit Sub
 Application.ActiveDocument.Unit = cdrMillimeter
     Dim activeSelection As ShapeRange
     Dim dShape As ShapeRange
@@ -84,6 +85,5 @@ Application.ActiveDocument.Unit = cdrMillimeter
         dShape.Move sW, 0#
         dShape.CreateSelection
     End If
-End If
 End Sub
 

@@ -20,6 +20,7 @@ End Sub
 
 Private Sub btnMake_Click()
     Application.ActiveDocument.Unit = cdrMillimeter
+    Application.Optimization = True
     Dim aSel As ShapeRange
     Dim countX As Integer
     Dim countY As Integer
@@ -60,8 +61,11 @@ Private Sub btnMake_Click()
             MakeMarkBottom selX, selY, selW, selH, productW, productH, countX, countY, markH, bleed, oneCut
         End If
     End If
-    
 Unload Me
+ActiveDocument.ClearSelection
+Application.Optimization = False
+ActiveWindow.Refresh
+Application.Refresh
 End Sub
 
 Sub MakeMarkTop(selX As Double, selY As Double, selW As Double, selH As Double, productW As Double, productH As Double, countX As Integer, countY As Integer, markH As Integer, bleed As Integer, oneCut As Boolean)
@@ -223,7 +227,3 @@ Sub MakeMarkBottom(selX As Double, selY As Double, selW As Double, selH As Doubl
         Next i
     End If
 End Sub
-
-
-
-

@@ -1,6 +1,6 @@
 Attribute VB_Name = "bookletGuides"
 Sub bookletGuides()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
     Application.ActiveDocument.Unit = cdrMillimeter
     ActiveDocument.ReferencePoint = cdrCenter
     Dim guide As Shape
@@ -42,7 +42,6 @@ If (Documents.Count > 0) Then
     ActiveDocument.ActivePage.GuidesLayer.Editable = False
     ActiveDocument.Pages(1).Activate
     ActiveDocument.ActivePage.Layers(2).Activate
-End If
 End Sub
 
 

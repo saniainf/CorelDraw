@@ -1,11 +1,11 @@
 Attribute VB_Name = "PrintMarksR5"
 Sub PrintMarksR5()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
     ActiveDocument.Unit = cdrMillimeter
     Application.Optimization = True
     
     Dim itemColorBar As Shape
-    Dim colorBar As ShapeRange, finalColorBar As ShapeRange
+    Dim colorBar As ShapeRange, finalColorBar As ShapeRange, srD As ShapeRange
     Dim leftOffsetMark As ShapeRange
     Dim rightOffsetMark As ShapeRange
     Dim leftTargetMark As ShapeRange
@@ -56,10 +56,10 @@ If (Documents.Count > 0) Then
             finalColorBar.Add itemColorBar
         End If
     Next itemColorBar
-    Set finalColorBar = finalColorBar.Duplicate
+    Set srD = finalColorBar.Duplicate
     colorBar.Delete
     
-    Set itemColorBar = finalColorBar.Group
+    Set itemColorBar = srD.Group
     itemColorBar.AddToSelection
     leftOffsetMark.AddToSelection
     rightOffsetMark.AddToSelection
@@ -68,10 +68,9 @@ If (Documents.Count > 0) Then
     rightTargetMark.AddToSelection
     signCmyk.AddToSelection
     ActiveSelectionRange.Group
-    ActiveDocument.ClearSelection
     
+    ActiveDocument.ClearSelection
     Application.Optimization = False
     ActiveWindow.Refresh
     Application.Refresh
-End If
 End Sub

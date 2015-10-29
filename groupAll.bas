@@ -1,6 +1,7 @@
 Attribute VB_Name = "groupAll"
 Sub GroupAll()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+    Application.Optimization = True
     Dim aLayer As Layer
     Dim s1 As Shape
     Dim aPage As Page
@@ -15,9 +16,12 @@ If (Documents.Count > 0) Then
     For Each aLayer In aPage.Layers
         If aLayer.Editable Then
             aLayer.Activate
-            aLayer.Shapes.All.Group
+            If aLayer.Shapes.All.Count > 1 Then aLayer.Shapes.All.Group
         End If
     Next aLayer
     aPage.GuidesLayer.Editable = guideL
-End If
+    ActiveDocument.ClearSelection
+    Application.Optimization = False
+    ActiveWindow.Refresh
+    Application.Refresh
 End Sub

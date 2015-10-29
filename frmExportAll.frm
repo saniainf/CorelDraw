@@ -15,6 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 Private Sub cbExecute_Click()
+    Application.Optimization = True
     Dim expFilter As ExportFilter
     Dim resolution As Integer
     Dim fileName As String
@@ -42,7 +43,7 @@ Private Sub cbExecute_Click()
             For Each aPage In doc.Pages
                 aPage.Activate
                 iPage = iPage + 1
-                fullFileName = filePath + fileName + "_-_" + aPage.Name + "_" & iPage & ".jpg"
+                fullFileName = filePath + fileName + "_-_" & iPage & "_-_" + aPage.Name + ".jpg"
                 aPage.Shapes.All.CreateSelection
                 If (aPage.SelectableShapes.Count > 0) Then
                     Set expFilter = doc.ExportBitmap(fullFileName, cdrJPEG, cdrSelection, colorSpace, 0, 0, resolution, resolution, cdrNormalAntiAliasing, False, False, chbProfile.Value, False, cdrCompressionNone)
@@ -66,7 +67,7 @@ Private Sub cbExecute_Click()
         For Each aPage In doc.Pages
             aPage.Activate
             iPage = iPage + 1
-            fullFileName = filePath + fileName + "_-_" + aPage.Name + "_" & iPage & ".jpg"
+            fullFileName = filePath + fileName + "_-_" & iPage & "_-_" + aPage.Name + ".jpg"
             aPage.Shapes.All.CreateSelection
             If (aPage.SelectableShapes.Count > 0) Then
                 Set expFilter = doc.ExportBitmap(fullFileName, cdrJPEG, cdrSelection, colorSpace, 0, 0, resolution, resolution, cdrNormalAntiAliasing, False, False, chbProfile.Value, False, cdrCompressionNone)
@@ -82,6 +83,10 @@ Private Sub cbExecute_Click()
         Next aPage
     End If
     ActiveDocument.Pages(1).Activate
+    ActiveDocument.ClearSelection
+    Application.Optimization = False
+    ActiveWindow.Refresh
+    Application.Refresh
     Unload Me
 End Sub
 

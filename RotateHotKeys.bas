@@ -1,20 +1,16 @@
 Attribute VB_Name = "RotateHotKeys"
 Sub RotateClockWise()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+If (ActiveSelectionRange.Count <= 0) Then Exit Sub
     Dim activeSelection As ShapeRange
-    If (ActiveSelectionRange.Count > 0) Then
-        Set activeSelection = ActiveSelectionRange
-        activeSelection.Rotate (-90)
-    End If
-End If
+    Set activeSelection = ActiveSelectionRange
+    activeSelection.Rotate (-90)
 End Sub
 
 Sub RotateCounterClockWise()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+If (ActiveSelectionRange.Count <= 0) Then Exit Sub
     Dim activeSelection As ShapeRange
-    If (ActiveSelectionRange.Count > 0) Then
-        Set activeSelection = ActiveSelectionRange
-        activeSelection.Rotate (90)
-    End If
-End If
+    Set activeSelection = ActiveSelectionRange
+    activeSelection.Rotate (90)
 End Sub

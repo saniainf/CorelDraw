@@ -1,6 +1,7 @@
 Attribute VB_Name = "DistributeToEdge"
 Sub DistributeLeftEdge()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+If (ActiveSelectionRange.Count < 2) Then Exit Sub
 Application.ActiveDocument.Unit = cdrMillimeter
     Dim activeSelection As ShapeRange
     Dim selectShape As Shape
@@ -37,11 +38,11 @@ Application.ActiveDocument.Unit = cdrMillimeter
             firstShape = False
         Next selectShape
     End If
-End If
 End Sub
 
 Sub DistributeRightEdge()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+If (ActiveSelectionRange.Count < 2) Then Exit Sub
 Application.ActiveDocument.Unit = cdrMillimeter
     Dim activeSelection As ShapeRange
     Dim selectShape As Shape
@@ -78,11 +79,11 @@ Application.ActiveDocument.Unit = cdrMillimeter
             firstShape = False
         Next selectShape
     End If
-End If
 End Sub
 
 Sub DistributeTopEdge()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+If (ActiveSelectionRange.Count < 2) Then Exit Sub
 Application.ActiveDocument.Unit = cdrMillimeter
     Dim activeSelection As ShapeRange
     Dim selectShape As Shape
@@ -119,11 +120,11 @@ Application.ActiveDocument.Unit = cdrMillimeter
             firstShape = False
         Next selectShape
     End If
-End If
 End Sub
 
 Sub DistributeBottomEdge()
-If (Documents.Count > 0) Then
+If (Documents.Count = 0) Then Exit Sub
+If (ActiveSelectionRange.Count < 2) Then Exit Sub
 Application.ActiveDocument.Unit = cdrMillimeter
     Dim activeSelection As ShapeRange
     Dim selectShape As Shape
@@ -160,5 +161,4 @@ Application.ActiveDocument.Unit = cdrMillimeter
             firstShape = False
         Next selectShape
     End If
-End If
 End Sub

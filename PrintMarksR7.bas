@@ -6,7 +6,7 @@ If (Documents.Count = 0) Then Exit Sub
 
     Dim iCB As Shape
     Dim colorBar As ShapeRange, cbLeftPart As ShapeRange, cbRightPart As ShapeRange
-    Dim cbCrop As New ShapeRange
+    Dim cbCrop As New ShapeRange, srD
     Dim cbTopPart As ShapeRange, cbBottomPart As ShapeRange
     Dim leftOffsetMark As ShapeRange
     Dim rightOffsetMark As ShapeRange
@@ -18,6 +18,7 @@ If (Documents.Count = 0) Then Exit Sub
     Dim offsetLeftMark As Integer, offsetTargetMark As Integer, offsetColorBar As Integer, offsetBothSide
     Dim allMarks As ShapeRange
     Dim i As Integer, a As Integer
+    Dim cBar As Shape, cbT As Shape, cbB As Shape
     
     printMarksPath = ("e:\Projects\Scripts\CorelDraw\cdrFiles\printMarks\")
     offsetLeftMark = 55
@@ -89,17 +90,17 @@ If (Documents.Count = 0) Then Exit Sub
     For Each iCB In cbLeftPart
         If iCB.BoundingBox.Left > ActivePage.BoundingBox.Left + offsetBothSide Then cbCrop.Add iCB
     Next iCB
-    Set cbCrop = cbCrop.Duplicate
+    Set srD = cbCrop.Duplicate
     cbLeftPart.Delete
-    Set cbLeftPart = cbCrop
+    Set cbLeftPart = srD
     
     Set cbCrop = New ShapeRange
     For Each iCB In cbRightPart
         If iCB.BoundingBox.Right < ActivePage.BoundingBox.Right - offsetBothSide Then cbCrop.Add iCB
     Next iCB
-    Set cbCrop = cbCrop.Duplicate
+    Set srD = cbCrop.Duplicate
     cbRightPart.Delete
-    Set cbRightPart = cbCrop
+    Set cbRightPart = srD
     
     '\ cut on a condition
     Set cbCrop = New ShapeRange
@@ -111,9 +112,9 @@ If (Documents.Count = 0) Then Exit Sub
             Exit For
         End If
     Next i
-    Set cbCrop = cbCrop.Duplicate
+    Set srD = cbCrop.Duplicate
     cbLeftPart.Delete
-    Set cbLeftPart = cbCrop
+    Set cbLeftPart = srD
     
     Set cbCrop = New ShapeRange
     For i = 1 To cbRightPart.Count
@@ -124,15 +125,14 @@ If (Documents.Count = 0) Then Exit Sub
             Exit For
         End If
     Next i
-    Set cbCrop = cbCrop.Duplicate
+    Set srD = cbCrop.Duplicate
     cbRightPart.Delete
-    Set cbRightPart = cbCrop
-
-    '\
+    Set cbRightPart = srD
+    
     Set colorBar = New ShapeRange
     colorBar.AddRange cbLeftPart
     colorBar.AddRange cbRightPart
-    colorBar.Group
+    Set cBar = colorBar.Group
     
     '\ cun top and bottom part
     Set cbCrop = New ShapeRange
@@ -141,10 +141,8 @@ If (Documents.Count = 0) Then Exit Sub
             cbCrop.Add iCB
         End If
     Next iCB
-    Set cbCrop = cbCrop.Duplicate
+    Set cbT = cbCrop.Duplicate.Group
     cbTopPart.Delete
-    Set cbTopPart = cbCrop
-    cbTopPart.Group
     
     Set cbCrop = New ShapeRange
     For Each iCB In cbBottomPart
@@ -152,18 +150,31 @@ If (Documents.Count = 0) Then Exit Sub
             cbCrop.Add iCB
         End If
     Next iCB
-    Set cbCrop = cbCrop.Duplicate
+    Set cbB = cbCrop.Duplicate.Group
     cbBottomPart.Delete
-    Set cbBottomPart = cbCrop
-    cbBottomPart.Group
     '\
+    
     ActiveDocument.ClearSelection
+    Set colorBar = New ShapeRange
+    colorBar.Add cBar
+    colorBar.Add cbT
+    colorBar.Add cbB
+    Set cBar = colorBar.Group
+    
+    ActiveDocument.ClearSelection
+    cBar.AddToSelection
+    leftOffsetMark.AddToSelection
+    rightOffsetMark.AddToSelection
+    leftMark.AddToSelection
+    leftTargetMark.AddToSelection
+    rightTargetMark.AddToSelection
+    signCmyk.AddToSelection
+    ActiveSelectionRange.Group
     
     ActiveDocument.ClearSelection
     Application.Optimization = False
     ActiveWindow.Refresh
     Application.Refresh
-
 End Sub
 
 Public Function nextItem(aSel As ShapeRange, i As Integer) As Boolean

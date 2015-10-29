@@ -82,3 +82,17 @@ Private Sub btnPrintMarksR5_Click()
     Application.Refresh
     Unload Me
 End Sub
+
+Private Sub btnPrintMarksR7_Click()
+    Application.Optimization = True
+    Dim aPage As Page
+    For Each aPage In ActiveDocument.Pages
+        aPage.Activate
+        InfUtilits.PrintMarksR7.PrintMarksR7
+    Next aPage
+    ActiveDocument.Pages(1).Activate
+    Application.Optimization = False
+    ActiveWindow.Refresh
+    Application.Refresh
+    Unload Me
+End Sub
