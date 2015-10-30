@@ -227,3 +227,8 @@ Sub MakeMarkBottom(selX As Double, selY As Double, selW As Double, selH As Doubl
         Next i
     End If
 End Sub
+
+Private Sub UserForm_Initialize()
+    txtbCountX.Text = Math.Round(ActiveSelectionRange.BoundingBox.Width / ActiveSelectionRange.Item(1).BoundingBox.Width)
+    txtbCountY.Text = Math.Round(ActiveSelectionRange.BoundingBox.Height / ActiveSelectionRange.Item(1).BoundingBox.Height)
+End Sub
