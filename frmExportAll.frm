@@ -43,7 +43,7 @@ Private Sub cbExecute_Click()
             For Each aPage In doc.Pages
                 aPage.Activate
                 iPage = iPage + 1
-                fullFileName = filePath + fileName + "_-_" & iPage & "_-_" + aPage.Name + ".jpg"
+                fullFileName = filePath + fileName + "_" & iPage & "_" + aPage.Name + ".jpg"
                 aPage.Shapes.All.CreateSelection
                 If (aPage.SelectableShapes.Count > 0) Then
                     Set expFilter = doc.ExportBitmap(fullFileName, cdrJPEG, cdrSelection, colorSpace, 0, 0, resolution, resolution, cdrNormalAntiAliasing, False, False, chbProfile.Value, False, cdrCompressionNone)
@@ -67,7 +67,7 @@ Private Sub cbExecute_Click()
         For Each aPage In doc.Pages
             aPage.Activate
             iPage = iPage + 1
-            fullFileName = filePath + fileName + "_-_" & iPage & "_-_" + aPage.Name + ".jpg"
+            fullFileName = filePath + fileName + "_" & iPage & "_" + aPage.Name + ".jpg"
             aPage.Shapes.All.CreateSelection
             If (aPage.SelectableShapes.Count > 0) Then
                 Set expFilter = doc.ExportBitmap(fullFileName, cdrJPEG, cdrSelection, colorSpace, 0, 0, resolution, resolution, cdrNormalAntiAliasing, False, False, chbProfile.Value, False, cdrCompressionNone)

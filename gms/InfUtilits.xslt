@@ -156,6 +156,66 @@
             EhLc3NzcEhLc3Nzc8PDwAKCgoADw8PAAAAAAAA==
           </userSmallBitmap>
         </itemData>
+        <itemData guid="06f55e21-2969-4661-bbd0-513d930a6e7c" dynamicCommand="InfUtilits.PrintMarksR5.PrintMarksR5" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Нарисовать метки для печати на Ryobi R5**" userCaption="InfUtilits.PrintMarksR5" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+            //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
+            AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
+            MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
+            AABmAAAAmQAzAGYAMzNmAAAAzAAzAJkAAAD/AGYAmQAzM5kAAAD/ADMAzABmAMwAMwD/ADMz
+            zABmM5kAMwD/AGYA/wAzM/8AZmaZAGYzzABmAP8AmQDMAGYz/wCZAP8AmTPMAGZmzACZAP8A
+            zAD/AJlmzACZM/8AzAD/AMwz/wCZmcwAADNmAAAzmQAAM8wAAGaZADNmmQAAM/8AADP/AABm
+            zAAAZv8AAJnMADNmzAAAZv8AM5nMAACZ/wAAzP8AZpnMAAAzAAAAZgAAADMzAABmMwAAmQAA
+            AGZmAACZMwAzZjMAAMwAADNmZgAA/wAAAJlmAAD/AAAzmTMAAMwzADOZZgAAzGYAM8wzAAD/
+            MwAA/zMAAJmZADP/MwAzmZkAAMyZAGaZZgAA/2YAM8xmAAD/ZgAAzMwAAP+ZAGaZmQAzzJkA
+            ZsxmAAD/mQAz/2YAM/+ZADPMzABmzJkAAP/MAAD/zABm/2YAM//MAGb/mQBmzMwAAP//AJnM
+            mQCZzMwAmf+ZAGb/zACZ/8wAzP/MADMzAAAzZgAAM5kAAGZmAABmmQAAM8wAAGZmMwAz/wAA
+            ZpkzAJmZAABmzAAAM/8AAGbMMwCZzAAAZv8AAGb/AACZmTMAzMwAAJn/AACZ/wAAmZlmAGb/
+            MwCZzDMAmf8zAMz/AACZzGYAzP8AAMzMMwCZ/2YAzP8zAMzMZgD//wAA//8AAP//MwDM/2YA
+            zMyZAMz/mQD//2YA//+ZAP//zABmAAAAOSAgADkmJgBmMwAAmQAAAJkzAADMAAAAZjMzAP8A
+            AAD/AAAAzDMAAJlmAACZMzMAaVNTAG9YWAB1XV0AzDMzAP8zAADMZgAA/zMAAJlmMwCZZmYA
+            zGYzAP8zMwD/ZgAAzJkAAP9mAACOc3IAkHVzAP9mMwDMZmYA/5kAAMyZMwD/mQAAnn9/AP/M
+            AAD/ZmYA/8wAAMyZZgD/mTMA/5lmAP/MMwDMmZkA/5mZAP/MZgD/zJkA/8zMADMAMwA5JSgA
+            OSYoADomKAA5JikAOiYpADonKQA7KCoAZgAzAEArLgBNOTsAZgBmAJkAMwBfTU8AzAAzAJkA
+            ZgBmM2YAalZXAGtXWQD/ADMAmQCZAMwAZgCZM2YAel9hAP8AZgDMM2YAmTOZAMwAmQDMM5kA
+            zDOZAJlmmQD/AJkAzADMAP8zZgCff4AAp4aIAP8AzADMZpkAzDPMALORkwDMZswA/2aZAP8z
+            zAD/AP8A/wD/AMyZzAD/ZswA/zP/AP+ZzAAODszMzCsrK0NDQwAAAA4ODg7MzMwrKytDQ0MA
+            AAAODg4OzMzMKysrQ0NDAAAADg4ODg4ODg4ODg4ODg4ODg4ODg4hDg4hDg4hISEODg4ODg4O
+            IQ4OIQ4OIQ4OIQ4ODg4ODiEODiEODg4ODiEODg4ODg4hDiEODg4ODg4hDg4ODg4OISEODg4O
+            Dg4OIQ4ODg4ODiEhIQ4ODiEhIQ4ODg4ODg4hDg4hDg4hDg4ODg4ODg4OIQ4OIQ4OIQ4ODg4O
+            Dg4ODiEODiEODiEODg4ODg4ODg4hISEODg4hISEhDg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4O
+            Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="e7661770-89d7-4edd-bf65-30e5a534e074" dynamicCommand="InfUtilits.PrintMarksR7.PrintMarksR7" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Нарисовать метки для печати на Ryobi R7**" userCaption="InfUtilits.PrintMarksR7" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+            //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
+            AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
+            MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
+            AABmAAAAmQAzAGYAMzNmAAAAzAAzAJkAAAD/AGYAmQAzM5kAAAD/ADMAzABmAMwAMwD/ADMz
+            zABmM5kAMwD/AGYA/wAzM/8AZmaZAGYzzABmAP8AmQDMAGYz/wCZAP8AmTPMAGZmzACZAP8A
+            zAD/AJlmzACZM/8AzAD/AMwz/wCZmcwAADNmAAAzmQAAM8wAAGaZADNmmQAAM/8AADP/AABm
+            zAAAZv8AAJnMADNmzAAAZv8AM5nMAACZ/wAAzP8AZpnMAAAzAAAAZgAAADMzAABmMwAAmQAA
+            AGZmAACZMwAzZjMAAMwAADNmZgAA/wAAAJlmAAD/AAAzmTMAAMwzADOZZgAAzGYAM8wzAAD/
+            MwAA/zMAAJmZADP/MwAzmZkAAMyZAGaZZgAA/2YAM8xmAAD/ZgAAzMwAAP+ZAGaZmQAzzJkA
+            ZsxmAAD/mQAz/2YAM/+ZADPMzABmzJkAAP/MAAD/zABm/2YAM//MAGb/mQBmzMwAAP//AJnM
+            mQCZzMwAmf+ZAGb/zACZ/8wAzP/MADMzAAAzZgAAM5kAAGZmAABmmQAAM8wAAGZmMwAz/wAA
+            ZpkzAJmZAABmzAAAM/8AAGbMMwCZzAAAZv8AAGb/AACZmTMAzMwAAJn/AACZ/wAAmZlmAGb/
+            MwCZzDMAmf8zAMz/AACZzGYAzP8AAMzMMwCZ/2YAzP8zAMzMZgD//wAA//8AAP//MwDM/2YA
+            zMyZAMz/mQD//2YA//+ZAP//zABmAAAAOSAgADkmJgBmMwAAmQAAAJkzAADMAAAAZjMzAP8A
+            AAD/AAAAzDMAAJlmAACZMzMAaVNTAG9YWAB1XV0AzDMzAP8zAADMZgAA/zMAAJlmMwCZZmYA
+            zGYzAP8zMwD/ZgAAzJkAAP9mAACOc3IAkHVzAP9mMwDMZmYA/5kAAMyZMwD/mQAAnn9/AP/M
+            AAD/ZmYA/8wAAMyZZgD/mTMA/5lmAP/MMwDMmZkA/5mZAP/MZgD/zJkA/8zMADMAMwA5JSgA
+            OSYoADomKAA5JikAOiYpADonKQA7KCoAZgAzAEArLgBNOTsAZgBmAJkAMwBfTU8AzAAzAJkA
+            ZgBmM2YAalZXAGtXWQD/ADMAmQCZAMwAZgCZM2YAel9hAP8AZgDMM2YAmTOZAMwAmQDMM5kA
+            zDOZAJlmmQD/AJkAzADMAP8zZgCff4AAp4aIAP8AzADMZpkAzDPMALORkwDMZswA/2aZAP8z
+            zAD/AP8A/wD/AMyZzAD/ZswA/zP/AP+ZzAAODszMzCsrK0NDQwAAAA4ODg7MzMwrKytDQ0MA
+            AAAODg4OzMzMKysrQ0NDAAAADg4ODg4ODg4ODg4ODg4ODg4ODg4hDg4hDg4OIQ4ODg4ODg4O
+            IQ4OIQ4ODiEODg4ODg4ODiEODiEODg4hDg4ODg4ODg4hDiEODg4ODiEODg4ODg4OISEODg4O
+            Dg4hDg4ODg4ODiEhIQ4ODg4ODiEODg4ODg4hDg4hDg4ODg4hDg4ODg4OIQ4OIQ4ODg4ODiEO
+            Dg4ODiEODiEODiEODg4hDg4ODg4hISEODg4hISEhIQ4ODg4ODg4ODg4ODg4ODg4ODg4ODg4O
+            Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
+          </userSmallBitmap>
+        </itemData>
         <itemData guid="c1ed876d-6ce1-481b-909b-b28a851dbbab" dynamicCommand="InfUtilits.OffsetAllShapes.OffsetAllShapes10" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Выставить объекты по клапану 10 мм" userCaption="InfUtilits.OffsetAllShapes10" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
           <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
@@ -246,38 +306,8 @@
             IQ4ODg4hDg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
           </userSmallBitmap>
         </itemData>
-        <itemData guid="06f55e21-2969-4661-bbd0-513d930a6e7c" dynamicCommand="InfUtilits.PrintMarksR5.PrintMarksR5" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Нарисовать метки для печати на Ryobi R5**" userCaption="InfUtilits.PrintMarksR5" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
-          <userSmallBitmap xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">
-            //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
-            AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
-            MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
-            AABmAAAAmQAzAGYAMzNmAAAAzAAzAJkAAAD/AGYAmQAzM5kAAAD/ADMAzABmAMwAMwD/ADMz
-            zABmM5kAMwD/AGYA/wAzM/8AZmaZAGYzzABmAP8AmQDMAGYz/wCZAP8AmTPMAGZmzACZAP8A
-            zAD/AJlmzACZM/8AzAD/AMwz/wCZmcwAADNmAAAzmQAAM8wAAGaZADNmmQAAM/8AADP/AABm
-            zAAAZv8AAJnMADNmzAAAZv8AM5nMAACZ/wAAzP8AZpnMAAAzAAAAZgAAADMzAABmMwAAmQAA
-            AGZmAACZMwAzZjMAAMwAADNmZgAA/wAAAJlmAAD/AAAzmTMAAMwzADOZZgAAzGYAM8wzAAD/
-            MwAA/zMAAJmZADP/MwAzmZkAAMyZAGaZZgAA/2YAM8xmAAD/ZgAAzMwAAP+ZAGaZmQAzzJkA
-            ZsxmAAD/mQAz/2YAM/+ZADPMzABmzJkAAP/MAAD/zABm/2YAM//MAGb/mQBmzMwAAP//AJnM
-            mQCZzMwAmf+ZAGb/zACZ/8wAzP/MADMzAAAzZgAAM5kAAGZmAABmmQAAM8wAAGZmMwAz/wAA
-            ZpkzAJmZAABmzAAAM/8AAGbMMwCZzAAAZv8AAGb/AACZmTMAzMwAAJn/AACZ/wAAmZlmAGb/
-            MwCZzDMAmf8zAMz/AACZzGYAzP8AAMzMMwCZ/2YAzP8zAMzMZgD//wAA//8AAP//MwDM/2YA
-            zMyZAMz/mQD//2YA//+ZAP//zABmAAAAOSAgADkmJgBmMwAAmQAAAJkzAADMAAAAZjMzAP8A
-            AAD/AAAAzDMAAJlmAACZMzMAaVNTAG9YWAB1XV0AzDMzAP8zAADMZgAA/zMAAJlmMwCZZmYA
-            zGYzAP8zMwD/ZgAAzJkAAP9mAACOc3IAkHVzAP9mMwDMZmYA/5kAAMyZMwD/mQAAnn9/AP/M
-            AAD/ZmYA/8wAAMyZZgD/mTMA/5lmAP/MMwDMmZkA/5mZAP/MZgD/zJkA/8zMADMAMwA5JSgA
-            OSYoADomKAA5JikAOiYpADonKQA7KCoAZgAzAEArLgBNOTsAZgBmAJkAMwBfTU8AzAAzAJkA
-            ZgBmM2YAalZXAGtXWQD/ADMAmQCZAMwAZgCZM2YAel9hAP8AZgDMM2YAmTOZAMwAmQDMM5kA
-            zDOZAJlmmQD/AJkAzADMAP8zZgCff4AAp4aIAP8AzADMZpkAzDPMALORkwDMZswA/2aZAP8z
-            zAD/AP8A/wD/AMyZzAD/ZswA/zP/AP+ZzAAODszMzCsrK0NDQwAAAA4ODg7MzMwrKytDQ0MA
-            AAAODg4OzMzMKysrQ0NDAAAADg4ODg4ODg4ODg4ODg4ODg4ODg4hDg4hDg4hISEODg4ODg4O
-            IQ4OIQ4OIQ4OIQ4ODg4ODiEODiEODg4ODiEODg4ODg4hDiEODg4ODg4hDg4ODg4OISEODg4O
-            Dg4OIQ4ODg4ODiEhIQ4ODiEhIQ4ODg4ODg4hDg4hDg4hDg4ODg4ODg4OIQ4OIQ4OIQ4ODg4O
-            Dg4ODiEODiEODiEODg4ODg4ODg4hISEODg4hISEhDg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4O
-            Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap>
-        </itemData>
         <itemData guid="bb7dbe6e-0c1a-43b0-945c-b47467a4a13a" dynamicCommand="InfUtilits.makeOnAllPages.makeOnAllPages" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Выполнить на всех страницах документа" userCaption="InfUtilits.makeOnAllPages" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
-          <userSmallBitmap xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -304,36 +334,6 @@
             EdwREdwSErwREREhERERERHcERHcEhK8ERERISEhERER3BISvBISvBISEiESEiESErwSErwS
             ErwSEhIhEhIhEhK8EhK8EhK8EhISIRISIRISvBISvBISvBISEiEhIRISErwSErwSErwSEhIS
             EhISEhK8EhK8EhK88PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap>
-        </itemData>
-        <itemData guid="e7661770-89d7-4edd-bf65-30e5a534e074" dynamicCommand="InfUtilits.PrintMarksR7.PrintMarksR7" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Нарисовать метки для печати на Ryobi R7**" userCaption="InfUtilits.PrintMarksR7" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
-          <userSmallBitmap xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">
-            //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
-            AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
-            MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
-            AABmAAAAmQAzAGYAMzNmAAAAzAAzAJkAAAD/AGYAmQAzM5kAAAD/ADMAzABmAMwAMwD/ADMz
-            zABmM5kAMwD/AGYA/wAzM/8AZmaZAGYzzABmAP8AmQDMAGYz/wCZAP8AmTPMAGZmzACZAP8A
-            zAD/AJlmzACZM/8AzAD/AMwz/wCZmcwAADNmAAAzmQAAM8wAAGaZADNmmQAAM/8AADP/AABm
-            zAAAZv8AAJnMADNmzAAAZv8AM5nMAACZ/wAAzP8AZpnMAAAzAAAAZgAAADMzAABmMwAAmQAA
-            AGZmAACZMwAzZjMAAMwAADNmZgAA/wAAAJlmAAD/AAAzmTMAAMwzADOZZgAAzGYAM8wzAAD/
-            MwAA/zMAAJmZADP/MwAzmZkAAMyZAGaZZgAA/2YAM8xmAAD/ZgAAzMwAAP+ZAGaZmQAzzJkA
-            ZsxmAAD/mQAz/2YAM/+ZADPMzABmzJkAAP/MAAD/zABm/2YAM//MAGb/mQBmzMwAAP//AJnM
-            mQCZzMwAmf+ZAGb/zACZ/8wAzP/MADMzAAAzZgAAM5kAAGZmAABmmQAAM8wAAGZmMwAz/wAA
-            ZpkzAJmZAABmzAAAM/8AAGbMMwCZzAAAZv8AAGb/AACZmTMAzMwAAJn/AACZ/wAAmZlmAGb/
-            MwCZzDMAmf8zAMz/AACZzGYAzP8AAMzMMwCZ/2YAzP8zAMzMZgD//wAA//8AAP//MwDM/2YA
-            zMyZAMz/mQD//2YA//+ZAP//zABmAAAAOSAgADkmJgBmMwAAmQAAAJkzAADMAAAAZjMzAP8A
-            AAD/AAAAzDMAAJlmAACZMzMAaVNTAG9YWAB1XV0AzDMzAP8zAADMZgAA/zMAAJlmMwCZZmYA
-            zGYzAP8zMwD/ZgAAzJkAAP9mAACOc3IAkHVzAP9mMwDMZmYA/5kAAMyZMwD/mQAAnn9/AP/M
-            AAD/ZmYA/8wAAMyZZgD/mTMA/5lmAP/MMwDMmZkA/5mZAP/MZgD/zJkA/8zMADMAMwA5JSgA
-            OSYoADomKAA5JikAOiYpADonKQA7KCoAZgAzAEArLgBNOTsAZgBmAJkAMwBfTU8AzAAzAJkA
-            ZgBmM2YAalZXAGtXWQD/ADMAmQCZAMwAZgCZM2YAel9hAP8AZgDMM2YAmTOZAMwAmQDMM5kA
-            zDOZAJlmmQD/AJkAzADMAP8zZgCff4AAp4aIAP8AzADMZpkAzDPMALORkwDMZswA/2aZAP8z
-            zAD/AP8A/wD/AMyZzAD/ZswA/zP/AP+ZzAAODszMzCsrK0NDQwAAAA4ODg7MzMwrKytDQ0MA
-            AAAODg4OzMzMKysrQ0NDAAAADg4ODg4ODg4ODg4ODg4ODg4ODg4hDg4hDg4OIQ4ODg4ODg4O
-            IQ4OIQ4ODiEODg4ODg4ODiEODiEODg4hDg4ODg4ODg4hDiEODg4ODiEODg4ODg4OISEODg4O
-            Dg4hDg4ODg4ODiEhIQ4ODg4ODiEODg4ODg4hDg4hDg4ODg4hDg4ODg4OIQ4OIQ4ODg4ODiEO
-            Dg4ODiEODiEODiEODg4hDg4ODg4hISEODg4hISEhIQ4ODg4ODg4ODg4ODg4ODg4ODg4ODg4O
-            Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
           </userSmallBitmap>
         </itemData>
       </items>
@@ -434,6 +434,12 @@
       <xsl:if test="not(./itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c'])">
         <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c']"/>
       </xsl:if>
+      <xsl:if test="not(./itemData[@guid='06f55e21-2969-4661-bbd0-513d930a6e7c'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='06f55e21-2969-4661-bbd0-513d930a6e7c']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']"/>
+      </xsl:if>
       <xsl:if test="not(./itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab'])">
         <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab']"/>
       </xsl:if>
@@ -442,12 +448,6 @@
       </xsl:if>
       <xsl:if test="not(./itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513'])">
         <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513']"/>
-      </xsl:if>
-      <xsl:if test="not(./itemData[@guid='06f55e21-2969-4661-bbd0-513d930a6e7c'])">
-        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='06f55e21-2969-4661-bbd0-513d930a6e7c']"/>
-      </xsl:if>
-      <xsl:if test="not(./itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074'])">
-        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']"/>
       </xsl:if>
       <xsl:if test="not(./itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a'])">
         <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a']"/>
@@ -472,6 +472,12 @@
   <xsl:template match="uiConfig/items/itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c']">
     <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c']"/>
   </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='06f55e21-2969-4661-bbd0-513d930a6e7c']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='06f55e21-2969-4661-bbd0-513d930a6e7c']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']"/>
+  </xsl:template>
   <xsl:template match="uiConfig/items/itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab']">
     <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab']"/>
   </xsl:template>
@@ -480,12 +486,6 @@
   </xsl:template>
   <xsl:template match="uiConfig/items/itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513']">
     <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513']"/>
-  </xsl:template>
-  <xsl:template match="uiConfig/items/itemData[@guid='06f55e21-2969-4661-bbd0-513d930a6e7c']">
-    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='06f55e21-2969-4661-bbd0-513d930a6e7c']"/>
-  </xsl:template>
-  <xsl:template match="uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']">
-    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']"/>
   </xsl:template>
   <xsl:template match="uiConfig/items/itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a']">
     <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a']"/>

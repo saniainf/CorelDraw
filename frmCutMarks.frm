@@ -61,7 +61,7 @@ Private Sub btnMake_Click()
             MakeMarkBottom selX, selY, selW, selH, productW, productH, countX, countY, markH, bleed, oneCut
         End If
     End If
-Unload Me
+'Unload Me
 ActiveDocument.ClearSelection
 Application.Optimization = False
 ActiveWindow.Refresh
