@@ -15,18 +15,33 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Public retval As Long
 Public signX As Double, signY As Double, modShift As Long
+Public sChar As String
+Public customPlace As Boolean
+Public offsetBottom As Integer
+
+Private Sub btnClose_Click()
+    Unload Me
+End Sub
 
 Private Sub btnMake_Click()
-    Dim pWidth As Integer, pHeight As Integer
-    Dim placeText As String
-    Dim iPage As Integer, iSpusk As Integer, iEven As Integer
+    Application.ActiveDocument.Unit = cdrMillimeter
+    Application.Optimization = True
     
+    signOnManyPages
     
+    Application.Optimization = False
+    ActiveWindow.Refresh
+    Application.Refresh
+    ActiveDocument.ClearSelection
 End Sub
 
 Private Sub btnPickPlace_Click()
     tbPlateOffset.Enabled = False
     lblPlateOffset.Enabled = False
+    btnPickPlace.BackColor = &H8000000D
+    btnPickPlace.ForeColor = &H8000000E
+    retval = ActiveDocument.GetUserClick(signX, signY, modShift, 100, False, cdrCursorPick)
+    customPlace = True
 End Sub
 
 Private Sub tbtnHoriz_Click()
@@ -46,6 +61,7 @@ Private Sub tbtnVertic_Click()
 End Sub
 
 Private Sub UserForm_Initialize()
+    ActiveDocument.Unit = cdrMillimeter
     tbPageWidth.Value = 497
     tbPageHeight.Value = 347
     tbStartPage.Value = ActivePage.Index
@@ -54,4 +70,47 @@ Private Sub UserForm_Initialize()
     tbPlateOffset.Value = 18
     tbtnReversePage.Value = True
     tbSign.Text = "#0000, 4+4, 347*497, BOSSART 115, спуск $"
+    sChar = "$"
+    customPlace = False
+    offsetBottom = 20
+End Sub
+
+Sub signOnManyPages()
+    Dim pWidth As Integer, pHeight As Integer
+    Dim placeText As String, beginS As String, lastS As String, iChar As Integer
+    Dim iPage As Integer, iSpusk As Integer, iEven As Integer
+    Dim sign As Shape
+    Dim aPage As Page
+    
+    iSpusk = tbStartNumber.Value
+    iEven = 1
+    
+    iChar = InStr(tbSign.Text, sChar)
+    beginS = Left(tbSign.Text, iChar - 1)
+    lastS = Mid(tbSign.Text, iChar + 1)
+    
+    For iPage = tbStartPage.Value To tbLastPage.Value
+        Set aPage = ActiveDocument.Pages(iPage)
+        If (iEven Mod 2) Then
+            placeText = beginS & iSpusk & " лицо" & lastS
+        Else
+            placeText = beginS & iSpusk & " оборот" & lastS
+            iSpusk = iSpusk + 1
+        End If
+        iEven = iEven + 1
+        
+        Set sign = aPage.ActiveLayer.CreateArtisticText(0, 0, placeText, , , "Arial", 9, cdrTrue, cdrFalse, , cdrLeftAlignment)
+        
+        If Not customPlace Then
+            signX = (aPage.BoundingBox.CenterX + (tbPageWidth.Value / 2) - (sign.BoundingBox.Height / 2))
+            signY = (aPage.BoundingBox.Top - tbPlateOffset.Value - tbPageHeight.Value + offsetBottom)
+        End If
+        
+        sign.PositionX = signX
+        sign.PositionY = signY + sign.BoundingBox.Height
+        If tbtnVertic Then
+            sign.RotationCenterX = sign.BoundingBox.Left
+            sign.Rotate (90)
+        End If
+    Next iPage
 End Sub

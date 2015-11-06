@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmCutMarks 
-   Caption         =   "Cut Marks v1.0"
-   ClientHeight    =   5865
+   Caption         =   "Cut Marks v1.2"
+   ClientHeight    =   2415
    ClientLeft      =   45
    ClientTop       =   390
-   ClientWidth     =   3150
+   ClientWidth     =   6840
    OleObjectBlob   =   "frmCutMarks.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -38,7 +38,7 @@ Private Sub btnMake_Click()
     countY = txtbCountY.Value
     markH = txtbMarkHeight.Value
     bleed = txtbOffset.Value
-    oneCut = cbOneCut.Value
+    oneCut = tbtnOneCut.Value
     
     Set aSel = ActiveSelectionRange
     If (aSel.Count > 0) Then
@@ -228,7 +228,62 @@ Sub MakeMarkBottom(selX As Double, selY As Double, selW As Double, selH As Doubl
     End If
 End Sub
 
+Private Sub btnSwithAll_Click()
+    If (tbTop.Value And tbBottom.Value And tbLeft.Value And tbRight.Value) Then
+        tbTop.Value = False
+        tbBottom.Value = False
+        tbLeft.Value = False
+        tbRight.Value = False
+    Else
+        tbTop.Value = True
+        tbBottom.Value = True
+        tbLeft.Value = True
+        tbRight.Value = True
+    End If
+End Sub
+
+Private Sub btnUpdate_Click()
+    If ActiveSelectionRange.Count Then
+        txtbCountX.Text = Math.Round(ActiveSelectionRange.BoundingBox.Width / ActiveSelectionRange.Item(1).BoundingBox.Width)
+        txtbCountY.Text = Math.Round(ActiveSelectionRange.BoundingBox.Height / ActiveSelectionRange.Item(1).BoundingBox.Height)
+    End If
+End Sub
+
+Private Sub tbBottom_Click()
+    If tbBottom Then
+        tbBottom.BackColor = &H80000018
+    Else
+        tbBottom.BackColor = &H8000000F
+    End If
+End Sub
+
+Private Sub tbLeft_Click()
+    If tbLeft Then
+        tbLeft.BackColor = &H80000018
+    Else
+        tbLeft.BackColor = &H8000000F
+    End If
+End Sub
+
+Private Sub tbRight_Click()
+    If tbRight Then
+        tbRight.BackColor = &H80000018
+    Else
+        tbRight.BackColor = &H8000000F
+    End If
+End Sub
+
+Private Sub tbTop_Click()
+    If tbTop Then
+        tbTop.BackColor = &H80000018
+    Else
+        tbTop.BackColor = &H8000000F
+    End If
+End Sub
+
 Private Sub UserForm_Initialize()
-    txtbCountX.Text = Math.Round(ActiveSelectionRange.BoundingBox.Width / ActiveSelectionRange.Item(1).BoundingBox.Width)
-    txtbCountY.Text = Math.Round(ActiveSelectionRange.BoundingBox.Height / ActiveSelectionRange.Item(1).BoundingBox.Height)
+    If ActiveSelectionRange.Count Then
+        txtbCountX.Text = Math.Round(ActiveSelectionRange.BoundingBox.Width / ActiveSelectionRange.Item(1).BoundingBox.Width)
+        txtbCountY.Text = Math.Round(ActiveSelectionRange.BoundingBox.Height / ActiveSelectionRange.Item(1).BoundingBox.Height)
+    End If
 End Sub
