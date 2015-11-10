@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmCutMarks 
-   Caption         =   "Cut Marks v1.2"
+   Caption         =   "Cut Marks v1.3"
    ClientHeight    =   2415
    ClientLeft      =   45
    ClientTop       =   390
@@ -46,8 +46,13 @@ Private Sub btnMake_Click()
         selW = aSel.SizeWidth
         selY = aSel.PositionY
         selH = aSel.SizeHeight
-        productW = selW / countX
-        productH = selH / countY
+        If oneCut Then
+            productW = (selW - bleed * 2) / countX
+            productH = (selH - bleed * 2) / countY
+        Else
+            productW = selW / countX
+            productH = selH / countY
+        End If
         If tbTop Then
             MakeMarkTop selX, selY, selW, selH, productW, productH, countX, countY, markH, bleed, oneCut
         End If
@@ -88,7 +93,11 @@ Sub MakeMarkTop(selX As Double, selY As Double, selW As Double, selH As Double, 
     mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
     
     If countX > 1 Then
-        startX = selX
+        If oneCut Then
+            startX = selX + bleed
+        Else
+            startX = selX
+        End If
         For i = 1 To countX - 1
             startX = startX + productW
             If oneCut Then
@@ -128,7 +137,11 @@ Sub MakeMarkLeft(selX As Double, selY As Double, selW As Double, selH As Double,
     mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
     
     If countY > 1 Then
-        startY = selY
+        If oneCut Then
+            startY = selY - bleed
+        Else
+            startY = selY
+        End If
         For i = 1 To countY - 1
             startY = startY - productH
             If oneCut Then
@@ -168,7 +181,11 @@ Sub MakeMarkRight(selX As Double, selY As Double, selW As Double, selH As Double
     mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
     
     If countY > 1 Then
-        startY = selY
+        If oneCut Then
+            startY = selY - bleed
+        Else
+            startY = selY
+        End If
         For i = 1 To countY - 1
             startY = startY - productH
             If oneCut Then
@@ -208,7 +225,11 @@ Sub MakeMarkBottom(selX As Double, selY As Double, selW As Double, selH As Doubl
     mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
     
     If countX > 1 Then
-        startX = selX
+        If oneCut Then
+            startX = selX + bleed
+        Else
+            startX = selX
+        End If
         For i = 1 To countX - 1
             startX = startX + productW
             If oneCut Then
