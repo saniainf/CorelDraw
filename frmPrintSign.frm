@@ -27,7 +27,12 @@ Private Sub btnMake_Click()
     Application.ActiveDocument.Unit = cdrMillimeter
     Application.Optimization = True
     
-    signOnManyPages
+    If tbtnReversePage Then
+        signOnPagesNoRevers
+    Else
+        signOnManyPages
+    End If
+    
     
     Application.Optimization = False
     ActiveWindow.Refresh
@@ -98,6 +103,41 @@ Sub signOnManyPages()
             iSpusk = iSpusk + 1
         End If
         iEven = iEven + 1
+        
+        Set sign = aPage.ActiveLayer.CreateArtisticText(0, 0, placeText, , , "Arial", 9, cdrTrue, cdrFalse, , cdrLeftAlignment)
+        
+        If Not customPlace Then
+            signX = (aPage.BoundingBox.CenterX + (tbPageWidth.Value / 2) - (sign.BoundingBox.Height / 2))
+            signY = (aPage.BoundingBox.Top - tbPlateOffset.Value - tbPageHeight.Value + offsetBottom)
+        End If
+        
+        sign.PositionX = signX
+        sign.PositionY = signY + sign.BoundingBox.Height
+        If tbtnVertic Then
+            sign.RotationCenterX = sign.BoundingBox.Left
+            sign.Rotate (90)
+        End If
+    Next iPage
+End Sub
+
+Sub signOnPagesNoRevers()
+    Dim pWidth As Integer, pHeight As Integer
+    Dim placeText As String, beginS As String, lastS As String, iChar As Integer
+    Dim iPage As Integer, iSpusk As Integer, iEven As Integer
+    Dim sign As Shape
+    Dim aPage As Page
+    
+    iSpusk = tbStartNumber.Value
+    iEven = 1
+    
+    iChar = InStr(tbSign.Text, sChar)
+    beginS = Left(tbSign.Text, iChar - 1)
+    lastS = Mid(tbSign.Text, iChar + 1)
+    
+    For iPage = tbStartPage.Value To tbLastPage.Value
+        Set aPage = ActiveDocument.Pages(iPage)
+        placeText = beginS & iSpusk & lastS
+        iSpusk = iSpusk + 1
         
         Set sign = aPage.ActiveLayer.CreateArtisticText(0, 0, placeText, , , "Arial", 9, cdrTrue, cdrFalse, , cdrLeftAlignment)
         
