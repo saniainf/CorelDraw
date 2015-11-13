@@ -46,7 +46,7 @@ Private Sub btnMake_Click()
         selW = aSel.SizeWidth
         selY = aSel.PositionY
         selH = aSel.SizeHeight
-        If oneCut Then
+        If oneCut And Not cbPlus.Value Then
             productW = (selW - bleed * 2) / countX
             productH = (selH - bleed * 2) / countY
         Else
@@ -79,21 +79,95 @@ Sub MakeMarkTop(selX As Double, selY As Double, selW As Double, selH As Double, 
     Dim mark As Shape
     Dim i As Integer
     
+    If cbPlus.Value And oneCut Then
+        startY = selY + bleed
+        endY = selY + markH + bleed
+        startX = selX
+        endX = selX
+    Else
+        startY = selY
+        endY = selY + markH
+        startX = selX + bleed
+        endX = selX + bleed
+    End If
+    
     'first mark
-    startX = selX + bleed
-    endX = selX + bleed
-    startY = selY
-    endY = selY + markH
     Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
     mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
+    
+    If cbPlus.Value And oneCut Then
+        startX = selX + selW
+        endX = selX + selW
+    Else
+        startX = selX + selW - bleed
+        endX = selX + selW - bleed
+    End If
+    
     'final mark
-    startX = selX + selW - bleed
-    endX = selX + selW - bleed
     Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
     mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
     
     If countX > 1 Then
-        If oneCut Then
+        If oneCut And Not cbPlus.Value Then
+            startX = selX + bleed
+        Else
+            startX = selX
+        End If
+        For i = 1 To countX - 1
+            startX = startX + productW
+            If oneCut Then
+                markX = startX
+                Set mark = ActiveLayer.CreateLineSegment(markX, startY, markX, endY)
+                mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
+            Else
+                markX = startX - bleed
+                Set mark = ActiveLayer.CreateLineSegment(markX, startY, markX, endY)
+                mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
+        
+                markX = startX + bleed
+                Set mark = ActiveLayer.CreateLineSegment(markX, startY, markX, endY)
+                mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
+            End If
+    Next i
+    End If
+End Sub
+
+Sub MakeMarkBottom(selX As Double, selY As Double, selW As Double, selH As Double, productW As Double, productH As Double, countX As Integer, countY As Integer, markH As Integer, bleed As Integer, oneCut As Boolean)
+    Dim startX As Double, startY As Double, endX As Double, endY As Double
+    Dim markX As Double, markY As Double
+    Dim mark As Shape
+    Dim i As Integer
+    
+    If cbPlus.Value And oneCut Then
+        startY = selY - selH - bleed
+        endY = selY - selH - bleed - markH
+        startX = selX
+        endX = selX
+    Else
+        startY = selY - selH
+        endY = selY - selH - markH
+        startX = selX + bleed
+        endX = selX + bleed
+    End If
+    
+    'first mark
+    Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
+    mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
+    
+    If cbPlus.Value And oneCut Then
+        startX = selX + selW
+        endX = selX + selW
+    Else
+        startX = selX + selW - bleed
+        endX = selX + selW - bleed
+    End If
+    
+    'final mark
+    Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
+    mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
+    
+    If countX > 1 Then
+        If oneCut And Not cbPlus.Value Then
             startX = selX + bleed
         Else
             startX = selX
@@ -123,21 +197,36 @@ Sub MakeMarkLeft(selX As Double, selY As Double, selW As Double, selH As Double,
     Dim mark As Shape
     Dim i As Integer
     
+    If cbPlus.Value And oneCut Then
+        startY = selY
+        endY = selY
+        startX = selX - bleed
+        endX = selX - bleed - markH
+    Else
+        startY = selY - bleed
+        endY = selY - bleed
+        startX = selX
+        endX = selX - markH
+    End If
+    
     'first mark
-    startX = selX
-    endX = selX - markH
-    startY = selY - bleed
-    endY = selY - bleed
     Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
     mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
+    
+    If cbPlus.Value And oneCut Then
+        startY = selY - selH
+        endY = selY - selH
+    Else
+        startY = selY - selH + bleed
+        endY = selY - selH + bleed
+    End If
+    
     'final mark
-    startY = selY - selH + bleed
-    endY = selY - selH + bleed
     Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
     mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
     
     If countY > 1 Then
-        If oneCut Then
+        If oneCut And Not cbPlus.Value Then
             startY = selY - bleed
         Else
             startY = selY
@@ -167,21 +256,36 @@ Sub MakeMarkRight(selX As Double, selY As Double, selW As Double, selH As Double
     Dim mark As Shape
     Dim i As Integer
     
+    If cbPlus.Value And oneCut Then
+        startY = selY
+        endY = selY
+        startX = selX + selW + bleed
+        endX = selX + selW + bleed + markH
+    Else
+        startY = selY - bleed
+        endY = selY - bleed
+        startX = selX + selW
+        endX = selX + selW + markH
+    End If
+    
     'first mark
-    startX = selX + selW
-    endX = selX + selW + markH
-    startY = selY - bleed
-    endY = selY - bleed
     Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
     mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
+    
+    If cbPlus.Value And oneCut Then
+        startY = selY - selH
+        endY = selY - selH
+    Else
+        startY = selY - selH + bleed
+        endY = selY - selH + bleed
+    End If
+    
     'final mark
-    startY = selY - selH + bleed
-    endY = selY - selH + bleed
     Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
     mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
     
     If countY > 1 Then
-        If oneCut Then
+        If oneCut And Not cbPlus.Value Then
             startY = selY - bleed
         Else
             startY = selY
@@ -199,50 +303,6 @@ Sub MakeMarkRight(selX As Double, selY As Double, selW As Double, selH As Double
             
                 markY = startY - bleed
                 Set mark = ActiveLayer.CreateLineSegment(startX, markY, endX, markY)
-                mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
-            End If
-        Next i
-    End If
-End Sub
-
-Sub MakeMarkBottom(selX As Double, selY As Double, selW As Double, selH As Double, productW As Double, productH As Double, countX As Integer, countY As Integer, markH As Integer, bleed As Integer, oneCut As Boolean)
-    Dim startX As Double, startY As Double, endX As Double, endY As Double
-    Dim markX As Double, markY As Double
-    Dim mark As Shape
-    Dim i As Integer
-    
-    'first mark
-    startX = selX + bleed
-    endX = selX + bleed
-    startY = selY - selH
-    endY = selY - selH - markH
-    Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
-    mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
-    'final mark
-    startX = selX + selW - bleed
-    endX = selX + selW - bleed
-    Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
-    mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
-    
-    If countX > 1 Then
-        If oneCut Then
-            startX = selX + bleed
-        Else
-            startX = selX
-        End If
-        For i = 1 To countX - 1
-            startX = startX + productW
-            If oneCut Then
-                markX = startX
-                Set mark = ActiveLayer.CreateLineSegment(markX, startY, markX, endY)
-                mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
-            Else
-                markX = startX - bleed
-                Set mark = ActiveLayer.CreateLineSegment(markX, startY, markX, endY)
-                mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
-            
-                markX = startX + bleed
-                Set mark = ActiveLayer.CreateLineSegment(markX, startY, markX, endY)
                 mark.Outline.SetProperties 0.0762, OutlineStyles(0), CreateRegistrationColor
             End If
         Next i
@@ -291,6 +351,14 @@ Private Sub tbRight_Click()
         tbRight.BackColor = &H80000018
     Else
         tbRight.BackColor = &H8000000F
+    End If
+End Sub
+
+Private Sub tbtnOneCut_Click()
+    If tbtnOneCut.Value Then
+        cbPlus.Enabled = True
+    Else
+        cbPlus.Enabled = False
     End If
 End Sub
 
