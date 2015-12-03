@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm1
    ClientHeight    =   4935
    ClientLeft      =   45
    ClientTop       =   390
-   ClientWidth     =   4230
+   ClientWidth     =   7470
    OleObjectBlob   =   "UserForm1.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -55,10 +55,7 @@ Private Sub btn2_Click()
 End Sub
 
 Private Sub btn3_Click()
-    ActiveDocument.GetUserClick x, y, shift, 10, True, cdrCursorPick
-    UserForm1.txtbFirst.Text = x
-    UserForm1.txtbSecond.Text = y
-    UserForm1.txtbThird.Text = shift
+ MsgBox UserDataPath
 End Sub
 
 Private Sub cb1_Change()
