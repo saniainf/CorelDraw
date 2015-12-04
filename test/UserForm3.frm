@@ -58,6 +58,18 @@ Private Sub CommandButton4_Click()
     lb1Refresh
 End Sub
 
+Private Sub CommandButton5_Click()
+    Dim s1 As Shape
+    Dim x As Integer
+    x = 0
+    For Each c3 In c
+        Set s1 = ActiveLayer.CreateRectangle(x, 4, x + 4, 0)
+        s1.Outline.SetNoOutline
+        s1.Fill.UniformColor = c3
+        x = x + 4
+    Next c3
+End Sub
+
 Private Sub ListBox1_Change()
     If ListBox1.ListCount <= 0 Or ListBox1.ListIndex < 0 Then Exit Sub
     pS = ListBox1.ListIndex
@@ -100,6 +112,7 @@ Private Sub ScrollBar1_Change()
 End Sub
 
 Private Sub UserForm_Initialize()
+    Application.ActiveDocument.Unit = cdrMillimeter
     cyanColor.CMYKAssign 100, 0, 0, 0
     magentaColor.CMYKAssign 0, 100, 0, 0
     yellowColor.CMYKAssign 0, 0, 100, 0
