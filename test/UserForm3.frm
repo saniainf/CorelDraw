@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm3 
    Caption         =   "UserForm3"
-   ClientHeight    =   3165
+   ClientHeight    =   4860
    ClientLeft      =   45
    ClientTop       =   390
    ClientWidth     =   6990
@@ -21,6 +21,7 @@ Dim magenta80 As New Color, magenta40 As New Color
 Dim yellow80 As New Color, yellow40 As New Color
 Dim black80 As New Color, black40 As New Color
 Dim grayBalance As New Color
+Dim pS As Integer
 
 Private Sub CommandButton1_Click()
     Dim cColor As New Color
@@ -28,9 +29,8 @@ Private Sub CommandButton1_Click()
         If ListBox1.ListIndex = -1 Then
             ListBox1.ListIndex = ListBox1.ListCount - 1
         End If
-        c.Add cColor, , , ListBox1.ListIndex + 1
+        c.Add cColor, , ListBox1.ListIndex + 1
         lb1Refresh
-        ListBox1.ListIndex = ListBox1.ListIndex + 1
     End If
 End Sub
 
@@ -54,20 +54,49 @@ Private Sub CommandButton4_Click()
     If ListBox1.ListIndex = -1 Then
         ListBox1.ListIndex = ListBox1.ListCount - 1
     End If
-    c.Add black80, , , ListBox1.ListIndex + 1
+    c.Add black80, , ListBox1.ListIndex + 1
     lb1Refresh
-    ListBox1.ListIndex = ListBox1.ListIndex + 1
-    ScrollBar1.Value = ListBox1.ListIndex
+End Sub
+
+Private Sub ListBox1_Change()
+    If ListBox1.ListCount <= 0 Or ListBox1.ListIndex < 0 Then Exit Sub
+    pS = ListBox1.ListIndex
+    Label1.Caption = "scroll min " & ScrollBar1.Min & vbCrLf _
+                & "scroll max " & ScrollBar1.Max & vbCrLf _
+                & "list index " & ListBox1.ListIndex & vbCrLf _
+                & "list count " & ListBox1.ListCount
 End Sub
 
 Private Sub ListBox1_Click()
+    If ListBox1.ListCount <= 0 Or ListBox1.ListIndex < 0 Then Exit Sub
     ScrollBar1.Value = ListBox1.ListIndex
-    Label1.Caption = ScrollBar1.Value
 End Sub
 
 Private Sub ScrollBar1_Change()
-    Label1.Caption = ScrollBar1.Value
-    ListBox1.ListIndex = ScrollBar1.Value
+    If ListBox1.ListCount <= 0 Or ListBox1.ListIndex < 0 Then Exit Sub
+    
+    Dim mColor As New Color
+    Set mColor = c.Item(pS + 1)
+    
+    If pS < ScrollBar1.Value Then
+        Label4.Caption = "Down"
+        c.Remove pS + 1
+        c.Add mColor, , , pS + 1
+        ListBox1.ListIndex = ScrollBar1.Value
+        lb1Refresh
+    End If
+    
+    If pS > ScrollBar1.Value Then
+        Label4.Caption = "Up"
+        c.Remove pS + 1
+        c.Add mColor, , pS
+        ListBox1.ListIndex = ScrollBar1.Value
+        lb1Refresh
+    End If
+    
+    Label2.Caption = "prev val " & pS & vbCrLf & "color " & mColor.Name
+    Label3.Caption = "scroll val " & ScrollBar1.Value
+    
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -110,8 +139,7 @@ Sub lb1Refresh()
     If ListBox1.ListIndex = -1 Then
         ListBox1.ListIndex = ListBox1.ListCount - 1
     End If
-    ScrollBar1.Value = ListBox1.ListIndex
-    Label1.Caption = ScrollBar1.Value
+    ScrollBar1.Min = 0
     ScrollBar1.Max = ListBox1.ListCount - 1
 End Sub
 

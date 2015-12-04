@@ -14,7 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Public retval As Long
-Public x As Double, y As Double, shift As Long
+Public x As Double, y As Double, Shift As Long
 
 Private Sub btn1_Click()
 Application.ActiveDocument.Unit = cdrMillimeter
