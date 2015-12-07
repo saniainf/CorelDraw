@@ -1,5 +1,5 @@
-Attribute VB_Name = "RecordedMacros"
-Sub Macro1()
+Attribute VB_Name = "ShapeWeld"
+Sub ShapeWeld()
     Application.Optimization = True
     Dim s1 As Shape
     Dim sr As ShapeRange

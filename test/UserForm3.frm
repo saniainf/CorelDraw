@@ -48,6 +48,7 @@ Private Sub CommandButton3_Click()
     End If
     c.Remove ListBox1.ListIndex + 1
     lb1Refresh
+    Shape.Seld
 End Sub
 
 Private Sub CommandButton4_Click()
