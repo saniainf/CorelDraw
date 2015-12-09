@@ -14,11 +14,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim c As New Collection
+Dim cColor As New Collection
 Dim cyanColor As New Color, magentaColor As New Color, yellowColor As New Color, blackColor As New Color
 Dim whiteColor As New Color
 Dim cyan80 As New Color, cyan40 As New Color
-Dim magenta80 As New Color, magenta40 As New Color
-Dim yellow80 As New Color, yellow40 As New Color
 Dim black80 As New Color, black40 As New Color
 Dim grayBalance As New Color
 Dim pS As Integer
@@ -36,9 +35,21 @@ End Sub
 
 Private Sub CommandButton2_Click()
     ListBox2.Clear
-    For Each c1 In c
-        ListBox2.AddItem c1.Name
-    Next c1
+    'ActiveShape.Fill.ApplyUniformFill CreateSpotColor(ActiveSelection.Fill.UniformColor.PaletteIdentifier, ActiveSelection.Fill.UniformColor.SpotColorID, 50)
+    'Dim x As Integer
+    'For i = 0 To 20
+        'x = (i Mod 3) + 1
+        'ListBox2.AddItem x
+    'Next i
+    For Each cc3 In cColor
+        'ListBox2.AddItem TypeName(cc3)
+        If TypeName(cc3) = "IDrawColor" Then
+            ListBox2.AddItem cc3.Name
+        End If
+        If TypeName(cc3) = "String" Then
+            ListBox2.AddItem cc3
+        End If
+    Next cc3
 End Sub
 
 Private Sub CommandButton3_Click()
@@ -48,7 +59,6 @@ Private Sub CommandButton3_Click()
     End If
     c.Remove ListBox1.ListIndex + 1
     lb1Refresh
-    Shape.Seld
 End Sub
 
 Private Sub CommandButton4_Click()
@@ -60,15 +70,35 @@ Private Sub CommandButton4_Click()
 End Sub
 
 Private Sub CommandButton5_Click()
-    Dim s1 As Shape
-    Dim x As Integer
+    Dim x As Double, spaceWidth As Double, barWidth As Double
+    Dim i As Integer
+    Dim sBar As Shape
+    spaceWidth = 0.3
+    barWidth = 3.9
     x = 0
-    For Each c3 In c
-        Set s1 = ActiveLayer.CreateRectangle(x, 4, x + 4, 0)
-        s1.Outline.SetNoOutline
-        s1.Fill.UniformColor = c3
-        x = x + 4
-    Next c3
+    For i = 1 To 16
+        'color bar
+        For a = 1 To 8 \ c.Count
+            For Each c3 In c
+                Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + barWidth, 0)
+                sBar.Outline.SetNoOutline
+                sBar.Fill.UniformColor = c3
+                x = x + barWidth
+            Next c3
+        Next a
+        'white bar
+        For a = 0 To 8 Mod c.Count - 1
+            Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + barWidth, 0)
+            sBar.Outline.SetNoOutline
+            sBar.Fill.ApplyNoFill
+            x = x + barWidth
+        Next a
+        'white space
+        Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + spaceWidth, 0)
+        sBar.Outline.SetNoOutline
+        sBar.Fill.ApplyNoFill
+        x = x + spaceWidth
+    Next i
 End Sub
 
 Private Sub ListBox1_Change()
@@ -121,10 +151,6 @@ Private Sub UserForm_Initialize()
     whiteColor.CMYKAssign 0, 0, 0, 0
     cyan80.CMYKAssign 80, 0, 0, 0
     cyan40.CMYKAssign 40, 0, 0, 0
-    magenta80.CMYKAssign 0, 80, 0, 0
-    magenta40.CMYKAssign 0, 40, 0, 0
-    yellow80.CMYKAssign 0, 0, 80, 0
-    yellow40.CMYKAssign 0, 0, 40, 0
     black80.CMYKAssign 0, 0, 0, 80
     black40.CMYKAssign 0, 0, 0, 40
     grayBalance.CMYKAssign 38, 26, 26, 0
@@ -133,9 +159,18 @@ Private Sub UserForm_Initialize()
     c.Add magentaColor
     c.Add yellowColor
     c.Add blackColor
-    c.Add black80
-    c.Add black40
     lb1Refresh
+    
+    Dim str1 As String, str2 As String
+    
+    str1 = "string1"
+    str2 = "string2"
+    
+    cColor.Add cyanColor
+    cColor.Add magentaColor
+    cColor.Add yellowColor
+    cColor.Add str1
+    cColor.Add str2
 End Sub
 
 Sub lb1Refresh()
@@ -145,6 +180,7 @@ Sub lb1Refresh()
     For Each c2 In c
         ListBox1.AddItem c2.Name
     Next c2
+    
     If s >= ListBox1.ListCount Then
         s = ListBox1.ListCount - 1
     End If
@@ -153,6 +189,7 @@ Sub lb1Refresh()
     If ListBox1.ListIndex = -1 Then
         ListBox1.ListIndex = ListBox1.ListCount - 1
     End If
+    
     ScrollBar1.Min = 0
     ScrollBar1.Max = ListBox1.ListCount - 1
 End Sub
