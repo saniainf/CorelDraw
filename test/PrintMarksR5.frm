@@ -19,12 +19,15 @@ Dim cyanColor As New Color, magentaColor As New Color, yellowColor As New Color,
 Dim whiteColor As New Color
 Dim cBlack40 As New Color, cGrayBalance As New Color
 Dim tint80 As String, tint40 As String, grayBalance As String, black40 As String
+Dim x As Double, spaceWidth As Double, barWidth As Double, startPos As Double
+Dim sBar As Shape
+Dim sectionCount As Integer, barInSection As Integer
 Dim prevSelected As Integer
-Dim clr As New Color
+Dim clrForLbl As New Color, saveClr As New Color, pickClr As New Color, tintClr As New Color
 Dim i As Integer, e As Integer, a As Integer
-Dim obj As Variant
+Dim objCColorForList As Variant, objCColorForBar As Variant
 Dim typeStr As Boolean
-Dim str As String
+Dim str As String, saveStr As String
 
 Private Sub UserForm_Initialize()
     Application.ActiveDocument.Unit = cdrMillimeter
@@ -40,6 +43,12 @@ Private Sub UserForm_Initialize()
     black40 = "black40"
     tint80 = "tint80"
     tint40 = "tint40"
+    
+    sectionCount = 16
+    barInSection = 8
+    spaceWidth = 0.3
+    barWidth = 3.9
+    startPos = 0#
     
     cColor.Add cyanColor
     cColor.Add magentaColor
@@ -67,20 +76,22 @@ Private Sub sbColorList_Change()
     If lbColorList.ListCount <= 0 Or lbColorList.ListIndex < 0 Then Exit Sub
    
     If prevSelected < sbColorList.Value Then
+        'save color or str
         If TypeName(cColor.Item(prevSelected + 1)) = "String" Then
-            str = cColor.Item(prevSelected + 1)
+            saveStr = cColor.Item(prevSelected + 1)
             typeStr = True
         End If
         If TypeName(cColor.Item(prevSelected + 1)) = "IDrawColor" Then
-            Set clr = cColor.Item(prevSelected + 1)
+            Set saveClr = cColor.Item(prevSelected + 1)
             typeStr = False
         End If
-
+        'remove item
         cColor.Remove prevSelected + 1
+        'add item in new position
         If typeStr Then
-            cColor.Add str, , , prevSelected + 1
+            cColor.Add saveStr, , , prevSelected + 1
         Else
-            cColor.Add clr, , , prevSelected + 1
+            cColor.Add saveClr, , , prevSelected + 1
         End If
         lbColorList.ListIndex = sbColorList.Value
         colorListUpdate
@@ -88,19 +99,19 @@ Private Sub sbColorList_Change()
 
     If prevSelected > sbColorList.Value Then
         If TypeName(cColor.Item(prevSelected + 1)) = "String" Then
-            str = cColor.Item(prevSelected + 1)
+            saveStr = cColor.Item(prevSelected + 1)
             typeStr = True
         End If
         If TypeName(cColor.Item(prevSelected + 1)) = "IDrawColor" Then
-            Set clr = cColor.Item(prevSelected + 1)
+            Set saveClr = cColor.Item(prevSelected + 1)
             typeStr = False
         End If
 
         cColor.Remove prevSelected + 1
         If typeStr Then
-            cColor.Add str, , prevSelected
+            cColor.Add saveStr, , prevSelected
         Else
-            cColor.Add clr, , prevSelected
+            cColor.Add saveClr, , prevSelected
         End If
         lbColorList.ListIndex = sbColorList.Value
         colorListUpdate
@@ -128,14 +139,15 @@ End Sub
 'End Sub
 
 Private Sub btnAddColor_Click()
-    If clr.UserAssignEx Then
-        If clr.Name = "unnamed color" Then
+    Set pickClr = New Color
+    If pickClr.UserAssignEx Then
+        If pickClr.Name = "unnamed color" Then
             MsgBox "Unnamed Color", vbCritical, "Error"
             Exit Sub
         End If
         'if not selected
         If lbColorList.ListIndex = -1 Then lbColorList.ListIndex = lbColorList.ListCount - 1
-        cColor.Add clr, , lbColorList.ListIndex + 1
+        cColor.Add pickClr, , lbColorList.ListIndex + 1
         colorListUpdate
     End If
 End Sub
@@ -185,7 +197,34 @@ Private Sub btnAddGrayBalance_Click()
 End Sub
 
 Private Sub btnCreateMarks_Click()
-
+    x = startPos
+    For i = 0 To sectionCount - 1
+        'color bar
+        For a = 1 To barInSection \ cColor.Count
+            For Each objCColorForBar In cColor
+                Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + barWidth, 0)
+                sBar.Outline.SetNoOutline
+                If TypeName(objCColorForBar) = "IDrawColor" Then
+                    sBar.Fill.UniformColor = objCColorForBar
+                Else
+                    sBar.Fill.UniformColor = parserStringToColorBar(objCColorForBar, i)
+                End If
+                x = x + barWidth
+            Next objCColorForBar
+        Next a
+        'white bar
+        For a = 0 To barInSection Mod cColor.Count - 1
+            Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + barWidth, 0)
+            sBar.Outline.SetNoOutline
+            sBar.Fill.ApplyNoFill
+            x = x + barWidth
+        Next a
+        'white space
+        Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + spaceWidth, 0)
+        sBar.Outline.SetNoOutline
+        sBar.Fill.ApplyNoFill
+        x = x + spaceWidth
+    Next i
 End Sub
 
 Private Sub btnCancel_Click()
@@ -199,15 +238,15 @@ Sub colorListUpdate()
     lbColorList.Clear
     Set cColorOnly = New Collection
     
-    For Each obj In cColor
-        Select Case TypeName(obj)
+    For Each objCColorForList In cColor
+        Select Case TypeName(objCColorForList)
             Case "IDrawColor"
-                lbColorList.AddItem obj.Name
-                cColorOnly.Add obj
+                lbColorList.AddItem objCColorForList.Name
+                cColorOnly.Add objCColorForList
             Case "String"
-                lbColorList.AddItem parserStringToColorList(obj)
+                lbColorList.AddItem parserStringToColorList(objCColorForList)
         End Select
-    Next obj
+    Next objCColorForList
     
     'if delete item and reduce items count
     If i >= lbColorList.ListCount Then i = lbColorList.ListCount - 1
@@ -235,17 +274,51 @@ Public Function parserStringToColorList(pStr As Variant) As String
     End Select
 End Function
 
+Public Function parserStringToColorBar(pStr As Variant, nSection As Integer) As Color
+    Select Case pStr
+        Case grayBalance
+            Set parserStringToColorBar = cGrayBalance
+        Case black40
+            Set parserStringToColorBar = cBlack40
+        Case tint80
+            'get copy color from ColorOnly collection
+            Set tintClr = cColorOnly.Item((nSection Mod cColorOnly.Count) + 1).GetCopy
+            'tint color differently for spot or cmyk
+            If tintClr.Type = cdrColorCMYK Then
+                tintClr.BlendWith whiteColor, 80
+            ElseIf tintClr.Type = cdrColorSpot Or clrForLbl.Type = cdrColorPantone Then
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 80)
+            End If
+            'return value
+            Set parserStringToColorBar = tintClr
+        Case tint40
+            Set tintClr = cColorOnly.Item((nSection Mod cColorOnly.Count) + 1).GetCopy
+            If tintClr.Type = cdrColorCMYK Then
+                tintClr.BlendWith whiteColor, 40
+            ElseIf tintClr.Type = cdrColorSpot Or clrForLbl.Type = cdrColorPantone Then
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 40)
+            End If
+            Set parserStringToColorBar = tintClr
+    End Select
+End Function
+
 Sub fillLabel()
+    If cColor.Count > barInSection Then
+        lblBarCount.ForeColor = &HFF&
+    Else
+        lblBarCount.ForeColor = &H80000012
+    End If
+    
     lblBarCount.Caption = "Bar count: " & cColor.Count
     i = 0
     e = 0
-    For Each clr In cColorOnly
-        If clr.Type = cdrColorCMYK Then
+    For Each clrForLbl In cColorOnly
+        If clrForLbl.Type = cdrColorCMYK Then
             i = i + 1
-        ElseIf clr.Type = cdrColorSpot Or clr.Type = cdrColorPantone Then
+        ElseIf clrForLbl.Type = cdrColorSpot Or clrForLbl.Type = cdrColorPantone Then
             e = e + 1
         End If
-    Next clr
+    Next clrForLbl
     lblCmykCount.Caption = "CMYK count: " & i
     lblSpotCount.Caption = "Spot count: " & e
 End Sub
