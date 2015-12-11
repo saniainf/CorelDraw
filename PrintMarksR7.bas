@@ -20,7 +20,7 @@ If (Documents.Count = 0) Then Exit Sub
     Dim i As Integer, a As Integer
     Dim cBar As Shape, cbT As Shape, cbB As Shape
     
-    printMarksPath = ("e:\Projects\Scripts\CorelDraw\cdrFiles\printMarks\")
+    printMarksPath = (UserDataPath & "printMarks\")
     offsetLeftMark = 55
     offsetTargetMark = 15
     offsetColorBar = 2

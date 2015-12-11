@@ -20,6 +20,7 @@ If (Documents.Count = 0) Then Exit Sub
     Set guide = ActiveDocument.ActivePage.GuidesLayer.CreateGuideAngle(296#, 0#, 90#)
     guide.Outline.SetProperties Color:=CreateRGBColor(0, 0, 255)
     ActivePage.GuidesLayer.Editable = False
+    ActivePage.GuidesLayer.Visible = True
     
     'second page
     If ActiveDocument.Pages.Count < 2 Then
@@ -40,6 +41,9 @@ If (Documents.Count = 0) Then Exit Sub
     guide.Outline.SetProperties Color:=CreateRGBColor(0, 0, 255)
 
     ActiveDocument.ActivePage.GuidesLayer.Editable = False
+    ActivePage.GuidesLayer.Visible = True
+    ActivePage.Layers(2).Activate
+    
     ActiveDocument.Pages(1).Activate
     ActiveDocument.ActivePage.Layers(2).Activate
 End Sub

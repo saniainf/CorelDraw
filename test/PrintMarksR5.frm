@@ -14,7 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Dim cColor As New Collection, cColorOnly As New Collection
+Dim cColor As New Collection, cColorOnly As New Collection, cColorBar As New Collection
 Dim cyanColor As New Color, magentaColor As New Color, yellowColor As New Color, blackColor As New Color
 Dim whiteColor As New Color
 Dim cBlack40 As New Color, cGrayBalance As New Color
@@ -25,9 +25,11 @@ Dim sectionCount As Integer, barInSection As Integer
 Dim prevSelected As Integer
 Dim clrForLbl As New Color, saveClr As New Color, pickClr As New Color, tintClr As New Color
 Dim i As Integer, e As Integer, a As Integer
-Dim objCColorForList As Variant, objCColorForBar As Variant
+Dim objCColorForList As Variant, objCColorForBar As Variant, objCColorBar As Variant
 Dim typeStr As Boolean
 Dim str As String, saveStr As String
+Dim icClr As Integer, icClrOnly As Integer
+Dim srBar As New ShapeRange
 
 Private Sub UserForm_Initialize()
     Application.ActiveDocument.Unit = cdrMillimeter
@@ -197,34 +199,25 @@ Private Sub btnAddGrayBalance_Click()
 End Sub
 
 Private Sub btnCreateMarks_Click()
-    x = startPos
-    For i = 0 To sectionCount - 1
-        'color bar
-        For a = 1 To barInSection \ cColor.Count
-            For Each objCColorForBar In cColor
-                Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + barWidth, 0)
-                sBar.Outline.SetNoOutline
-                If TypeName(objCColorForBar) = "IDrawColor" Then
-                    sBar.Fill.UniformColor = objCColorForBar
-                Else
-                    sBar.Fill.UniformColor = parserStringToColorBar(objCColorForBar, i)
-                End If
-                x = x + barWidth
-            Next objCColorForBar
-        Next a
-        'white bar
-        For a = 0 To barInSection Mod cColor.Count - 1
-            Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + barWidth, 0)
-            sBar.Outline.SetNoOutline
-            sBar.Fill.ApplyNoFill
-            x = x + barWidth
-        Next a
-        'white space
-        Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + spaceWidth, 0)
-        sBar.Outline.SetNoOutline
-        sBar.Fill.ApplyNoFill
-        x = x + spaceWidth
-    Next i
+    ActiveDocument.BeginCommandGroup "Ñreate Print Marks"
+    Application.Optimization = True
+    Set srBar = New ShapeRange
+    Set cColorBar = New Collection
+    
+    If cColor.Count <= 8 Then createStandartBar
+    If cColor.Count > 8 Then createExtendetBar
+
+    For Each objCColorBar In cColorBar
+        srBar.Add objCColorBar
+    Next objCColorBar
+    Set sBar = srBar.Group
+    PrintMarksR5v2.PrintMarksR5v2 sBar
+    
+    ActiveDocument.ClearSelection
+    Application.Optimization = False
+    ActiveWindow.Refresh
+    Application.Refresh
+    ActiveDocument.EndCommandGroup
 End Sub
 
 Private Sub btnCancel_Click()
@@ -261,6 +254,67 @@ Sub colorListUpdate()
     sbColorList.Max = lbColorList.ListCount - 1
 End Sub
 
+Sub createExtendetBar()
+    x = startPos
+    icClr = 1
+    icClrOnly = 1
+    For i = 0 To sectionCount - 1
+        'color bar
+        For a = 1 To barInSection
+            Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + barWidth, 0)
+            sBar.Outline.SetNoOutline
+            If TypeName(cColor.Item(icClr)) = "IDrawColor" Then
+                sBar.Fill.UniformColor = cColor.Item(icClr)
+            Else
+                sBar.Fill.UniformColor = parserStringToExtColorBar(cColor.Item(icClr))
+            End If
+            x = x + barWidth
+            icClr = icClr + 1
+            If icClrOnly > cColorOnly.Count Then icClrOnly = 1
+            If icClr > cColor.Count Then icClr = 1
+        Next a
+        'white space
+        Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + spaceWidth, 0)
+        sBar.Outline.SetNoOutline
+        sBar.Fill.ApplyNoFill
+        x = x + spaceWidth
+    Next i
+End Sub
+
+Sub createStandartBar()
+    x = startPos
+    For i = 0 To sectionCount - 1
+        'color bar
+        For a = 1 To barInSection \ cColor.Count
+            For Each objCColorForBar In cColor
+                Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + barWidth, 0)
+                cColorBar.Add sBar
+                sBar.Outline.SetNoOutline
+                If TypeName(objCColorForBar) = "IDrawColor" Then
+                    sBar.Fill.UniformColor = objCColorForBar
+                Else
+                    sBar.Fill.UniformColor = parserStringToColorBar(objCColorForBar, i)
+                End If
+                x = x + barWidth
+            Next objCColorForBar
+        Next a
+        'white bar
+        For a = 0 To barInSection Mod cColor.Count - 1
+            Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + barWidth, 0)
+            cColorBar.Add sBar
+            sBar.Outline.SetNoOutline
+            sBar.Fill.ApplyNoFill
+            x = x + barWidth
+        Next a
+        'white space
+        Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + spaceWidth, 0)
+        cColorBar.Add sBar
+        sBar.Outline.SetNoOutline
+        sBar.Fill.ApplyNoFill
+        x = x + spaceWidth
+    Next i
+End Sub
+
 Public Function parserStringToColorList(pStr As Variant) As String
     Select Case pStr
         Case grayBalance
@@ -271,6 +325,39 @@ Public Function parserStringToColorList(pStr As Variant) As String
             parserStringToColorList = "Tint: 80%"
         Case tint40
             parserStringToColorList = "Tint: 40%"
+    End Select
+End Function
+
+Public Function parserStringToExtColorBar(pStr As Variant) As Color
+    Select Case pStr
+        Case grayBalance
+            Set parserStringToExtColorBar = cGrayBalance
+        Case black40
+            Set parserStringToExtColorBar = cBlack40
+        Case tint80
+            'get copy color from ColorOnly collection
+            Set tintClr = cColorOnly.Item(icClrOnly).GetCopy
+            'tint color differently for spot or cmyk
+            If tintClr.Type = cdrColorCMYK Then
+                tintClr.BlendWith whiteColor, 80
+            ElseIf tintClr.Type = cdrColorSpot Or clrForLbl.Type = cdrColorPantone Then
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 80)
+            End If
+            icClrOnly = icClrOnly + 1
+            'return value
+            Set parserStringToExtColorBar = tintClr
+        Case tint40
+            'get copy color from ColorOnly collection
+            Set tintClr = cColorOnly.Item(icClrOnly).GetCopy
+            'tint color differently for spot or cmyk
+            If tintClr.Type = cdrColorCMYK Then
+                tintClr.BlendWith whiteColor, 40
+            ElseIf tintClr.Type = cdrColorSpot Or clrForLbl.Type = cdrColorPantone Then
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 40)
+            End If
+            icClrOnly = icClrOnly + 1
+            'return value
+            Set parserStringToExtColorBar = tintClr
     End Select
 End Function
 

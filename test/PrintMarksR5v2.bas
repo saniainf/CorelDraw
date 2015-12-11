@@ -1,27 +1,23 @@
-Attribute VB_Name = "PrintMarksR5"
-Sub PrintMarksR5()
-If (Documents.Count = 0) Then Exit Sub
-    ActiveDocument.Unit = cdrMillimeter
-    Application.Optimization = True
+Attribute VB_Name = "PrintMarksR5v2"
+Public Sub PrintMarksR5v2(sColorBar As Shape)
     
     Dim itemColorBar As Shape
-    Dim colorBar As ShapeRange, finalColorBar As ShapeRange, srD As ShapeRange
-    Dim leftOffsetMark As ShapeRange
-    Dim rightOffsetMark As ShapeRange
-    Dim leftTargetMark As ShapeRange
-    Dim rightTargetMark As ShapeRange
-    Dim leftMark As ShapeRange
-    Dim signCmyk As ShapeRange
+    Dim colorBar As New ShapeRange, finalColorBar As New ShapeRange, srD As New ShapeRange
+    Dim leftOffsetMark As New ShapeRange
+    Dim rightOffsetMark As New ShapeRange
+    Dim leftTargetMark As New ShapeRange
+    Dim rightTargetMark As New ShapeRange
+    Dim leftMark As New ShapeRange
+    Dim signCmyk As New ShapeRange
     Dim printMarksPath As String
     Dim offsetLeftMark As Integer, offsetTargetMark As Integer
-    Dim allMarks As ShapeRange
+    Dim allMarks As New ShapeRange
     
     printMarksPath = (UserDataPath & "printMarks\")
     offsetLeftMark = 55
     offsetTargetMark = 15
     
-    ActiveLayer.Import (printMarksPath & "colorBarR5.cdr")
-    Set colorBar = ActiveSelectionRange
+    colorBar.Add sColorBar
     ActiveLayer.Import (printMarksPath & "leftOffsetMark.cdr")
     Set leftOffsetMark = ActiveSelectionRange
     ActiveLayer.Import (printMarksPath & "rightOffsetMark.cdr")
@@ -68,9 +64,5 @@ If (Documents.Count = 0) Then Exit Sub
     rightTargetMark.AddToSelection
     signCmyk.AddToSelection
     ActiveSelectionRange.Group
-    
-    ActiveDocument.ClearSelection
-    Application.Optimization = False
-    ActiveWindow.Refresh
-    Application.Refresh
 End Sub
+
