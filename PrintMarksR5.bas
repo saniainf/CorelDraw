@@ -1,8 +1,10 @@
 Attribute VB_Name = "PrintMarksR5"
 Sub PrintMarksR5()
 If (Documents.Count = 0) Then Exit Sub
-    ActiveDocument.Unit = cdrMillimeter
-    Application.Optimization = True
+ActiveDocument.BeginCommandGroup "Create R5 Print Marks"
+Application.Optimization = True
+ActiveDocument.Unit = cdrMillimeter
+ActiveDocument.ReferencePoint = cdrTopLeft
     
     Dim itemColorBar As Shape
     Dim colorBar As ShapeRange, finalColorBar As ShapeRange, srD As ShapeRange
@@ -70,7 +72,8 @@ If (Documents.Count = 0) Then Exit Sub
     ActiveSelectionRange.Group
     
     ActiveDocument.ClearSelection
-    Application.Optimization = False
-    ActiveWindow.Refresh
-    Application.Refresh
+Application.Optimization = False
+ActiveWindow.Refresh
+Application.Refresh
+ActiveDocument.EndCommandGroup
 End Sub

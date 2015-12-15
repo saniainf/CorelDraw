@@ -165,3 +165,14 @@ ErrHandler:
     Resume ExitSub
 End Sub
 
+
+Sub Macro2()
+    ' Recorded 14.12.2015
+    Dim s1 As Shape
+    Set s1 = ActiveLayer.CreateArtisticText(2.691827, 3.069563, "Text")
+    s1.Fill.UniformColor.CMYKAssign 0, 0, 0, 100
+    s1.Outline.SetNoOutline
+    ' Recording of this command is not supported: TextUndoRedo
+    s1.ConvertToCurves
+    s1.Delete
+End Sub

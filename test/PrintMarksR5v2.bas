@@ -1,6 +1,5 @@
 Attribute VB_Name = "PrintMarksR5v2"
-Public Sub PrintMarksR5v2(sColorBar As Shape)
-    
+Public Sub PrintMarksR5v2(sColorBar As Shape, signColor As Shape)
     Dim itemColorBar As Shape
     Dim colorBar As New ShapeRange, finalColorBar As New ShapeRange, srD As New ShapeRange
     Dim leftOffsetMark As New ShapeRange
@@ -8,7 +7,6 @@ Public Sub PrintMarksR5v2(sColorBar As Shape)
     Dim leftTargetMark As New ShapeRange
     Dim rightTargetMark As New ShapeRange
     Dim leftMark As New ShapeRange
-    Dim signCmyk As New ShapeRange
     Dim printMarksPath As String
     Dim offsetLeftMark As Integer, offsetTargetMark As Integer
     Dim allMarks As New ShapeRange
@@ -27,8 +25,6 @@ Public Sub PrintMarksR5v2(sColorBar As Shape)
     Set rightTargetMark = leftTargetMark.Duplicate
     ActiveLayer.Import (printMarksPath & "leftMark.cdr")
     Set leftMark = ActiveSelectionRange
-    ActiveLayer.Import (printMarksPath & "signCmyk.cdr")
-    Set signCmyk = ActiveSelectionRange
     Set finalColorBar = New ShapeRange
     
     colorBar.CenterX = ActivePage.BoundingBox.CenterX
@@ -43,8 +39,9 @@ Public Sub PrintMarksR5v2(sColorBar As Shape)
     leftTargetMark.PositionY = ActivePage.BoundingBox.Bottom + offsetTargetMark
     rightTargetMark.PositionX = ActivePage.BoundingBox.Right - rightTargetMark.BoundingBox.Width
     rightTargetMark.PositionY = ActivePage.BoundingBox.Bottom + offsetTargetMark
-    signCmyk.PositionX = leftTargetMark.BoundingBox.CenterX - signCmyk.BoundingBox.Width / 2
-    signCmyk.PositionY = ActivePage.BoundingBox.Bottom + offsetTargetMark * 2
+    signColor.Rotate 90
+    signColor.PositionX = leftTargetMark.BoundingBox.CenterX - signColor.BoundingBox.Width / 2
+    signColor.PositionY = leftTargetMark.BoundingBox.Bottom + signColor.BoundingBox.Height + offsetTargetMark
     
     colorBar.Ungroup
     For Each itemColorBar In colorBar
@@ -62,7 +59,7 @@ Public Sub PrintMarksR5v2(sColorBar As Shape)
     leftMark.AddToSelection
     leftTargetMark.AddToSelection
     rightTargetMark.AddToSelection
-    signCmyk.AddToSelection
+    signColor.AddToSelection
     ActiveSelectionRange.Group
 End Sub
 

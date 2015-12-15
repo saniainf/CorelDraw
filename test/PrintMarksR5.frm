@@ -14,22 +14,24 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Dim cColor As New Collection, cColorOnly As New Collection, cColorBar As New Collection
+Dim cColor As New Collection, cColorOnly As New Collection, cColorBar As New Collection, cColorSign As New Collection
 Dim cyanColor As New Color, magentaColor As New Color, yellowColor As New Color, blackColor As New Color
 Dim whiteColor As New Color
 Dim cBlack40 As New Color, cGrayBalance As New Color
 Dim tint80 As String, tint40 As String, grayBalance As String, black40 As String
 Dim x As Double, spaceWidth As Double, barWidth As Double, startPos As Double
-Dim sBar As Shape
+Dim sBar As Shape, sText As Shape, sSign As Shape
 Dim sectionCount As Integer, barInSection As Integer
 Dim prevSelected As Integer
-Dim clrForLbl As New Color, saveClr As New Color, pickClr As New Color, tintClr As New Color
+Dim oClr As New Color, saveClr As New Color, pickClr As New Color, tintClr As New Color
 Dim i As Integer, e As Integer, a As Integer
-Dim objCColorForList As Variant, objCColorForBar As Variant, objCColorBar As Variant
+Dim objCColorForList As Variant, objCColorForBar As Variant
 Dim typeStr As Boolean
 Dim str As String, saveStr As String
 Dim icClr As Integer, icClrOnly As Integer
 Dim srBar As New ShapeRange
+Dim rPoint As cdrReferencePoint
+Dim listHeight As Double
 
 Private Sub UserForm_Initialize()
     Application.ActiveDocument.Unit = cdrMillimeter
@@ -51,6 +53,7 @@ Private Sub UserForm_Initialize()
     spaceWidth = 0.3
     barWidth = 3.9
     startPos = 0#
+    listHeight = lbColorList.Height
     
     cColor.Add cyanColor
     cColor.Add magentaColor
@@ -199,24 +202,45 @@ Private Sub btnAddGrayBalance_Click()
 End Sub
 
 Private Sub btnCreateMarks_Click()
+If (Documents.Count = 0) Then
+    Unload Me
+    Exit Sub
+End If
     ActiveDocument.BeginCommandGroup "Ñreate Print Marks"
+    rPoint = ActiveDocument.ReferencePoint
+    ActiveDocument.ReferencePoint = cdrTopLeft
     Application.Optimization = True
-    Set srBar = New ShapeRange
     Set cColorBar = New Collection
+    Set cColorSign = New Collection
     
     If cColor.Count <= 8 Then createStandartBar
     If cColor.Count > 8 Then createExtendetBar
-
-    For Each objCColorBar In cColorBar
-        srBar.Add objCColorBar
-    Next objCColorBar
+    
+    'color bar
+    signBar
+    Set srBar = New ShapeRange
+    ActiveDocument.ClearSelection
+    For Each sBar In cColorBar
+        srBar.Add sBar
+    Next sBar
     Set sBar = srBar.Group
-    PrintMarksR5v2.PrintMarksR5v2 sBar
+    
+    'sign color
+    signColor
+    Set srBar = New ShapeRange
+    ActiveDocument.ClearSelection
+    For Each sSign In cColorSign
+        srBar.Add sSign
+    Next sSign
+    Set sSign = srBar.Group
+    
+    PrintMarksR5v2.PrintMarksR5v2 sBar, sSign
     
     ActiveDocument.ClearSelection
     Application.Optimization = False
     ActiveWindow.Refresh
     Application.Refresh
+    ActiveDocument.ReferencePoint = rPoint
     ActiveDocument.EndCommandGroup
 End Sub
 
@@ -262,6 +286,7 @@ Sub createExtendetBar()
         'color bar
         For a = 1 To barInSection
             Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + barWidth, 0)
+            cColorBar.Add sBar
             sBar.Outline.SetNoOutline
             If TypeName(cColor.Item(icClr)) = "IDrawColor" Then
                 sBar.Fill.UniformColor = cColor.Item(icClr)
@@ -275,6 +300,7 @@ Sub createExtendetBar()
         Next a
         'white space
         Set sBar = ActiveLayer.CreateRectangle(x, barWidth, x + spaceWidth, 0)
+        cColorBar.Add sBar
         sBar.Outline.SetNoOutline
         sBar.Fill.ApplyNoFill
         x = x + spaceWidth
@@ -315,6 +341,51 @@ Sub createStandartBar()
     Next i
 End Sub
 
+Private Sub cbCustomSign_Click()
+    If cbCustomSign.Value = True Then
+        lbColorList.ListStyle = fmListStyleOption
+        colorListUpdate
+        lbColorList.Height = listHeight
+    Else
+        lbColorList.ListStyle = fmListStylePlain
+        colorListUpdate
+        lbColorList.Height = listHeight
+    End If
+End Sub
+
+Private Sub signBar()
+    If cbCustomSign.Value Then
+        If lbColorList.ListIndex + 1 > barInSection Then
+            x = startPos + barWidth * barInSection / 2
+        Else
+            x = startPos + barWidth * lbColorList.ListIndex
+        End If
+    Else
+        x = startPos + barWidth * barInSection / 2
+    End If
+    For i = sectionCount - 1 To 0 Step -1
+        Set sText = ActiveLayer.CreateArtisticText(x, barWidth, i + 1, , , "Arial", 4, cdrFalse, cdrFalse, cdrNoFontLine, cdrLeftAlignment)
+        sText.ConvertToCurves
+        sText.PositionY = sText.PositionY - sText.BoundingBox.Height
+        sText.Fill.UniformColor = whiteColor
+        sText.Outline.SetNoOutline
+        cColorBar.Add sText
+        x = x + barWidth * barInSection + spaceWidth
+    Next i
+End Sub
+
+Private Sub signColor()
+    x = startPos
+    For Each oClr In cColorOnly
+        Set sText = ActiveLayer.CreateArtisticText(x, 0, oClr.Name, , , "Arial", 6, cdrTrue, cdrFalse, cdrNoFontLine, cdrLeftAlignment)
+        sText.ConvertToCurves
+        sText.Fill.UniformColor = oClr
+        sText.Outline.SetNoOutline
+        cColorSign.Add sText
+        x = x + sText.BoundingBox.Width + barWidth / 2
+    Next oClr
+End Sub
+
 Public Function parserStringToColorList(pStr As Variant) As String
     Select Case pStr
         Case grayBalance
@@ -340,7 +411,7 @@ Public Function parserStringToExtColorBar(pStr As Variant) As Color
             'tint color differently for spot or cmyk
             If tintClr.Type = cdrColorCMYK Then
                 tintClr.BlendWith whiteColor, 80
-            ElseIf tintClr.Type = cdrColorSpot Or clrForLbl.Type = cdrColorPantone Then
+            ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
                 Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 80)
             End If
             icClrOnly = icClrOnly + 1
@@ -352,7 +423,7 @@ Public Function parserStringToExtColorBar(pStr As Variant) As Color
             'tint color differently for spot or cmyk
             If tintClr.Type = cdrColorCMYK Then
                 tintClr.BlendWith whiteColor, 40
-            ElseIf tintClr.Type = cdrColorSpot Or clrForLbl.Type = cdrColorPantone Then
+            ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
                 Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 40)
             End If
             icClrOnly = icClrOnly + 1
@@ -373,7 +444,7 @@ Public Function parserStringToColorBar(pStr As Variant, nSection As Integer) As 
             'tint color differently for spot or cmyk
             If tintClr.Type = cdrColorCMYK Then
                 tintClr.BlendWith whiteColor, 80
-            ElseIf tintClr.Type = cdrColorSpot Or clrForLbl.Type = cdrColorPantone Then
+            ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
                 Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 80)
             End If
             'return value
@@ -382,7 +453,7 @@ Public Function parserStringToColorBar(pStr As Variant, nSection As Integer) As 
             Set tintClr = cColorOnly.Item((nSection Mod cColorOnly.Count) + 1).GetCopy
             If tintClr.Type = cdrColorCMYK Then
                 tintClr.BlendWith whiteColor, 40
-            ElseIf tintClr.Type = cdrColorSpot Or clrForLbl.Type = cdrColorPantone Then
+            ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
                 Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 40)
             End If
             Set parserStringToColorBar = tintClr
@@ -399,13 +470,13 @@ Sub fillLabel()
     lblBarCount.Caption = "Bar count: " & cColor.Count
     i = 0
     e = 0
-    For Each clrForLbl In cColorOnly
-        If clrForLbl.Type = cdrColorCMYK Then
+    For Each oClr In cColorOnly
+        If oClr.Type = cdrColorCMYK Then
             i = i + 1
-        ElseIf clrForLbl.Type = cdrColorSpot Or clrForLbl.Type = cdrColorPantone Then
+        ElseIf oClr.Type = cdrColorSpot Or oClr.Type = cdrColorPantone Then
             e = e + 1
         End If
-    Next clrForLbl
+    Next oClr
     lblCmykCount.Caption = "CMYK count: " & i
     lblSpotCount.Caption = "Spot count: " & e
 End Sub
