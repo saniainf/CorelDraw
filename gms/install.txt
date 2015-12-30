@@ -1,12 +1,14 @@
 copy
-\printMarks\*.*
+\printMarks\
 to
-c:\Users\@username@\AppData\Roaming\Corel\CorelDRAW Graphics Suite X5\Custom Data\
+C:\Users\@username@\AppData\Roaming\Corel\CorelDRAW Graphics Suite XX\Custom Data\
+C:\Documents and Settings\@username@\Application Data\Corel\CorelDRAW Graphics Suite XX\Custom Data\
 
 copy
 InfUtilits.gms
 to
-c:\Users\@username@\AppData\Roaming\Corel\CorelDRAW Graphics Suite X5\Draw\GMS\
+C:\Users\@username@\AppData\Roaming\Corel\CorelDRAW Graphics Suite XX\Draw\GMS\
+C:\Documents and Settings\@username@\Application Data\Corel\CorelDRAW Graphics Suite XX\Draw\GMS\
 
 import workspace from file
 InfUtilits.xslt
