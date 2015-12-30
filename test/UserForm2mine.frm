@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm2 
-   Caption         =   "UserForm2"
+   Caption         =   "ÌÈíåð"
    ClientHeight    =   7350
    ClientLeft      =   45
    ClientTop       =   390
@@ -18,11 +18,25 @@ Dim Col As New Collection
 Dim matrix() As Integer
 Dim w As Integer, h As Integer
 Dim mineCount As Integer
+Dim cellSize As Integer
+
+Private Sub CommandButton2_Click()
+    frmOptions.Show
+End Sub
+
+Public Sub SetOptions(e As String, i As String, a As String)
+    w = CInt(e) - 1
+    h = CInt(i) - 1
+    mineCount = CInt(a) - 1
+    ReDim matrix(w, h)
+    newGame
+End Sub
 
 Private Sub UserForm_Initialize()
-    w = 4   '-1
-    h = 6   '-1
-    mineCount = 5   '-1
+    cellSize = 24
+    w = 5   '-1
+    h = 5   '-1
+    mineCount = 4   '-1
     ReDim matrix(w, h)
     newGame
 End Sub
@@ -49,10 +63,10 @@ Public Function newGame()
             Set wrp = New clsEventWrapper
             wrp.SetHandler Me
             Set tb = Me.Controls.Add("Forms.ToggleButton.1", "tb" & n)
-            tb.Height = 24
-            tb.Width = 24
-            tb.Left = 24 * e
-            tb.Top = 24 * i
+            tb.Height = cellSize
+            tb.Width = cellSize
+            tb.Left = cellSize * e
+            tb.Top = cellSize * i
             tb.TabStop = False
             tb.Value = False
             wrp.SetButton tb
@@ -64,7 +78,6 @@ Public Function newGame()
     Next i
     Randomize
     clearMatrix
-    Label1.Caption = ""
     For i = 0 To mineCount
         X = CInt(Int((w + 1) * Rnd()))
         Y = CInt(Int((h + 1) * Rnd()))
@@ -75,16 +88,23 @@ Public Function newGame()
         End If
     Next i
     countMinesAround
-    updateLbl2
+    formOptions
 End Function
 
+Sub formOptions()
+    Me.Width = cellSize * (w + 1) + 4
+    Me.Height = cellSize * (h + 1) + 52
+    CommandButton1.Left = 3
+    CommandButton1.Top = Me.Height - CommandButton1.Height * 2
+    CommandButton2.Left = Me.Width - CommandButton2.Width - 8
+    CommandButton2.Top = Me.Height - CommandButton1.Height * 2
+End Sub
 Public Function Event_Click(wrp As clsEventWrapper)
     If wrp.getButton.Caption = "" Then
         Dim e As Integer, i As Integer
         e = wrp.GetX
         i = wrp.GetY
         wrp.getButton.Locked = True
-        Label1.Caption = wrp.getButton.Name & vbCr & "e= " & e & vbCr & "i= " & i & vbCr & (i * (w + 1) + e) + 1 & vbCr & Col((i * (w + 1) + e) + 1).getButton.Name
         If matrix(e, i) = 0 Then
             openEmpty e, i
         ElseIf matrix(e, i) = 66 Then
@@ -175,17 +195,6 @@ Public Function Event_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, B
         End If
     End If
 End Function
-
-Sub updateLbl2()
-    Dim i As Integer, e As Integer
-    Label2.Caption = ""
-    For i = 0 To h
-        For e = 0 To w
-            Label2.Caption = Label2.Caption & matrix(e, i) & vbTab
-        Next e
-        Label2.Caption = Label2.Caption & vbCr
-    Next i
-End Sub
 
 Sub clearMatrix()
     Dim i As Integer, e As Integer
