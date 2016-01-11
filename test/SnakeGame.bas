@@ -1,11 +1,11 @@
 Attribute VB_Name = "SnakeGame"
 Option Explicit
 
-Public ImDone As Boolean
 Public Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
+Dim ImDone As Boolean
+Dim EndGame As Boolean
 Dim directSnake As String
 Dim tmr As Double
-Dim snakeBody As New Collection
 Dim cellSize As Integer
 Dim boardHeight As Integer, boardWidth As Integer
 Dim matrix() As Integer
@@ -17,7 +17,12 @@ Dim foodCount As Integer
 Sub SnakeGame()
     Application.ActiveDocument.Unit = cdrMillimeter
     ActiveDocument.ReferencePoint = cdrTopLeft
+    EndGame = False
     
+
+End Sub
+
+Sub SnakeGameLoop()
     Initialization
     tmr = Timer
     Do Until ImDone
@@ -39,8 +44,6 @@ Sub Initialization()
     Dim s As Shape
     Dim X As Integer, Y As Integer
     
-    Set snakeBody = New Collection
-    
     cellSize = 15
     startBodySize = 5 - 1
     boardHeight = 20 - 1
@@ -54,8 +57,12 @@ Sub Initialization()
     ReDim matrix(boardWidth, boardHeight)
     ReDim snake(1, startBodySize)
     
+    ActiveDocument.ActivePage.SetSize (boardWidth + 1) * cellSize, (boardWidth + 1) * cellSize
+    
     ImDone = False
     directSnake = "right"
+    
+    drawGameField
     
     For e = startBodySize To 0 Step -1
         snake(0, e) = Abs(e - startBodySize) + startColumn
@@ -71,20 +78,39 @@ Sub Initialization()
     
 End Sub
 
+Sub drawGameField()
+    Dim s As Shape
+    Dim e As Integer, i As Integer
+    Application.Optimization = True
+    For i = 0 To boardHeight
+        For e = 0 To boardWidth
+            Set s = ActivePage.Layers.Item(5).CreateRectangle(e * cellSize, i * cellSize, e * cellSize + cellSize, i * cellSize + cellSize)
+            s.Fill.ApplyNoFill
+            s.Outline.Color.CMYKAssign 0, 0, 0, 40
+            s.Outline.width = 0.1
+        Next e
+    Next i
+    ActiveDocument.ClearSelection
+    Application.Optimization = False
+    ActiveWindow.Refresh
+    Application.Refresh
+End Sub
+
 Sub UpdateInput()
     If (GetAsyncKeyState(vbKeyQ)) Then
         ImDone = True
+        EndGame = True
     End If
-    If (GetAsyncKeyState(vbKeyUp)) Then
+    If (GetAsyncKeyState(vbKeyUp)) And Not directSnake = "down" Then
         directSnake = "up"
     End If
-    If (GetAsyncKeyState(vbKeyDown)) Then
+    If (GetAsyncKeyState(vbKeyDown)) And Not directSnake = "up" Then
         directSnake = "down"
     End If
-    If (GetAsyncKeyState(vbKeyLeft)) Then
+    If (GetAsyncKeyState(vbKeyLeft)) And Not directSnake = "right" Then
         directSnake = "left"
     End If
-    If (GetAsyncKeyState(vbKeyRight)) Then
+    If (GetAsyncKeyState(vbKeyRight)) And Not directSnake = "left" Then
         directSnake = "right"
     End If
 End Sub
@@ -190,6 +216,7 @@ Sub Destroy()
     
     ActivePage.Layers.Item(2).Shapes.All.Delete
     ActivePage.Layers.Item(3).Shapes.All.Delete
+    ActivePage.Layers.Item(5).Shapes.All.Delete
     
     ActiveDocument.ClearSelection
     Application.Optimization = False
