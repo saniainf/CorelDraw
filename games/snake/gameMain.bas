@@ -1,29 +1,29 @@
-Attribute VB_Name = "SnakeGame"
+Attribute VB_Name = "gameMain"
 Option Explicit
 
 Public Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
 Dim ImDone As Boolean
-Dim EndGame As Boolean
 Dim directSnake As String
 Dim tmr As Double
 Dim cellSize As Integer
 Dim boardHeight As Integer, boardWidth As Integer
-Dim matrix() As Integer
+Dim foodMatrix() As Integer
 Dim snake() As Integer
 Dim debugTxt1 As Shape
 Dim Tick As Double
-Dim foodCount As Integer
 Dim keyReadDone As Boolean
+Dim returnValue As Integer
 
-Sub SnakeGame()
-    Application.ActiveDocument.Unit = cdrMillimeter
-    ActiveDocument.ReferencePoint = cdrTopLeft
-    EndGame = False
-    SnakeGameLoop
-
+Sub LoadLevel()
+    Tick = gameLevel.Tick
+    cellSize = gameLevel.cellSize
+    boardHeight = gameLevel.boardHeight
+    boardWidth = gameLevel.boardWidth
+    snake = gameLevel.snake
+    foodMatrix = gameLevel.foodMatrix
 End Sub
 
-Sub SnakeGameLoop()
+Function GameLoop() As Integer
     Initialization
     tmr = Timer
     Do Until ImDone
@@ -36,60 +36,33 @@ Sub SnakeGameLoop()
         End If
     Loop
     Destroy
-End Sub
+    GameLoop = returnValue
+End Function
 
-Sub Initialization()
-    Dim i As Integer, e As Integer
-    Dim startBodySize As Integer
-    Dim startRow As Integer, startColumn As Integer
-    Dim s As Shape
-    Dim X As Integer, Y As Integer
+Private Sub Initialization()
+    Dim maxViewArea As Integer
+    maxViewArea = 450
     
-    cellSize = 15
-    startBodySize = 5 - 1
-    boardHeight = 20 - 1
-    boardWidth = 20 - 1
-    startRow = 20 - 1
-    startColumn = 2 - 1
-    foodCount = 5 - 1
-    
-    Tick = 0.3
-    
-    ReDim matrix(boardWidth, boardHeight)
-    ReDim snake(1, startBodySize)
-    
-    ActiveDocument.ActivePage.SetSize (boardWidth + 1) * cellSize, (boardWidth + 1) * cellSize
+    ActiveDocument.ActivePage.SetSize (boardWidth) * cellSize, (boardHeight) * cellSize
+    ActiveWindow.ActiveView.SetViewArea -(maxViewArea - boardWidth * cellSize) / 2, -(maxViewArea - boardHeight * cellSize) / 2, maxViewArea, maxViewArea
     
     ImDone = False
-    directSnake = "right"
+    directSnake = ""
     keyReadDone = True
     
     drawGameField
-    
-    For e = startBodySize To 0 Step -1
-        snake(0, e) = Abs(e - startBodySize) + startColumn
-        snake(1, e) = startRow
-    Next e
-    
-    Randomize
-    For e = 0 To foodCount
-        X = Int(20 * Rnd)
-        Y = Int(20 * Rnd)
-        matrix(X, Y) = 1
-    Next e
-    
 End Sub
 
-Sub drawGameField()
+Private Sub drawGameField()
     Dim s As Shape
     Dim e As Integer, i As Integer
     Application.Optimization = True
-    For i = 0 To boardHeight
-        For e = 0 To boardWidth
+    For i = 0 To boardHeight - 1
+        For e = 0 To boardWidth - 1
             Set s = ActivePage.Layers.Item(5).CreateRectangle(e * cellSize, i * cellSize, e * cellSize + cellSize, i * cellSize + cellSize)
             s.Fill.ApplyNoFill
             s.Outline.Color.CMYKAssign 0, 0, 0, 40
-            s.Outline.width = 0.1
+            s.Outline.Width = 0.1
         Next e
     Next i
     ActiveDocument.ClearSelection
@@ -98,10 +71,9 @@ Sub drawGameField()
     Application.Refresh
 End Sub
 
-Sub UpdateInput()
+Private Sub UpdateInput()
     If (GetAsyncKeyState(vbKeyQ)) Then
         ImDone = True
-        EndGame = True
     End If
     If (GetAsyncKeyState(vbKeyUp)) And Not directSnake = "down" And Not keyReadDone Then
         directSnake = "up"
@@ -121,19 +93,22 @@ Sub UpdateInput()
     End If
 End Sub
 
-Sub Update()
+Private Sub Update()
     Dim a As Integer, b As Integer
     Dim a2 As Integer, b2 As Integer
     Dim e As Integer, i As Integer
     Dim imWin As Boolean
     
+    keyReadDone = False
+    If directSnake = "" Then Exit Sub
+    
     imWin = True
     a = snake(0, 0)
     b = snake(1, 0)
     
-    If matrix(a, b) = 1 Then
+    If foodMatrix(a, b) = 1 Then
         ReDim Preserve snake(1, (UBound(snake, 2) + 1))
-        matrix(a, b) = 0
+        foodMatrix(a, b) = 0
     End If
     
     Select Case directSnake
@@ -147,13 +122,6 @@ Sub Update()
         snake(1, 0) = snake(1, 0) - 1
     End Select
     
-    If snake(0, 0) < 0 Or snake(0, 0) > boardWidth Then
-        gameOver
-    End If
-    If snake(1, 0) < 0 Or snake(1, 0) > boardHeight Then
-        gameOver
-    End If
-    
     For e = 1 To UBound(snake, 2)
         a2 = snake(0, e)
         b2 = snake(1, e)
@@ -163,26 +131,36 @@ Sub Update()
         b = b2
     Next e
     
+    If snake(0, 0) < 0 Or snake(0, 0) > boardWidth - 1 Then
+        returnValue = 0
+        ImDone = True
+    End If
+    If snake(1, 0) < 0 Or snake(1, 0) > boardHeight - 1 Then
+        returnValue = 0
+        ImDone = True
+    End If
     For e = 1 To UBound(snake, 2)
         If snake(0, 0) = snake(0, e) And snake(1, 0) = snake(1, e) Then
-            gameOver
+            returnValue = 0
+            ImDone = True
         End If
     Next e
     
-    For i = 0 To boardWidth
-        For e = 0 To boardHeight
-            If matrix(e, i) = 1 Then
+    For i = 0 To boardHeight - 1
+        For e = 0 To boardWidth - 1
+            If foodMatrix(e, i) = 1 Then
                 imWin = False
             End If
         Next e
     Next i
-    If imWin Then gameWin
-    
-    keyReadDone = False
+    If imWin Then
+        returnValue = 1
+        ImDone = True
+    End If
     
 End Sub
 
-Sub Draw()
+Private Sub Draw()
     Application.Optimization = True
     Dim X As Integer, Y As Integer
     Dim e As Integer, i As Integer
@@ -205,9 +183,9 @@ Sub Draw()
         s.Fill.UniformColor.CMYKAssign 100, 0, 0, 0
     Next e
     
-    For i = 0 To boardWidth
-        For e = 0 To boardHeight
-            If matrix(e, i) = 1 Then
+    For i = 0 To boardHeight - 1
+        For e = 0 To boardWidth - 1
+            If foodMatrix(e, i) = 1 Then
                 Set s = ActivePage.Layers.Item(3).CreateEllipse(e * cellSize, i * cellSize + cellSize, e * cellSize + cellSize, i * cellSize)
                 s.Outline.SetNoOutline
                 s.Fill.UniformColor.CMYKAssign 0, 100, 100, 0
@@ -221,7 +199,7 @@ Sub Draw()
     Application.Refresh
 End Sub
 
-Sub Destroy()
+Private Sub Destroy()
     Application.Optimization = True
     
     ActivePage.Layers.Item(2).Shapes.All.Delete
@@ -232,15 +210,5 @@ Sub Destroy()
     Application.Optimization = False
     ActiveWindow.Refresh
     Application.Refresh
-End Sub
-
-Sub gameOver()
-    MsgBox "Game Over"
-    ImDone = True
-End Sub
-
-Sub gameWin()
-    MsgBox "You Win"
-    ImDone = True
 End Sub
 

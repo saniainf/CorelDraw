@@ -63,8 +63,8 @@ Public Function newGame()
             Set wrp = New clsEventWrapper
             wrp.SetHandler Me
             Set tb = Me.Controls.Add("Forms.ToggleButton.1", "tb" & n)
-            tb.Height = cellSize
-            tb.Width = cellSize
+            tb.height = cellSize
+            tb.width = cellSize
             tb.Left = cellSize * e
             tb.Top = cellSize * i
             tb.TabStop = False
@@ -92,12 +92,12 @@ Public Function newGame()
 End Function
 
 Sub formOptions()
-    Me.Width = cellSize * (w + 1) + 4
-    Me.Height = cellSize * (h + 1) + 52
+    Me.width = cellSize * (w + 1) + 4
+    Me.height = cellSize * (h + 1) + 52
     CommandButton1.Left = 3
-    CommandButton1.Top = Me.Height - CommandButton1.Height * 2
-    CommandButton2.Left = Me.Width - CommandButton2.Width - 8
-    CommandButton2.Top = Me.Height - CommandButton1.Height * 2
+    CommandButton1.Top = Me.height - CommandButton1.height * 2
+    CommandButton2.Left = Me.width - CommandButton2.width - 8
+    CommandButton2.Top = Me.height - CommandButton1.height * 2
 End Sub
 Public Function Event_Click(wrp As clsEventWrapper)
     If wrp.getButton.Caption = "" Then

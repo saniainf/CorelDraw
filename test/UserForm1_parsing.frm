@@ -132,3 +132,6 @@ Function getDigit(pStr As String) As Integer
     Next i
 End Function
 
+Private Sub UserForm_Click()
+
+End Sub
