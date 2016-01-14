@@ -11,7 +11,7 @@ Sub SnakeGame()
     Dim scorePoint As Integer
     scorePoint = 0
     
-    newGame
+'    newGame
     
     For i = 1 To gameLevel.levelCount
         ActiveDocument.Pages.Item(2).Activate
@@ -26,9 +26,9 @@ Sub SnakeGame()
                 Exit Sub
             Case "endlevel"
                 If Not i = gameLevel.levelCount Then
-                    nextLevel (i + 1)
+'                    nextLevel (i + 1)
                 Else
-                    gameWin
+'                    gameWin
                 End If
             Case "quit"
                 Exit Sub
