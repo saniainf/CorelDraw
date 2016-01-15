@@ -1,7 +1,7 @@
 Attribute VB_Name = "mMain"
 Option Explicit
-
-Dim ImDone As Boolean
+Public Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
+Dim imDone As Boolean
 
 Sub SnakeGame()
     Application.ActiveDocument.Unit = cdrMillimeter
@@ -11,7 +11,7 @@ Sub SnakeGame()
     Dim scorePoint As Integer
     scorePoint = 0
     
-'    newGame
+    newGame
     
     For i = 1 To gameLevel.levelCount
         ActiveDocument.Pages.Item(2).Activate
@@ -26,9 +26,9 @@ Sub SnakeGame()
                 Exit Sub
             Case "endlevel"
                 If Not i = gameLevel.levelCount Then
-'                    nextLevel (i + 1)
+                    nextLevel (i + 1)
                 Else
-'                    gameWin
+                    gameWin
                 End If
             Case "quit"
                 Exit Sub
@@ -37,10 +37,10 @@ Sub SnakeGame()
 End Sub
 
 Private Sub newGame()
-    ImDone = False
+    imDone = False
     
     ActiveDocument.Pages.Item(1).Activate
-    Do Until ImDone
+    Do Until imDone
         DoEvents
         UpdateInput
     Loop
@@ -48,14 +48,18 @@ Private Sub newGame()
 End Sub
 
 Private Sub gameOver()
-    MsgBox "Game Over"
+    Dim s As Shape
+    ActiveDocument.Pages.Item(6).Activate
+    Set s = ActivePage.Layers.Item(2).CreateArtisticText(400, 170, scorePoint, , , "Arial", 84, cdrTrue, cdrFalse, cdrNoFontLine, cdrCenterAlignment)
+    s.Fill.UniformColor.CMYKAssign 0, 100, 100, 0
+    ActiveDocument.ClearSelection
 End Sub
 
 Private Sub nextLevel(i As Integer)
     Dim s As Shape
     Dim tmr As Double
     
-    ImDone = False
+    imDone = False
     
     Application.Optimization = True
     ActiveDocument.Pages.Item(4).Activate
@@ -67,10 +71,10 @@ Private Sub nextLevel(i As Integer)
     Application.Refresh
     
     tmr = Timer
-    Do Until ImDone
+    Do Until imDone
         DoEvents
         If Timer > tmr + 2 Then
-            ImDone = True
+            imDone = True
         End If
     Loop
     
@@ -92,6 +96,6 @@ End Sub
 
 Private Sub UpdateInput()
     If (GetAsyncKeyState(vbKeySpace)) Then
-          ImDone = True
+          imDone = True
     End If
 End Sub

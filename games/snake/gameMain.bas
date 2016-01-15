@@ -1,9 +1,8 @@
 Attribute VB_Name = "gameMain"
 Option Explicit
 
-Public Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
 Public scorePoint As Integer
-Dim ImDone As Boolean
+Dim imDone As Boolean
 Dim directSnake As String
 Dim tmr As Double
 Dim cellSize As Integer
@@ -34,10 +33,10 @@ Function GameLoop() As String
     Initialization
     LoadResource
     tmr = Timer
-    Do Until ImDone
+    Do Until imDone
         DoEvents
         UpdateInput
-        If Timer > tmr + Tick And Not ImDone Then
+        If Timer > tmr + Tick And Not imDone Then
             Update
             Draw
             tmr = Timer
@@ -48,7 +47,18 @@ Function GameLoop() As String
 End Function
 
 Private Sub LoadResource()
+    Dim sr As New ShapeRange
+    Dim s As Shape
+    Set gc = New Collection
     
+    Set sr = ActiveDocument.Pages.Item(5).Shapes.All
+    gc.Add Item:=sr.Item(1), key:="body"
+    gc.Add Item:=sr.Item(2), key:="tr"
+    gc.Add Item:=sr.Item(3), key:="br"
+    gc.Add Item:=sr.Item(4), key:="tl"
+    gc.Add Item:=sr.Item(5), key:="bl"
+    gc.Add Item:=sr.Item(6), key:="tail"
+    gc.Add Item:=sr.Item(7), key:="head"
 End Sub
 
 Private Sub Initialization()
@@ -62,7 +72,7 @@ Private Sub Initialization()
     offsetLeft = (screenWidth - boardWidth * cellSize) / 2
     offsetBottom = (screenHeight - boardHeight * cellSize) / 2
     
-    ImDone = False
+    imDone = False
     directSnake = ""
     keyReadDone = True
     
@@ -109,7 +119,7 @@ End Sub
 Private Sub UpdateInput()
     If (GetAsyncKeyState(vbKeyQ)) Then
         returnValue = "quit"
-        ImDone = True
+        imDone = True
         keyReadDone = True
     ElseIf (GetAsyncKeyState(vbKeyUp)) And Not directSnake = "down" And Not keyReadDone Then
         directSnake = "up"
@@ -173,25 +183,25 @@ Private Sub Update()
     '/ out of range
     If snake(0, 0) < 0 Or snake(0, 0) > boardWidth - 1 Then
         returnValue = "loselevel"
-        ImDone = True
+        imDone = True
         Exit Sub
     End If
     If snake(1, 0) < 0 Or snake(1, 0) > boardHeight - 1 Then
         returnValue = "loselevel"
-        ImDone = True
+        imDone = True
         Exit Sub
     End If
     '/ collision wall
     If wallmatrix(snake(0, 0), snake(1, 0)) = 1 Then
         returnValue = "loselevel"
-        ImDone = True
+        imDone = True
         Exit Sub
     End If
     '/ collision his body
     For e = 1 To UBound(snake, 2)
         If snake(0, 0) = snake(0, e) And snake(1, 0) = snake(1, e) Then
             returnValue = "loselevel"
-            ImDone = True
+            imDone = True
         End If
     Next e
     
@@ -204,59 +214,90 @@ Private Sub Update()
     Next i
     If imWin Then
         returnValue = "endlevel"
-        ImDone = True
+        imDone = True
     End If
     
 End Sub
 
 Private Sub Draw()
     Application.Optimization = True
-    Dim X As Integer, Y As Integer
+    Dim x As Integer, y As Integer
     Dim e As Integer, i As Integer
     Dim s As Shape
     Dim typeBodyCell As String
+    Dim directionTail As String
     
     ActivePage.Layers.Item(2).Shapes.All.Delete
     ActivePage.Layers.Item(3).Shapes.All.Delete
     SScorePoint.Text.Story = " "
+    
     '/ draw snake head
-    X = snake(0, 0) * cellSize
-    Y = snake(1, 0) * cellSize
-    Set s = ActivePage.Layers.Item(2).CreateEllipse(X + offsetLeft, Y + cellSize + offsetBottom, X + cellSize + offsetLeft, Y + offsetBottom)
-    s.Outline.SetNoOutline
-    s.Fill.UniformColor.CMYKAssign 100, 0, 100, 0
+    x = snake(0, 0) * cellSize
+    y = snake(1, 0) * cellSize
+    Set s = gc.Item("head").Duplicate
+    s.MoveToLayer ActivePage.Layers.Item(2)
+    s.SetPosition x + offsetLeft, y + offsetBottom + cellSize
+    Select Case directSnake
+        Case "up"
+            s.Rotate 90
+        Case "down"
+            s.Rotate 270
+        Case "left"
+            s.Rotate 180
+        Case "right"
+            
+    End Select
     '/ draw snake body
-    For e = 1 To UBound(snake, 2)
-        If e = UBound(snake, 2) Then
-            typeBodyCell = "lr"
-        Else
-            typeBodyCell = findTypeBodyCell(snake(0, e - 1), snake(1, e - 1), snake(0, e), snake(1, e), snake(0, e + 1), snake(1, e + 1))
-        End If
-        X = snake(0, e) * cellSize
-        Y = snake(1, e) * cellSize
+    For e = 1 To UBound(snake, 2) - 1
+        typeBodyCell = getTypeBodyCell(snake(0, e - 1), snake(1, e - 1), snake(0, e), snake(1, e), snake(0, e + 1), snake(1, e + 1))
+        x = snake(0, e) * cellSize
+        y = snake(1, e) * cellSize
         Select Case typeBodyCell
             Case "tr"
-                Set s = ActivePage.Layers.Item(2).CreateEllipse(X + offsetLeft, Y + cellSize + offsetBottom, X + cellSize + offsetLeft, Y + offsetBottom)
-                s.Outline.SetNoOutline
-                s.Fill.UniformColor.CMYKAssign 50, 0, 0, 0
+                Set s = gc.Item("tr").Duplicate
+                s.MoveToLayer ActivePage.Layers.Item(2)
+                s.SetPosition x + offsetLeft, y + offsetBottom + cellSize
             Case "br"
-                Set s = ActivePage.Layers.Item(2).CreateEllipse(X + offsetLeft, Y + cellSize + offsetBottom, X + cellSize + offsetLeft, Y + offsetBottom)
-                s.Outline.SetNoOutline
-                s.Fill.UniformColor.CMYKAssign 0, 50, 0, 0
+                Set s = gc.Item("br").Duplicate
+                s.MoveToLayer ActivePage.Layers.Item(2)
+                s.SetPosition x + offsetLeft, y + offsetBottom + cellSize
             Case "tl"
-                Set s = ActivePage.Layers.Item(2).CreateEllipse(X + offsetLeft, Y + cellSize + offsetBottom, X + cellSize + offsetLeft, Y + offsetBottom)
-                s.Outline.SetNoOutline
-                s.Fill.UniformColor.CMYKAssign 0, 0, 50, 0
+                Set s = gc.Item("tl").Duplicate
+                s.MoveToLayer ActivePage.Layers.Item(2)
+                s.SetPosition x + offsetLeft, y + offsetBottom + cellSize
             Case "bl"
-                Set s = ActivePage.Layers.Item(2).CreateEllipse(X + offsetLeft, Y + cellSize + offsetBottom, X + cellSize + offsetLeft, Y + offsetBottom)
-                s.Outline.SetNoOutline
-                s.Fill.UniformColor.CMYKAssign 0, 0, 0, 50
-            Case Else
-                Set s = ActivePage.Layers.Item(2).CreateEllipse(X + offsetLeft, Y + cellSize + offsetBottom, X + cellSize + offsetLeft, Y + offsetBottom)
-                s.Outline.SetNoOutline
-                s.Fill.UniformColor.CMYKAssign 100, 0, 0, 0
+                Set s = gc.Item("bl").Duplicate
+                s.MoveToLayer ActivePage.Layers.Item(2)
+                s.SetPosition x + offsetLeft, y + offsetBottom + cellSize
+            Case "tb"
+                Set s = gc.Item("body").Duplicate
+                s.MoveToLayer ActivePage.Layers.Item(2)
+                s.SetPosition x + offsetLeft, y + offsetBottom + cellSize
+                s.Rotate 90
+            Case "lr"
+                Set s = gc.Item("body").Duplicate
+                s.MoveToLayer ActivePage.Layers.Item(2)
+                s.SetPosition x + offsetLeft, y + offsetBottom + cellSize
         End Select
     Next e
+    '/ draw tail
+    x = snake(0, UBound(snake, 2)) * cellSize
+    y = snake(1, UBound(snake, 2)) * cellSize
+    Set s = gc.Item("tail").Duplicate
+    s.MoveToLayer ActivePage.Layers.Item(2)
+    s.SetPosition x + offsetLeft, y + offsetBottom + cellSize
+    directionTail = getDirectionTail(snake(0, (UBound(snake, 2) - 1)), snake(1, (UBound(snake, 2) - 1)), snake(0, UBound(snake, 2)), snake(1, UBound(snake, 2)))
+    Select Case directionTail
+        Case "top"
+            s.Rotate 270
+        Case "bottom"
+            s.Rotate 90
+        Case "left"
+        
+        Case "right"
+            s.Rotate 180
+    End Select
+    
     '/ draw food
     For i = 0 To boardHeight - 1
         For e = 0 To boardWidth - 1
@@ -267,6 +308,7 @@ Private Sub Draw()
             End If
         Next e
     Next i
+    
     '/ draw interface
     SScorePoint.Text.Story = scorePoint
     
@@ -276,39 +318,56 @@ Private Sub Draw()
     Application.Refresh
 End Sub
 
-Private Function findTypeBodyCell(pX As Integer, pY As Integer, X As Integer, Y As Integer, nX As Integer, nY As Integer) As String
+Private Function getDirectionTail(pX As Integer, pY As Integer, x As Integer, y As Integer) As String
+    If x = pX Then
+        If pY = y + 1 Then getDirectionTail = "top"
+        If pY = y - 1 Then getDirectionTail = "bottom"
+    End If
+    If y = pY Then
+        If pX = x + 1 Then getDirectionTail = "right"
+        If pX = x - 1 Then getDirectionTail = "left"
+    End If
+End Function
+
+Private Function getTypeBodyCell(pX As Integer, pY As Integer, x As Integer, y As Integer, nX As Integer, nY As Integer) As String
     Dim a As String
     Dim b As String
     
-    If X = pX Then
-        If pY = Y + 1 Then a = "top"
-        If pY = Y - 1 Then a = "bottom"
+    If x = pX Then
+        If pY = y + 1 Then a = "top"
+        If pY = y - 1 Then a = "bottom"
     End If
-    If Y = pY Then
-        If pX = X + 1 Then a = "right"
-        If pX = X - 1 Then a = "left"
+    If y = pY Then
+        If pX = x + 1 Then a = "right"
+        If pX = x - 1 Then a = "left"
     End If
     
-    If X = nX Then
-        If nY = Y + 1 Then b = "top"
-        If nY = Y - 1 Then b = "bottom"
+    If x = nX Then
+        If nY = y + 1 Then b = "top"
+        If nY = y - 1 Then b = "bottom"
     End If
-    If Y = nY Then
-        If nX = X + 1 Then b = "right"
-        If nX = X - 1 Then b = "left"
+    If y = nY Then
+        If nX = x + 1 Then b = "right"
+        If nX = x - 1 Then b = "left"
     End If
     
     If (a = "top" And b = "right") Or (a = "right" And b = "top") Then
-        findTypeBodyCell = "tr"
+        getTypeBodyCell = "tr"
     End If
     If (a = "bottom" And b = "right") Or (a = "right" And b = "bottom") Then
-        findTypeBodyCell = "br"
+        getTypeBodyCell = "br"
     End If
     If (a = "top" And b = "left") Or (a = "left" And b = "top") Then
-        findTypeBodyCell = "tl"
+        getTypeBodyCell = "tl"
     End If
     If (a = "bottom" And b = "left") Or (a = "left" And b = "bottom") Then
-        findTypeBodyCell = "bl"
+        getTypeBodyCell = "bl"
+    End If
+    If (a = "top" And b = "bottom") Or (a = "bottom" And b = "top") Then
+        getTypeBodyCell = "tb"
+    End If
+    If (a = "left" And b = "right") Or (a = "right" And b = "left") Then
+        getTypeBodyCell = "lr"
     End If
 End Function
 

@@ -29,7 +29,7 @@ End Sub
 
 Private Sub level3()
     Dim i As Integer, e As Integer
-    Dim X As Integer, Y As Integer
+    Dim x As Integer, y As Integer
     Dim foodSplit() As String
     Dim wallSplit() As String
     
@@ -73,7 +73,7 @@ End Sub
 
 Private Sub level2()
     Dim i As Integer, e As Integer
-    Dim X As Integer, Y As Integer
+    Dim x As Integer, y As Integer
     Dim foodSplit() As String
     Dim wallSplit() As String
     
@@ -117,7 +117,7 @@ End Sub
 
 Private Sub level1()
     Dim i As Integer, e As Integer
-    Dim X As Integer, Y As Integer
+    Dim x As Integer, y As Integer
     Dim foodSplit() As String
     Dim wallSplit() As String
     
