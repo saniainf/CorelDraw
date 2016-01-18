@@ -16,7 +16,6 @@ Sub LoadLevel()
     cellSize = 15
     boardHeight = 20
     boardWidth = 10
-    scorePoint = 0
 End Sub
 
 Function GameLoop() As String

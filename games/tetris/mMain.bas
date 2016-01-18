@@ -7,13 +7,11 @@ Sub TetrisGame()
     Application.ActiveDocument.Unit = cdrMillimeter
     ActiveDocument.ReferencePoint = cdrTopLeft
     Dim returnValue As String
-    scorePoint = 0
     
 '    newGame
     ActiveDocument.Pages.Item(2).Activate
     gameMain.LoadLevel
     returnValue = gameMain.GameLoop
-    scorePoint = gameMain.scorePoint
     Select Case returnValue
         Case "gameover"
 '            gameOver
