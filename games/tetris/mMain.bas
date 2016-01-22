@@ -5,7 +5,7 @@ Dim imDone As Boolean
 
 Sub TetrisGame()
     Application.ActiveDocument.Unit = cdrMillimeter
-    ActiveDocument.ReferencePoint = cdrTopLeft
+    ActiveDocument.ReferencePoint = cdrBottomLeft
     Dim returnValue As String
     
 '    newGame
