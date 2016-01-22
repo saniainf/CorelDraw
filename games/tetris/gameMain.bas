@@ -40,19 +40,42 @@ Private Sub Initialization()
     imDone = False
     boardDraw = False
     figureDraw = False
+    Set cFigures = New Collection
     ReDim boardMatrix(boardWidth - 1, boardHeight - 1)
     drawGameField
     
-    figO.Add strToArr("0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0")
+    figO.Add strToArr("0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0") 'yellow
     cFigures.Add figO
     
-    figI.Add strToArr("0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0")
-    figI.Add strToArr("0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0")
+    figI.Add strToArr("0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0") 'cyan
+    figI.Add strToArr("0,0,2,0,0,0,2,0,0,0,2,0,0,0,2,0")
     cFigures.Add figI
     
-    figS.Add strToArr("0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0")
-    figS.Add strToArr("0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0")
+    figS.Add strToArr("0,0,0,0,0,0,3,3,0,3,3,0,0,0,0,0") 'green
+    figS.Add strToArr("0,0,3,0,0,0,3,3,0,0,0,3,0,0,0,0")
     cFigures.Add figS
+    
+    figZ.Add strToArr("0,0,0,0,0,0,4,4,0,4,4,0,0,0,0,0")
+    figZ.Add strToArr("0,0,0,0,0,0,4,0,0,0,4,4,0,0,0,4")
+    cFigures.Add figZ
+    
+    figL.Add strToArr("0,0,0,0,0,5,0,0,0,5,5,5,0,0,0,0")
+    figL.Add strToArr("0,0,0,0,0,0,5,5,0,0,5,0,0,0,5,0")
+    figL.Add strToArr("0,0,0,0,0,0,0,0,0,5,5,5,0,0,0,5")
+    figL.Add strToArr("0,0,0,0,0,0,5,0,0,0,5,0,0,5,5,0")
+    cFigures.Add figL
+    
+    figJ.Add strToArr("0,0,0,0,0,0,0,6,0,6,6,6,0,0,0,0")
+    figJ.Add strToArr("0,0,0,0,0,0,6,0,0,0,6,0,0,0,6,6")
+    figJ.Add strToArr("0,0,0,0,0,0,0,0,0,6,6,6,0,6,0,0")
+    figJ.Add strToArr("0,0,0,0,0,6,6,0,0,0,6,0,0,0,6,0")
+    cFigures.Add figJ
+    
+    figT.Add strToArr("0,0,0,0,0,0,7,0,0,7,7,7,0,0,0,0") 'purple
+    figT.Add strToArr("0,0,0,0,0,0,7,0,0,0,7,7,0,0,7,0")
+    figT.Add strToArr("0,0,0,0,0,0,0,0,0,7,7,7,0,0,7,0")
+    figT.Add strToArr("0,0,0,0,0,0,7,0,0,7,7,0,0,0,7,0")
+    cFigures.Add figT
     
     nextFigure
 End Sub
@@ -63,18 +86,16 @@ Private Sub nextFigure()
     currentShape = 1
     fMatrix = cFigures.Item(currentFigure).Item(currentShape)
     
-    '/ figure start position
+    '/ TODO figure start position and check collision
     fallTmr = Timer
     fX = 3
     fY = UBound(boardMatrix, 2) - UBound(fMatrix, 2)
     
-    boardDraw = True
+    figureDraw = True
 End Sub
 
 Private Sub rotateFigure()
-    Dim canRotate As Boolean
     Dim prevShape As Integer
-    canRotate = True
     
     prevShape = currentShape
     currentShape = currentShape + 1
@@ -83,18 +104,11 @@ Private Sub rotateFigure()
     End If
     fMatrix = cFigures.Item(currentFigure).Item(currentShape)
     
-    If collWallWell Then
-        canRotate = False
-    ElseIf collBotWell Then
-        canRotate = False
-    ElseIf collAnotherFigure Then
-        canRotate = False
-    End If
-    
-    If Not canRotate Then
+    If checkCollision Then
         currentShape = prevShape
         fMatrix = cFigures.Item(currentFigure).Item(currentShape)
     End If
+    
     figureDraw = True
 End Sub
 
@@ -122,7 +136,7 @@ Private Sub drawGameField()
             Set s = ActivePage.Layers.Item(5).CreateRectangle(e * cellSize, i * cellSize, e * cellSize + cellSize, i * cellSize + cellSize)
             s.Fill.ApplyNoFill
             s.Outline.Color.CMYKAssign 0, 0, 0, 20
-            s.Outline.width = 0.1
+            s.Outline.Width = 0.1
         Next e
     Next i
     ActiveDocument.ClearSelection
@@ -135,26 +149,21 @@ Private Sub UpdateInput()
     ElseIf (GetAsyncKeyState(vbKeyUp)) And keyUp Then
         rotateFigure
         keyUp = False
-        figureDraw = True
     ElseIf (GetAsyncKeyState(vbKeyDown)) Then
         fallTmr = fallTmr - fallTick
-        figureDraw = True
     ElseIf (GetAsyncKeyState(vbKeyLeft)) And keyLeft Then
         keyLeft = False
         fX = fX - 1
-        If collWallWell Then fX = fX + 1
-        If collAnotherFigure Then fX = fX + 1
+        If checkCollision Then fX = fX + 1
         figureDraw = True
     ElseIf (GetAsyncKeyState(vbKeyRight)) And keyRight Then
         keyRight = False
         fX = fX + 1
-        If collWallWell Then fX = fX - 1
-        If collAnotherFigure Then fX = fX - 1
+        If checkCollision Then fX = fX - 1
         figureDraw = True
     ElseIf (GetAsyncKeyState(vbKeySpace)) And keySpace Then
         dropFigure
         keySpace = False
-        figureDraw = True
     End If
     
     If (GetAsyncKeyState(vbKeyUp)) = 0 Then
@@ -174,29 +183,24 @@ End Sub
 Private Sub Update()
     If Timer > fallTmr + fallTick Then
         fY = fY - 1
-        If collBotWell Then
+        If checkCollision Then
             fY = fY + 1
             copyFigureToBoard
             nextFigure
-        End If
-        If collAnotherFigure Then
-            fY = fY + 1
-            copyFigureToBoard
-            nextFigure
+            boardDraw = True
         End If
         fallTmr = Timer
         figureDraw = True
     End If
-    
-    checkLines
+    If checkLines Then boardDraw = True
 End Sub
 
 Private Sub copyFigureToBoard()
     Dim e As Integer, i As Integer
     For i = 0 To UBound(fMatrix, 2)
         For e = 0 To UBound(fMatrix, 1)
-            If fMatrix(e, i) = 1 Then
-                boardMatrix(e + fX, i + fY) = 1
+            If Not fMatrix(e, i) = 0 Then
+                boardMatrix(e + fX, i + fY) = fMatrix(e, i)
             End If
         Next e
     Next i
@@ -206,21 +210,16 @@ Private Sub dropFigure()
     Dim e As Integer, i As Integer
     For i = fY To 0 - UBound(fMatrix, 2) Step -1
         fY = fY - 1
-        If collBotWell Then
-            fY = fY + 1
-            Exit Sub
-        End If
-        If collAnotherFigure Then
+        If checkCollision Then
             fY = fY + 1
             Exit Sub
         End If
     Next i
 End Sub
 
-Private Sub checkLines()
+Private Function checkLines() As Boolean
     Dim e As Integer, i As Integer
     Dim lineIsFull As Boolean
-    
     For i = 0 To UBound(boardMatrix, 2)
         lineIsFull = True
         For e = 0 To UBound(boardMatrix, 1)
@@ -231,9 +230,10 @@ Private Sub checkLines()
         If lineIsFull Then
             deleteLine (i)
             i = i - 1
+            checkLines = True
         End If
     Next i
-End Sub
+End Function
 
 Private Sub deleteLine(n As Integer)
     Dim e As Integer, i As Integer
@@ -247,41 +247,21 @@ Private Sub deleteLine(n As Integer)
     Next i
 End Sub
 
-Private Function collAnotherFigure() As Boolean
+Private Function checkCollision() As Boolean
     Dim e As Integer, i As Integer
-    '/ check collision with another figure
+    checkCollision = False
     For i = 0 To UBound(fMatrix, 2)
         For e = 0 To UBound(fMatrix, 1)
-            If fMatrix(e, i) = 1 Then
-                If boardMatrix(fX + e, fY + i) = 1 Then
-                    collAnotherFigure = True
-                End If
-            End If
-        Next e
-    Next i
-End Function
-
-Private Function collBotWell() As Boolean
-    Dim e As Integer, i As Integer
-    '/ check collision with bottom well
-    For i = 0 To UBound(fMatrix, 2)
-        For e = 0 To UBound(fMatrix, 1)
-            If fMatrix(e, i) = 1 Then
-                If fY + i < 0 Then
-                    collBotWell = True
-                End If
-            End If
-        Next e
-    Next i
-End Function
-
-Private Function collWallWell() As Boolean
-    Dim e As Integer, i As Integer
-    For i = 0 To UBound(fMatrix, 2)
-        For e = 0 To UBound(fMatrix, 1)
-            If fMatrix(e, i) = 1 Then
+            If Not fMatrix(e, i) = 0 Then
+                '/ check collision with wall of the well
                 If fX + e < 0 Or fX + e > UBound(boardMatrix, 1) Then
-                    collWallWell = True
+                    checkCollision = True
+                '/ check collision with bottom of the well
+                ElseIf fY + i < 0 Then
+                    checkCollision = True
+                '/ check collision with dropped figures
+                ElseIf Not boardMatrix(fX + e, fY + i) = 0 Then
+                    checkCollision = True
                 End If
             End If
         Next e
@@ -298,10 +278,26 @@ Private Sub Draw()
         ActivePage.Layers.Item(3).Shapes.All.Delete
         For i = 0 To (boardHeight - 1)
             For e = 0 To (boardWidth - 1)
-                If boardMatrix(e, i) = 1 Then
-                    Set s = ActivePage.Layers.Item(3).CreateRectangle(e * cellSize, i * cellSize + cellSize, e * cellSize + cellSize, i * cellSize)
-                    s.Outline.SetNoOutline
-                    s.Fill.UniformColor.CMYKAssign 100, 0, 0, 0
+                If Not boardMatrix(e, i) = 0 Then
+                    Set s = ActivePage.Layers.Item(3).CreateRectangle(e * cellSize, i * cellSize + cellSize, e * cellSize + cellSize, i * cellSize, 20, 20, 20, 20)
+                    s.Outline.Color.CMYKAssign 0, 0, 0, 100
+                    s.Outline.Width = 0.4
+                    Select Case boardMatrix(e, i)
+                        Case 1
+                            s.Fill.UniformColor.CMYKAssign 0, 0, 100, 0
+                        Case 2
+                            s.Fill.UniformColor.CMYKAssign 100, 0, 0, 0
+                        Case 3
+                            s.Fill.UniformColor.CMYKAssign 100, 0, 100, 0
+                        Case 4
+                            s.Fill.UniformColor.CMYKAssign 0, 100, 100, 0
+                        Case 5
+                            s.Fill.UniformColor.CMYKAssign 0, 60, 100, 0
+                        Case 6
+                            s.Fill.UniformColor.CMYKAssign 100, 100, 0, 0
+                        Case 7
+                            s.Fill.UniformColor.CMYKAssign 40, 100, 0, 0
+                    End Select
                 End If
             Next e
         Next i
@@ -312,10 +308,26 @@ Private Sub Draw()
         ActivePage.Layers.Item(2).Shapes.All.Delete
         For i = 0 To UBound(fMatrix, 2)
             For e = 0 To UBound(fMatrix, 1)
-                If fMatrix(e, i) = 1 Then
-                    Set s = ActivePage.Layers.Item(2).CreateRectangle((e + fX) * cellSize, (i + fY) * cellSize + cellSize, (e + fX) * cellSize + cellSize, (i + fY) * cellSize)
-                    s.Outline.SetNoOutline
-                    s.Fill.UniformColor.CMYKAssign 100, 0, 0, 0
+                If Not fMatrix(e, i) = 0 Then
+                    Set s = ActivePage.Layers.Item(2).CreateRectangle((e + fX) * cellSize, (i + fY) * cellSize + cellSize, (e + fX) * cellSize + cellSize, (i + fY) * cellSize, 20, 20, 20, 20)
+                    s.Outline.Color.CMYKAssign 0, 0, 0, 100
+                    s.Outline.Width = 0.4
+                    Select Case fMatrix(e, i)
+                        Case 1
+                            s.Fill.UniformColor.CMYKAssign 0, 0, 100, 0
+                        Case 2
+                            s.Fill.UniformColor.CMYKAssign 100, 0, 0, 0
+                        Case 3
+                            s.Fill.UniformColor.CMYKAssign 100, 0, 100, 0
+                        Case 4
+                            s.Fill.UniformColor.CMYKAssign 0, 100, 100, 0
+                        Case 5
+                            s.Fill.UniformColor.CMYKAssign 0, 60, 100, 0
+                        Case 6
+                            s.Fill.UniformColor.CMYKAssign 100, 100, 0, 0
+                        Case 7
+                            s.Fill.UniformColor.CMYKAssign 40, 100, 0, 0
+                    End Select
                 End If
             Next e
         Next i
