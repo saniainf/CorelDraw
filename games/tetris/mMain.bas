@@ -10,11 +10,12 @@ Sub TetrisGame()
     
 '    newGame
     ActiveDocument.Pages.Item(2).Activate
+    ActiveDocument.MasterPage.DesktopLayer.Visible = True
     gameMain.LoadLevel
     returnValue = gameMain.GameLoop
     Select Case returnValue
         Case "gameover"
-'            gameOver
+            gameOver
             Exit Sub
         Case "gamewin"
 '            gameWin
@@ -38,7 +39,8 @@ End Sub
 Private Sub gameOver()
     Dim s As Shape
     ActiveDocument.Pages.Item(6).Activate
-    Set s = ActivePage.Layers.Item(2).CreateArtisticText(400, 170, scorePoint, , , "Arial", 84, cdrTrue, cdrFalse, cdrNoFontLine, cdrCenterAlignment)
+    ActiveDocument.MasterPage.DesktopLayer.Visible = False
+    Set s = ActivePage.Layers.Item(2).CreateArtisticText(400, 170, gameMain.ScorePoint, , , "Arial", 84, cdrTrue, cdrFalse, cdrNoFontLine, cdrCenterAlignment)
     s.Fill.UniformColor.CMYKAssign 0, 100, 100, 0
     ActiveDocument.ClearSelection
 End Sub
@@ -46,7 +48,7 @@ End Sub
 Private Sub gameWin()
     Dim s As Shape
     ActiveDocument.Pages.Item(3).Activate
-    Set s = ActivePage.Layers.Item(2).CreateArtisticText(400, 170, scorePoint, , , "Arial", 84, cdrTrue, cdrFalse, cdrNoFontLine, cdrCenterAlignment)
+    Set s = ActivePage.Layers.Item(2).CreateArtisticText(400, 170, 0, , , "Arial", 84, cdrTrue, cdrFalse, cdrNoFontLine, cdrCenterAlignment)
     s.Fill.UniformColor.CMYKAssign 0, 100, 100, 0
     ActiveDocument.ClearSelection
 End Sub
