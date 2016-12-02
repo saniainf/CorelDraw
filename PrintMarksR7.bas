@@ -1,8 +1,11 @@
 Attribute VB_Name = "PrintMarksR7"
 Sub PrintMarksR7()
+' version 1.2
+' add create color bar in new document
 If (Documents.Count = 0) Then Exit Sub
-    ActiveDocument.Unit = cdrMillimeter
-    Application.Optimization = True
+ActiveDocument.BeginCommandGroup "Create R7 Print Marks"
+Application.Optimization = True
+ActiveDocument.Unit = cdrMillimeter
 
     Dim iCB As Shape
     Dim colorBar As ShapeRange, cbLeftPart As ShapeRange, cbRightPart As ShapeRange
@@ -19,6 +22,18 @@ If (Documents.Count = 0) Then Exit Sub
     Dim allMarks As ShapeRange
     Dim i As Integer, a As Integer
     Dim cBar As Shape, cbT As Shape, cbB As Shape
+    
+    'create color bar in new document
+    Dim mainDoc As Document
+    Dim mainPage As Page
+    Dim cbarDoc As Document
+    Set mainDoc = ActiveDocument
+    Set mainPage = mainDoc.ActivePage
+    Set cbarDoc = CreateDocument
+    
+    cbarDoc.Unit = cdrMillimeter
+    cbarDoc.ActivePage.SizeWidth = mainPage.SizeWidth
+    cbarDoc.ActivePage.SizeHeight = mainPage.SizeHeight
     
     printMarksPath = (UserDataPath & "printMarks\")
     offsetLeftMark = 55
@@ -134,7 +149,7 @@ If (Documents.Count = 0) Then Exit Sub
     colorBar.AddRange cbRightPart
     Set cBar = colorBar.Group
     
-    '\ cun top and bottom part
+    '\ cut top and bottom part
     Set cbCrop = New ShapeRange
     For Each iCB In cbTopPart
         If (iCB.BoundingBox.Left > colorBar.BoundingBox.Left) And (iCB.BoundingBox.Right < colorBar.BoundingBox.Right) Then
@@ -169,12 +184,19 @@ If (Documents.Count = 0) Then Exit Sub
     leftTargetMark.AddToSelection
     rightTargetMark.AddToSelection
     signCmyk.AddToSelection
-    ActiveSelectionRange.Group
+    ActiveSelectionRange.Group.Copy
     
-    ActiveDocument.ClearSelection
-    Application.Optimization = False
-    ActiveWindow.Refresh
-    Application.Refresh
+    mainPage.ActiveLayer.Paste
+    cbarDoc.Dirty = False
+    cbarDoc.Close
+    
+    mainDoc.Activate
+    mainPage.Activate
+    mainDoc.ClearSelection
+Application.Optimization = False
+ActiveWindow.Refresh
+Application.Refresh
+ActiveDocument.EndCommandGroup
 End Sub
 
 Public Function nextItem(aSel As ShapeRange, i As Integer) As Boolean
@@ -203,4 +225,6 @@ Public Function fillCmyk(s1 As Shape) As Boolean
     If s1.Fill.UniformColor.IsSame(yellowColor) Then fillCmyk = True
     If s1.Fill.UniformColor.IsSame(blackColor) Then fillCmyk = True
 End Function
+
+
 
