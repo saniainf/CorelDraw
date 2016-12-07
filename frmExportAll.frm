@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmExportAll 
    Caption         =   "Export All v2.01"
-   ClientHeight    =   2940
+   ClientHeight    =   3135
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   3735
@@ -27,6 +27,7 @@ Private Sub cbExecute_Click()
     Dim doc As Document
     Dim aPage As Page
     Dim iPage As Integer
+    Dim expArea As Rect
     
     colorSpaceField = cboColorSpace.Text
     resolution = cboResolution.Text
@@ -40,13 +41,19 @@ Private Sub cbExecute_Click()
             filePath = doc.filePath
             fileName = Left(fileName, (Len(fileName) - 4))
             iPage = 0
+            doc.MasterPage.GuidesLayer.Editable = False
             For Each aPage In doc.Pages
                 aPage.Activate
+                aPage.GuidesLayer.Editable = False
                 iPage = iPage + 1
                 fullFileName = filePath + fileName + "_" & iPage & "_" + aPage.Name + ".jpg"
                 aPage.Shapes.All.CreateSelection
                 If (aPage.SelectableShapes.Count > 0) Then
-                    Set expFilter = doc.ExportBitmap(fullFileName, cdrJPEG, cdrSelection, colorSpace, 0, 0, resolution, resolution, cdrNormalAntiAliasing, False, False, chbProfile.Value, False, cdrCompressionNone)
+                    Set expArea = activeSelection.BoundingBox.GetCopy
+                    If cbPageBox.Value Then
+                        Set expArea = aPage.BoundingBox.GetCopy
+                    End If
+                    Set expFilter = doc.ExportBitmap(fullFileName, cdrJPEG, cdrCurrentPage, colorSpace, 0, 0, resolution, resolution, cdrNormalAntiAliasing, False, False, chbProfile.Value, False, cdrCompressionNone, , expArea)
                     With expFilter
                         .Progressive = False
                         .Optimized = False
@@ -64,13 +71,19 @@ Private Sub cbExecute_Click()
         filePath = doc.filePath
         fileName = Left(fileName, (Len(fileName) - 4))
         iPage = 0
+        doc.MasterPage.GuidesLayer.Editable = False
         For Each aPage In doc.Pages
             aPage.Activate
+            aPage.GuidesLayer.Editable = False
             iPage = iPage + 1
             fullFileName = filePath + fileName + "_" & iPage & "_" + aPage.Name + ".jpg"
             aPage.Shapes.All.CreateSelection
             If (aPage.SelectableShapes.Count > 0) Then
-                Set expFilter = doc.ExportBitmap(fullFileName, cdrJPEG, cdrSelection, colorSpace, 0, 0, resolution, resolution, cdrNormalAntiAliasing, False, False, chbProfile.Value, False, cdrCompressionNone)
+                Set expArea = activeSelection.BoundingBox.GetCopy
+                If cbPageBox.Value Then
+                    Set expArea = aPage.BoundingBox.GetCopy
+                End If
+                Set expFilter = doc.ExportBitmap(fullFileName, cdrJPEG, cdrCurrentPage, colorSpace, 0, 0, resolution, resolution, cdrNormalAntiAliasing, False, False, chbProfile.Value, False, cdrCompressionNone, , expArea)
                 With expFilter
                     .Progressive = False
                     .Optimized = False
@@ -92,6 +105,10 @@ End Sub
 
 Private Sub cbCancel_Click()
     Unload Me
+End Sub
+
+Private Sub cbPageBox_Click()
+
 End Sub
 
 Private Sub UserForm_Initialize()

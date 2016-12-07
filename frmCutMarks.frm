@@ -77,7 +77,7 @@ End Sub
 
 Private Sub drawMark(startX As Double, startY As Double, endX As Double, endY As Double)
     Dim mark As Shape
-    Dim whiteColor As New color
+    Dim whiteColor As New Color
     whiteColor.CMYKAssign 0, 0, 0, 0
     If cbWhiteSpace Then
         Set mark = ActiveLayer.CreateLineSegment(startX, startY, endX, endY)
