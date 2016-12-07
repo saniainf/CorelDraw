@@ -208,6 +208,7 @@ If (Documents.Count = 0) Then
     Exit Sub
 End If
     ActiveDocument.BeginCommandGroup "Ñreate Print Marks"
+    Application.Optimization = True
     
     'create color bar in new document
     Dim mainDoc As Document
@@ -224,7 +225,6 @@ End If
     cbarDoc.ActivePage.SizeHeight = mainPage.SizeHeight
     
     ActiveDocument.ReferencePoint = cdrTopLeft
-    Application.Optimization = True
     Set cColorBar = New Collection
     Set cColorSign = New Collection
     
