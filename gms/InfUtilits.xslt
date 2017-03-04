@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
-	<xsl:output method="xml" encoding="UTF-8" indent="yes"/>
-	<export:data>
-		<uiConfig><applicationInfo name="CorelDRAW" framework="CorelDRAW" version="15" userConfiguration="true" localizedLang="EN"></applicationInfo><items><itemData guid="8a35a8c9-0098-407c-9326-b726fa25c0f6" dynamicCommand="InfUtilits.ExportAll.ExportAll" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Экспортировать все в JPG" userCaption="InfUtilites.ExportAll" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+  <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+  <export:data>
+    <uiConfig>
+      <applicationInfo name="CorelDRAW" framework="CorelDRAW" version="15" userConfiguration="true" localizedLang="EN"></applicationInfo>
+      <items>
+        <itemData guid="8a35a8c9-0098-407c-9326-b726fa25c0f6" dynamicCommand="InfUtilits.ExportAll.ExportAll" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Экспортировать все в JPG" userCaption="InfUtilites.ExportAll" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -29,7 +33,10 @@
             DjcONw4ONw4ODg4ONw43Dg43DjcODjcODg4ODjcODjc3Dg4ONzc3Dg4ODg43Dg4ODg4ODg4O
             Dg4ODg4ONw4ODg4ODg4ODg4ODg43Nzc3Dg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4O
             Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData><itemData guid="5e77ed03-a08f-421d-93c7-8ba3b99358b3" dynamicCommand="InfUtilits.PrintGridOff.PrintGridOff" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Отключить слои для печати" userCaption="InfUtilites.GridPrintOff" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="5e77ed03-a08f-421d-93c7-8ba3b99358b3" dynamicCommand="InfUtilits.PrintGridOff.PrintGridOff" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Отключить слои для печати" userCaption="InfUtilites.GridPrintOff" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -56,7 +63,11 @@
             IRK7Dg4hDg4ODiEOuxISEiEhuw4OIQ4ODg4hDrsSEhISISEODiEODg4ODiG7EhISEhIhISEO
             Dg4ODg4hIbu7u7u7uyEhDg4ODg4ODiEhDg4ODiEhDg4ODg4ODg4ODiEhISEODg4ODg4ODg4O
             Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData><itemData guid="266435b4-6e53-460f-9fa7-f45be187d400" length="0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"></itemData><itemData guid="962a76c1-e25c-4c8f-a529-2859d095bdd9" dynamicCommand="InfUtilits.bookletGuides.bookletGuides" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Направляющие для буклета" userCaption="InfUtilites.BookletGuides" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="266435b4-6e53-460f-9fa7-f45be187d400" length="0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"></itemData>
+        <itemData guid="962a76c1-e25c-4c8f-a529-2859d095bdd9" dynamicCommand="InfUtilits.bookletGuides.bookletGuides" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Направляющие для буклета" userCaption="InfUtilites.BookletGuides" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -83,7 +94,10 @@
             EhISEhISEry8EjwSIRIhEjwSEhISPBK8vBI8EiEhEhI8EhISEjwSvLwSEhISEhISEhISEhIS
             Ery8EjwSEhISEjwSEhISPBK8vLw8vLy8vLw8vLy8vDy8vA4OPA4ODg4OPA4ODg48Dg4ODg4O
             Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData><itemData guid="673372ab-fabe-4e97-ab65-b0843a0afeb7" dynamicCommand="InfUtilits.groupAll.GroupAll" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Сгрупировать все объекты" userCaption="InfUtilites.GroupAll" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="673372ab-fabe-4e97-ab65-b0843a0afeb7" dynamicCommand="InfUtilits.groupAll.GroupAll" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Сгрупировать все объекты" userCaption="InfUtilites.GroupAll" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -110,7 +124,10 @@
             3Ly8vLwOPDwODg7cEREREdwODg4ODg4ODjwOvBISEhK8Dg4ODg48Dg4ODrwSEhISvA4ODg4O
             Dg4OPA68vLy8vLwODg4ODjwODg4ODg4ODg4ODg4ODg4ODjw8DjwOPA48PA48DjwOPDw8PA4O
             Dg4OPDwODg4ODjw88PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData><itemData guid="405ff1b6-8f77-46ac-ba65-7b44186f9d3c" dynamicCommand="InfUtilits.PlaceAllToPowerClip.PlaceAllToPowerClip" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Поместить в PowerClip все объекты" userCaption="InfUtilits.PlaceAllToPowerClip" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="405ff1b6-8f77-46ac-ba65-7b44186f9d3c" dynamicCommand="InfUtilits.PlaceAllToPowerClip.PlaceAllToPowerClip" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Поместить в PowerClip все объекты" userCaption="InfUtilits.PlaceAllToPowerClip" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -137,7 +154,10 @@
             Dw8PvLy8vNzcEhISEtwPDw+8vBISEhLcEhISEhLcDw+8EhISEhISEhISEhISvA8PvBISEhIS
             EhLcEhISErwPDw+8vBISEhLc3Ly8vLy8Dw8PDw+8vLy83NwPDw8PDw8PDw8PDw8PD9zc3Nzc
             EhLc3NzcEhLc3Nzc8PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData><itemData guid="7fdf35e6-184b-40bf-9410-72f66fdedb05" dynamicCommand="InfUtilits.PrintMarksR5v2.showForm" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Нарисовать метки для печати на Ryobi R5**" userCaption="InfUtilits.PrintMarksR5" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="7fdf35e6-184b-40bf-9410-72f66fdedb05" dynamicCommand="InfUtilits.PrintMarksR5v2.showForm" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Нарисовать метки для печати на Ryobi R5**" userCaption="InfUtilits.PrintMarksR5" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -164,7 +184,10 @@
             Dg4OIQ4ODg4ODiEhIQ4ODiEhIQ4ODg4ODg4hDg4hDg4hDg4ODg4ODg4OIQ4OIQ4OIQ4ODg4O
             Dg4ODiEODiEODiEODg4ODg4ODg4hISEODg4hISEhDg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4O
             Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData><itemData guid="e7661770-89d7-4edd-bf65-30e5a534e074" dynamicCommand="InfUtilits.PrintMarksR7.PrintMarksR7" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Нарисовать метки для печати на Ryobi R7**" userCaption="InfUtilits.PrintMarksR7" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="e7661770-89d7-4edd-bf65-30e5a534e074" dynamicCommand="InfUtilits.PrintMarksR7.PrintMarksR7" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Нарисовать метки для печати на Ryobi R7**" userCaption="InfUtilits.PrintMarksR7" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -191,7 +214,10 @@
             Dg4hDg4ODg4ODiEhIQ4ODg4ODiEODg4ODg4hDg4hDg4ODg4hDg4ODg4OIQ4OIQ4ODg4ODiEO
             Dg4ODiEODiEODiEODg4hDg4ODg4hISEODg4hISEhIQ4ODg4ODg4ODg4ODg4ODg4ODg4ODg4O
             Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData><itemData guid="c1ed876d-6ce1-481b-909b-b28a851dbbab" dynamicCommand="InfUtilits.OffsetAllShapes.OffsetAllShapes10" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Выставить объекты по клапану 10 мм" userCaption="InfUtilits.OffsetAllShapes10" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="c1ed876d-6ce1-481b-909b-b28a851dbbab" dynamicCommand="InfUtilits.OffsetAllShapes.OffsetAllShapes10" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Выставить объекты по клапану 10 мм" userCaption="InfUtilits.OffsetAllShapes10" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -218,7 +244,10 @@
             IQ4ODiEODg4ODg4hDiEODiEODg4hDg4ODg4ODiEhDg4hDg4OIQ4ODg4ODg4OIQ4ODiEhIQ4O
             Dg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODjw8PA4OPDwODjw8Dg48PDwODg4O
             Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData><itemData guid="cdc71a9b-c96f-4453-8abb-4d128b0af848" dynamicCommand="InfUtilits.OffsetAllShapes.OffsetAllShapes12" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Выставить объекты по клапану 12 мм" userCaption="InfUtilits.OffsetAllShapes12" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="cdc71a9b-c96f-4453-8abb-4d128b0af848" dynamicCommand="InfUtilits.OffsetAllShapes.OffsetAllShapes12" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Выставить объекты по клапану 12 мм" userCaption="InfUtilits.OffsetAllShapes12" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -245,7 +274,10 @@
             Dg4ODiEODg4ODg4hDiEODiEODg4hDg4ODg4ODiEhDg4hDg4OIQ4ODg4ODg4OIQ4ODiEhIQ4O
             Dg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODjw8PA4OPDwODjw8Dg48PDwODg4O
             Dg4ODg4ODg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData><itemData guid="ef6c8cf2-1078-4d7e-92a9-066e1a2a8513" dynamicCommand="InfUtilits.CutMarks.CutMarks" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Нарисовать метки реза" userCaption="InfUtilits.CutMarks" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="ef6c8cf2-1078-4d7e-92a9-066e1a2a8513" dynamicCommand="InfUtilits.CutMarks.CutMarks" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Нарисовать метки реза" userCaption="InfUtilits.CutMarks" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -272,7 +304,10 @@
             EhK8Dg4ODg4SEhK8EhISEhISvCEhISEhvLy8vLy8vLy8vLwODg4ODg4OIQ4hDg4ODiEODg4O
             Dg4ODiEOIQ4ODg4hDg4ODg4ODg4hDiEODg4OIQ4ODg4ODg4OIQ4hDg4ODiEODg4ODg4ODiEO
             IQ4ODg4hDg4ODg4O8PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData><itemData guid="bb7dbe6e-0c1a-43b0-945c-b47467a4a13a" dynamicCommand="InfUtilits.makeOnAllPages.makeOnAllPages" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Выполнить на всех страницах документа" userCaption="InfUtilits.makeOnAllPages" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
+          </userSmallBitmap>
+        </itemData>
+        <itemData guid="bb7dbe6e-0c1a-43b0-945c-b47467a4a13a" dynamicCommand="InfUtilits.makeOnAllPages.makeOnAllPages" dynamicCategory="2cc24a3e-fe24-4708-9a74-9c75406eebcd" userToolTip="Выполнить на всех страницах документа" userCaption="InfUtilits.makeOnAllPages" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <userSmallBitmap dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes">
             //8BABAAV0NtblVJX1VJSXRlbUJtcAAAAAAAAAAAKAAAAAAEAAAAAQAAKAAAABAAAAAQAAAA
             AQAIAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAZGRkAMzMzADMz
             MwBMTEwAZmZmAGZmZgB/f38AmZmZAJmZmQCysrIA8PDwAMzMzADMzMwA5eXlAP///wAAADMA
@@ -299,13 +334,171 @@
             EdwREdwSErwREREhERERERHcERHcEhK8ERERISEhERER3BISvBISvBISEiESEiESErwSErwS
             ErwSEhIhEhIhEhK8EhK8EhK8EhISIRISIRISvBISvBISvBISEiEhIRISErwSErwSErwSEhIS
             EhISEhK8EhK8EhK88PDwAKCgoADw8PAAAAAAAA==
-          </userSmallBitmap></itemData></items><commandBars><commandBarData guid="151d56b8-d94c-4ce2-b04d-adce68db0573" type="toolbar" nonLocalizableName="InfUtilits" userCaption="InfUtilits" userCreated="true" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export"><container floatWidth="32767" floatHeight="100"><item guidRef="8a35a8c9-0098-407c-9326-b726fa25c0f6"></item><item guidRef="5e77ed03-a08f-421d-93c7-8ba3b99358b3"></item><item guidRef="266435b4-6e53-460f-9fa7-f45be187d400"></item><item guidRef="962a76c1-e25c-4c8f-a529-2859d095bdd9"></item><item guidRef="266435b4-6e53-460f-9fa7-f45be187d400"></item><item guidRef="673372ab-fabe-4e97-ab65-b0843a0afeb7"></item><item guidRef="405ff1b6-8f77-46ac-ba65-7b44186f9d3c"></item><item guidRef="266435b4-6e53-460f-9fa7-f45be187d400"></item><item guidRef="7fdf35e6-184b-40bf-9410-72f66fdedb05"></item><item guidRef="e7661770-89d7-4edd-bf65-30e5a534e074"></item><item guidRef="c1ed876d-6ce1-481b-909b-b28a851dbbab"></item><item guidRef="cdc71a9b-c96f-4453-8abb-4d128b0af848"></item><item guidRef="266435b4-6e53-460f-9fa7-f45be187d400"></item><item guidRef="ef6c8cf2-1078-4d7e-92a9-066e1a2a8513"></item><item guidRef="266435b4-6e53-460f-9fa7-f45be187d400"></item><item guidRef="bb7dbe6e-0c1a-43b0-945c-b47467a4a13a"></item></container></commandBarData></commandBars></uiConfig></export:data>
-	<xsl:template match="node()[count(*)='0']|@*">
-		<xsl:copy-of select="."/>
-	</xsl:template>
-	<xsl:template match="node()">
-		<xsl:copy>
-			<xsl:apply-templates select="node()|@*"/>
-		</xsl:copy>
-	</xsl:template>
-	<xsl:template match="uiConfig"><xsl:copy><xsl:apply-templates select="node()|@*"/><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./items)"><xsl:copy-of select="document('')/*/export:data/uiConfig/items"/></xsl:if><xsl:if test="not(./commandBars)"><xsl:copy-of select="document('')/*/export:data/uiConfig/commandBars"/></xsl:if></xsl:copy></xsl:template><xsl:template match="uiConfig/items"><xsl:copy><xsl:apply-templates select="node()|@*"/><xsl:if test="not(./itemData[@guid='8a35a8c9-0098-407c-9326-b726fa25c0f6'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='8a35a8c9-0098-407c-9326-b726fa25c0f6']"/></xsl:if><xsl:if test="not(./itemData[@guid='5e77ed03-a08f-421d-93c7-8ba3b99358b3'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='5e77ed03-a08f-421d-93c7-8ba3b99358b3']"/></xsl:if><xsl:if test="not(./itemData[@guid='266435b4-6e53-460f-9fa7-f45be187d400'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='266435b4-6e53-460f-9fa7-f45be187d400']"/></xsl:if><xsl:if test="not(./itemData[@guid='962a76c1-e25c-4c8f-a529-2859d095bdd9'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='962a76c1-e25c-4c8f-a529-2859d095bdd9']"/></xsl:if><xsl:if test="not(./itemData[@guid='673372ab-fabe-4e97-ab65-b0843a0afeb7'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='673372ab-fabe-4e97-ab65-b0843a0afeb7']"/></xsl:if><xsl:if test="not(./itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c']"/></xsl:if><xsl:if test="not(./itemData[@guid='7fdf35e6-184b-40bf-9410-72f66fdedb05'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='7fdf35e6-184b-40bf-9410-72f66fdedb05']"/></xsl:if><xsl:if test="not(./itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']"/></xsl:if><xsl:if test="not(./itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab']"/></xsl:if><xsl:if test="not(./itemData[@guid='cdc71a9b-c96f-4453-8abb-4d128b0af848'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='cdc71a9b-c96f-4453-8abb-4d128b0af848']"/></xsl:if><xsl:if test="not(./itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513']"/></xsl:if><xsl:if test="not(./itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a']"/></xsl:if></xsl:copy></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='8a35a8c9-0098-407c-9326-b726fa25c0f6']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='8a35a8c9-0098-407c-9326-b726fa25c0f6']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='5e77ed03-a08f-421d-93c7-8ba3b99358b3']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='5e77ed03-a08f-421d-93c7-8ba3b99358b3']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='266435b4-6e53-460f-9fa7-f45be187d400']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='266435b4-6e53-460f-9fa7-f45be187d400']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='962a76c1-e25c-4c8f-a529-2859d095bdd9']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='962a76c1-e25c-4c8f-a529-2859d095bdd9']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='673372ab-fabe-4e97-ab65-b0843a0afeb7']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='673372ab-fabe-4e97-ab65-b0843a0afeb7']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='7fdf35e6-184b-40bf-9410-72f66fdedb05']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='7fdf35e6-184b-40bf-9410-72f66fdedb05']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='cdc71a9b-c96f-4453-8abb-4d128b0af848']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='cdc71a9b-c96f-4453-8abb-4d128b0af848']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513']"/></xsl:template><xsl:template match="uiConfig/items/itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a']"><xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a']"/></xsl:template><xsl:template match="uiConfig/commandBars"><xsl:copy><xsl:apply-templates select="node()|@*"/><xsl:if test="not(./commandBarData[@guid='151d56b8-d94c-4ce2-b04d-adce68db0573'])"><xsl:copy-of select="document('')/*/export:data/uiConfig/commandBars/commandBarData[@guid='151d56b8-d94c-4ce2-b04d-adce68db0573']"/></xsl:if></xsl:copy></xsl:template><xsl:template match="uiConfig/commandBars/commandBarData[@guid='151d56b8-d94c-4ce2-b04d-adce68db0573']"><xsl:copy-of select="document('')/*/export:data/uiConfig/commandBars/commandBarData[@guid='151d56b8-d94c-4ce2-b04d-adce68db0573']"/></xsl:template></xsl:stylesheet>
+          </userSmallBitmap>
+        </itemData>
+      </items>
+      <commandBars>
+        <commandBarData guid="151d56b8-d94c-4ce2-b04d-adce68db0573" type="toolbar" nonLocalizableName="InfUtilits" userCaption="InfUtilits" userCreated="true" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:export="export">
+          <container floatWidth="32767" floatHeight="100">
+            <item guidRef="8a35a8c9-0098-407c-9326-b726fa25c0f6"></item>
+            <item guidRef="5e77ed03-a08f-421d-93c7-8ba3b99358b3"></item>
+            <item guidRef="266435b4-6e53-460f-9fa7-f45be187d400"></item>
+            <item guidRef="962a76c1-e25c-4c8f-a529-2859d095bdd9"></item>
+            <item guidRef="266435b4-6e53-460f-9fa7-f45be187d400"></item>
+            <item guidRef="673372ab-fabe-4e97-ab65-b0843a0afeb7"></item>
+            <item guidRef="405ff1b6-8f77-46ac-ba65-7b44186f9d3c"></item>
+            <item guidRef="266435b4-6e53-460f-9fa7-f45be187d400"></item>
+            <item guidRef="7fdf35e6-184b-40bf-9410-72f66fdedb05"></item>
+            <item guidRef="e7661770-89d7-4edd-bf65-30e5a534e074"></item>
+            <item guidRef="c1ed876d-6ce1-481b-909b-b28a851dbbab"></item>
+            <item guidRef="cdc71a9b-c96f-4453-8abb-4d128b0af848"></item>
+            <item guidRef="266435b4-6e53-460f-9fa7-f45be187d400"></item>
+            <item guidRef="ef6c8cf2-1078-4d7e-92a9-066e1a2a8513"></item>
+            <item guidRef="266435b4-6e53-460f-9fa7-f45be187d400"></item>
+            <item guidRef="bb7dbe6e-0c1a-43b0-945c-b47467a4a13a"></item>
+          </container>
+        </commandBarData>
+      </commandBars>
+    </uiConfig>
+  </export:data>
+  <xsl:template match="node()[count(*)='0']|@*">
+    <xsl:copy-of select="."/>
+  </xsl:template>
+  <xsl:template match="node()">
+    <xsl:copy>
+      <xsl:apply-templates select="node()|@*"/>
+    </xsl:copy>
+  </xsl:template>
+  <xsl:template match="uiConfig">
+    <xsl:copy>
+      <xsl:apply-templates select="node()|@*"/>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./items)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items"/>
+      </xsl:if>
+      <xsl:if test="not(./commandBars)">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/commandBars"/>
+      </xsl:if>
+    </xsl:copy>
+  </xsl:template>
+  <xsl:template match="uiConfig/items">
+    <xsl:copy>
+      <xsl:apply-templates select="node()|@*"/>
+      <xsl:if test="not(./itemData[@guid='8a35a8c9-0098-407c-9326-b726fa25c0f6'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='8a35a8c9-0098-407c-9326-b726fa25c0f6']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='5e77ed03-a08f-421d-93c7-8ba3b99358b3'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='5e77ed03-a08f-421d-93c7-8ba3b99358b3']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='266435b4-6e53-460f-9fa7-f45be187d400'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='266435b4-6e53-460f-9fa7-f45be187d400']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='962a76c1-e25c-4c8f-a529-2859d095bdd9'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='962a76c1-e25c-4c8f-a529-2859d095bdd9']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='673372ab-fabe-4e97-ab65-b0843a0afeb7'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='673372ab-fabe-4e97-ab65-b0843a0afeb7']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='7fdf35e6-184b-40bf-9410-72f66fdedb05'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='7fdf35e6-184b-40bf-9410-72f66fdedb05']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='cdc71a9b-c96f-4453-8abb-4d128b0af848'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='cdc71a9b-c96f-4453-8abb-4d128b0af848']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513']"/>
+      </xsl:if>
+      <xsl:if test="not(./itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a']"/>
+      </xsl:if>
+    </xsl:copy>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='8a35a8c9-0098-407c-9326-b726fa25c0f6']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='8a35a8c9-0098-407c-9326-b726fa25c0f6']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='5e77ed03-a08f-421d-93c7-8ba3b99358b3']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='5e77ed03-a08f-421d-93c7-8ba3b99358b3']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='266435b4-6e53-460f-9fa7-f45be187d400']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='266435b4-6e53-460f-9fa7-f45be187d400']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='962a76c1-e25c-4c8f-a529-2859d095bdd9']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='962a76c1-e25c-4c8f-a529-2859d095bdd9']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='673372ab-fabe-4e97-ab65-b0843a0afeb7']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='673372ab-fabe-4e97-ab65-b0843a0afeb7']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='405ff1b6-8f77-46ac-ba65-7b44186f9d3c']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='7fdf35e6-184b-40bf-9410-72f66fdedb05']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='7fdf35e6-184b-40bf-9410-72f66fdedb05']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='e7661770-89d7-4edd-bf65-30e5a534e074']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='c1ed876d-6ce1-481b-909b-b28a851dbbab']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='cdc71a9b-c96f-4453-8abb-4d128b0af848']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='cdc71a9b-c96f-4453-8abb-4d128b0af848']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='ef6c8cf2-1078-4d7e-92a9-066e1a2a8513']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/items/itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/items/itemData[@guid='bb7dbe6e-0c1a-43b0-945c-b47467a4a13a']"/>
+  </xsl:template>
+  <xsl:template match="uiConfig/commandBars">
+    <xsl:copy>
+      <xsl:apply-templates select="node()|@*"/>
+      <xsl:if test="not(./commandBarData[@guid='151d56b8-d94c-4ce2-b04d-adce68db0573'])">
+        <xsl:copy-of select="document('')/*/export:data/uiConfig/commandBars/commandBarData[@guid='151d56b8-d94c-4ce2-b04d-adce68db0573']"/>
+      </xsl:if>
+    </xsl:copy>
+  </xsl:template>
+  <xsl:template match="uiConfig/commandBars/commandBarData[@guid='151d56b8-d94c-4ce2-b04d-adce68db0573']">
+    <xsl:copy-of select="document('')/*/export:data/uiConfig/commandBars/commandBarData[@guid='151d56b8-d94c-4ce2-b04d-adce68db0573']"/>
+  </xsl:template>
+</xsl:stylesheet>
