@@ -13,8 +13,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-' verison 2.0.2
+' verison 2.0.3
 ' add create color bar in new document
+' correct values of tint on color bar
 Option Explicit
 Dim cColor As New Collection, cColorOnly As New Collection, cColorBar As New Collection, cColorSign As New Collection
 Dim cyanColor As New Color, magentaColor As New Color, yellowColor As New Color, blackColor As New Color
@@ -62,8 +63,8 @@ Private Sub UserForm_Initialize()
     cColor.Add blackColor
     cColor.Add grayBalance
     cColor.Add black40
-    cColor.Add tint80
     cColor.Add tint40
+    cColor.Add tint80
     
     colorListUpdate
 End Sub
@@ -432,9 +433,9 @@ Public Function parserStringToExtColorBar(pStr As Variant) As Color
             Set tintClr = cColorOnly.Item(icClrOnly).GetCopy
             'tint color differently for spot or cmyk
             If tintClr.Type = cdrColorCMYK Then
-                tintClr.BlendWith whiteColor, 80
+                tintClr.BlendWith whiteColor, 20
             ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
-                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 80)
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 20)
             End If
             icClrOnly = icClrOnly + 1
             'return value
@@ -444,9 +445,9 @@ Public Function parserStringToExtColorBar(pStr As Variant) As Color
             Set tintClr = cColorOnly.Item(icClrOnly).GetCopy
             'tint color differently for spot or cmyk
             If tintClr.Type = cdrColorCMYK Then
-                tintClr.BlendWith whiteColor, 40
+                tintClr.BlendWith whiteColor, 60
             ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
-                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 40)
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 60)
             End If
             icClrOnly = icClrOnly + 1
             'return value
@@ -465,18 +466,18 @@ Public Function parserStringToColorBar(pStr As Variant, nSection As Integer) As 
             Set tintClr = cColorOnly.Item((nSection Mod cColorOnly.Count) + 1).GetCopy
             'tint color differently for spot or cmyk
             If tintClr.Type = cdrColorCMYK Then
-                tintClr.BlendWith whiteColor, 80
+                tintClr.BlendWith whiteColor, 20
             ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
-                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 80)
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 20)
             End If
             'return value
             Set parserStringToColorBar = tintClr
         Case tint40
             Set tintClr = cColorOnly.Item((nSection Mod cColorOnly.Count) + 1).GetCopy
             If tintClr.Type = cdrColorCMYK Then
-                tintClr.BlendWith whiteColor, 40
+                tintClr.BlendWith whiteColor, 60
             ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
-                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 40)
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 60)
             End If
             Set parserStringToColorBar = tintClr
     End Select
