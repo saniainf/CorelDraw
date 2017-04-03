@@ -293,7 +293,7 @@ Sub colorListUpdate()
     'restore selected item
     lbColorList.ListIndex = i
     'if not selected
-    If lbColorList.ListIndex = -1 Then lbColorList.ListIndex = lbColorList.ListCount - 1
+    If lbColorList.ListIndex = -1 Then lbColorList.ListIndex = 0
     'label fill
     fillLabel
     'scroll color list min_max
@@ -468,7 +468,7 @@ Public Function parserStringToColorBar(pStr As Variant, nSection As Integer) As 
             If tintClr.Type = cdrColorCMYK Then
                 tintClr.BlendWith whiteColor, 20
             ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
-                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 20)
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 80)
             End If
             'return value
             Set parserStringToColorBar = tintClr
@@ -477,7 +477,7 @@ Public Function parserStringToColorBar(pStr As Variant, nSection As Integer) As 
             If tintClr.Type = cdrColorCMYK Then
                 tintClr.BlendWith whiteColor, 60
             ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
-                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 60)
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 40)
             End If
             Set parserStringToColorBar = tintClr
     End Select
