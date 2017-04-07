@@ -435,7 +435,7 @@ Public Function parserStringToExtColorBar(pStr As Variant) As Color
             If tintClr.Type = cdrColorCMYK Then
                 tintClr.BlendWith whiteColor, 20
             ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
-                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 20)
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 80)
             End If
             icClrOnly = icClrOnly + 1
             'return value
@@ -447,7 +447,7 @@ Public Function parserStringToExtColorBar(pStr As Variant) As Color
             If tintClr.Type = cdrColorCMYK Then
                 tintClr.BlendWith whiteColor, 60
             ElseIf tintClr.Type = cdrColorSpot Or tintClr.Type = cdrColorPantone Then
-                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 60)
+                Set tintClr = CreateSpotColor(tintClr.PaletteIdentifier, tintClr.SpotColorID, 40)
             End If
             icClrOnly = icClrOnly + 1
             'return value
