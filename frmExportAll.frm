@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmExportAll 
-   Caption         =   "Export All v2.01"
+   Caption         =   "Export All v2.02"
    ClientHeight    =   3135
    ClientLeft      =   45
    ClientTop       =   435
@@ -15,6 +15,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 'v 1.1
 'correct export many doc
+'v 1.2
+'shapes -> SelectableShapes
 
 Private Sub cbExecute_Click()
     Application.Optimization = True
@@ -70,9 +72,9 @@ Private Sub exportJpeg(doc As Document)
         aPage.GuidesLayer.Editable = False
         iPage = iPage + 1
         fullFileName = filePath + fileName + "_" & iPage & "_" + aPage.Name + ".jpg"
-        aPage.Shapes.All.CreateSelection
+        aPage.SelectableShapes.All.CreateSelection
         If (aPage.SelectableShapes.Count > 0) Then
-            Set expArea = aPage.Shapes.All.BoundingBox.GetCopy
+            Set expArea = aPage.SelectableShapes.All.BoundingBox.GetCopy
             If cbPageBox.Value Then
                 Set expArea = aPage.BoundingBox.GetCopy
             End If
