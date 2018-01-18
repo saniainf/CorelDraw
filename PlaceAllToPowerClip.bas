@@ -1,7 +1,8 @@
 Attribute VB_Name = "PlaceAllToPowerClip"
 Sub PlaceAllToPowerClip()
 If (Documents.Count = 0) Then Exit Sub
-    Application.Optimization = True
+ActiveDocument.BeginCommandGroup "Place to Power Clip"
+Application.Optimization = True
     Application.ActiveDocument.Unit = cdrMillimeter
     Dim aSel As ShapeRange
     Dim shPowerClip As Shape
@@ -29,13 +30,15 @@ If (Documents.Count = 0) Then Exit Sub
                 Set aSel = aLayer.Shapes.All
                 Set shPowerClip = aLayer.CreateRectangle(sL, sT, sR, sB)
                 shPowerClip.Outline.SetNoOutline
+                shPowerClip.Fill.ApplyNoFill
                 aSel.AddToPowerClip shPowerClip, cdrFalse
             End If
         End If
     Next aLayer
     aPage.GuidesLayer.Editable = guideL
     ActiveDocument.ClearSelection
-    Application.Optimization = False
-    ActiveWindow.Refresh
-    Application.Refresh
+Application.Optimization = False
+ActiveWindow.Refresh
+Application.Refresh
+ActiveDocument.EndCommandGroup
 End Sub
