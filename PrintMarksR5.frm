@@ -13,6 +13,10 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+' version 2.0.4
+' remove CommandGroup
+' maybe this call bug
+
 ' verison 2.0.3
 ' add create color bar in new document
 ' correct values of tint on color bar
@@ -208,7 +212,8 @@ If (Documents.Count = 0) Then
     Unload Me
     Exit Sub
 End If
-    ActiveDocument.BeginCommandGroup "Ñreate Print Marks"
+    'maybe this call bug
+    'ActiveDocument.BeginCommandGroup "Ñreate Print Marks"
     Application.Optimization = True
     
     'create color bar in new document
@@ -264,7 +269,7 @@ End If
     ActiveWindow.Refresh
     Application.Refresh
     
-    ActiveDocument.EndCommandGroup
+    'ActiveDocument.EndCommandGroup
 End Sub
 
 Private Sub btnCancel_Click()
