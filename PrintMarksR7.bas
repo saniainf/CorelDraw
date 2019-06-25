@@ -1,9 +1,15 @@
 Attribute VB_Name = "PrintMarksR7"
 Sub PrintMarksR7()
+' version 1.2.1
+' remove command group
+' maybe this call bug
+
 ' version 1.2
 ' add create color bar in new document
 If (Documents.Count = 0) Then Exit Sub
-ActiveDocument.BeginCommandGroup "Create R7 Print Marks"
+
+' maybe this call bug
+' ActiveDocument.BeginCommandGroup "Create R7 Print Marks"
 Application.Optimization = True
 ActiveDocument.Unit = cdrMillimeter
 
@@ -196,7 +202,8 @@ ActiveDocument.Unit = cdrMillimeter
 Application.Optimization = False
 ActiveWindow.Refresh
 Application.Refresh
-ActiveDocument.EndCommandGroup
+
+' ActiveDocument.EndCommandGroup
 End Sub
 
 Public Function nextItem(aSel As ShapeRange, i As Integer) As Boolean
