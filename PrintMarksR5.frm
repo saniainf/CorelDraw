@@ -156,6 +156,9 @@ Private Sub btnAddColor_Click()
             MsgBox "Unnamed Color", vbCritical, "Error"
             Exit Sub
         End If
+        If pickClr.Type = cdrColorPantone Or pickClr.Type = cdrColorSpot Then
+            pickClr.Tint = 100
+        End If
         'if not selected
         If lbColorList.ListIndex = -1 Then lbColorList.ListIndex = lbColorList.ListCount - 1
         cColor.Add pickClr, , lbColorList.ListIndex + 1
