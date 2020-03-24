@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmExportAll 
-   Caption         =   "Export All v2.02"
+   Caption         =   "Export All v2.03"
    ClientHeight    =   3135
    ClientLeft      =   45
    ClientTop       =   435
@@ -17,6 +17,8 @@ Attribute VB_Exposed = False
 'correct export many doc
 'v 1.2
 'shapes -> SelectableShapes
+'v 2.03
+'correct file name
 
 Private Sub cbExecute_Click()
     Application.Optimization = True
@@ -47,6 +49,7 @@ Private Sub exportJpeg(doc As Document)
     Dim fileName As String
     Dim filePath As String
     Dim fullFileName As String
+    Dim pageName As String
     Dim fileCount As String
     Dim colorSpace As Integer
     Dim colorSpaceField As String
@@ -71,7 +74,8 @@ Private Sub exportJpeg(doc As Document)
         aPage.Activate
         aPage.GuidesLayer.Editable = False
         iPage = iPage + 1
-        fullFileName = filePath + fileName + "_" & iPage & "_" + aPage.Name + ".jpg"
+        pageName = Replace_symbols(aPage.Name)
+        fullFileName = filePath & fileName & "_" & iPage & "_" & pageName & ".jpg"
         aPage.SelectableShapes.All.CreateSelection
         If (aPage.SelectableShapes.Count > 0) Then
             Set expArea = aPage.SelectableShapes.All.BoundingBox.GetCopy
@@ -110,4 +114,12 @@ Private Sub UserForm_Initialize()
     cboColorSpace.AddItem "RGB Color (24-bit)"
     cboColorSpace.AddItem "CMYK color (24-bit)"
 End Sub
+
+Function Replace_symbols(ByVal txt As String) As String
+    sT$ = "<>?.,%*!;':~!@/\#$%^&*=|`"""
+    For i% = 1 To Len(sT$)
+        txt = Replace(txt, Mid(sT$, i, 1), "_")
+    Next
+    Replace_symbols = txt
+End Function
 
