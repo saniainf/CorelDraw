@@ -18,7 +18,7 @@ Public Sub PrintMarksR5v2(sColorBar As Shape, signColor As Shape)
     
     printMarksPath = (UserDataPath & "printMarks\")
     offsetLeftMark = 55
-    offsetTargetMark = 15
+    offsetTargetMark = 30
     
     colorBar.Add sColorBar
     

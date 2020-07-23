@@ -25,6 +25,7 @@ ActiveDocument.Unit = cdrMillimeter
     Dim signCmyk As ShapeRange
     Dim printMarksPath As String
     Dim offsetLeftMark As Integer, offsetTargetMark As Integer, offsetColorBar As Integer, offsetBothSide
+    Dim offsetSignColor As Integer
     Dim allMarks As ShapeRange
     Dim i As Integer, a As Integer
     Dim cBar As Shape, cbT As Shape, cbB As Shape
@@ -43,7 +44,8 @@ ActiveDocument.Unit = cdrMillimeter
     
     printMarksPath = (UserDataPath & "printMarks\")
     offsetLeftMark = 55
-    offsetTargetMark = 15
+    offsetTargetMark = 30
+    offsetSignColor = 45
     offsetColorBar = 2
     offsetBothSide = 5
     
@@ -76,7 +78,7 @@ ActiveDocument.Unit = cdrMillimeter
     rightTargetMark.PositionX = ActivePage.BoundingBox.Right - rightTargetMark.BoundingBox.Width
     rightTargetMark.PositionY = ActivePage.BoundingBox.Bottom + offsetTargetMark
     signCmyk.PositionX = leftTargetMark.BoundingBox.CenterX - signCmyk.BoundingBox.Width / 2
-    signCmyk.PositionY = ActivePage.BoundingBox.Bottom + offsetTargetMark * 2
+    signCmyk.PositionY = ActivePage.BoundingBox.Bottom + offsetSignColor
     
     colorBar.PositionY = ActivePage.BoundingBox.Bottom + colorBar.BoundingBox.Height + offsetColorBar
     cbTopPart.PositionY = colorBar.BoundingBox.Top + cbTopPart.BoundingBox.Height
